@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 
+import { Header } from '@/components/layout/header';
+
 import './globals.css';
 
 const inter = Inter({
@@ -23,7 +25,10 @@ type RootLayoutProps = Readonly<{
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body className={inter.variable}>{children}</body>
+      <body className={inter.variable}>
+        <Header />
+        <div className="pt-20">{children}</div>
+      </body>
     </html>
   );
 }
