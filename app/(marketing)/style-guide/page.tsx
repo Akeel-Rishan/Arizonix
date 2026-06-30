@@ -1,3 +1,35 @@
+'use client';
+
+import { ArrowRight } from 'lucide-react';
+
+import { AnimatedCounter } from '@/components/ui/animated-counter';
+import { Badge } from '@/components/ui/badge';
+import {
+  Button,
+  type ButtonSize,
+  type ButtonVariant,
+} from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Container } from '@/components/ui/container';
+import { Section } from '@/components/ui/section';
+import { SectionHeading } from '@/components/ui/section-heading';
+
+const buttonVariants: readonly ButtonVariant[] = [
+  'primary',
+  'secondary',
+  'outline',
+  'ghost',
+];
+
+const buttonSizes: readonly ButtonSize[] = ['sm', 'md', 'lg'];
+
 const brandSwatches = [
   { name: 'Brand Blue', token: 'brand-blue', className: 'bg-brand-blue' },
   {
@@ -192,6 +224,138 @@ export default function StyleGuidePage() {
           </p>
         </section>
       </div>
+
+      <Section id="primitives" variant="glass">
+        <Container>
+          <SectionHeading
+            description="Composable controls and content foundations built for consistent product experiences."
+            eyebrow="UI Primitives"
+            title={
+              <>
+                Small pieces,{' '}
+                <span className="text-gradient">serious polish</span>
+              </>
+            }
+          />
+
+          <div className="mt-16 space-y-20">
+            <section aria-labelledby="button-primitives">
+              <h3
+                className="text-2xl font-semibold text-white"
+                id="button-primitives"
+              >
+                Buttons
+              </h3>
+              <div className="mt-6 space-y-6">
+                {buttonVariants.map((variant) => (
+                  <div
+                    className="flex flex-wrap items-center gap-4"
+                    key={variant}
+                  >
+                    {buttonSizes.map((size) => (
+                      <Button
+                        icon={ArrowRight}
+                        iconPosition="right"
+                        key={`${variant}-${size}`}
+                        size={size}
+                        variant={variant}
+                      >
+                        {variant} {size}
+                      </Button>
+                    ))}
+                  </div>
+                ))}
+                <Button href="#cards" variant="primary">
+                  Link-rendered button
+                </Button>
+              </div>
+            </section>
+
+            <section aria-labelledby="badge-primitives">
+              <h3
+                className="text-2xl font-semibold text-white"
+                id="badge-primitives"
+              >
+                Badges
+              </h3>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Badge>Default</Badge>
+                <Badge variant="gradient">Featured</Badge>
+                <Badge variant="outline">Outline</Badge>
+              </div>
+            </section>
+
+            <section aria-labelledby="cards" id="cards">
+              <h3 className="text-2xl font-semibold text-white">
+                Card composition
+              </h3>
+              <div className="mt-6 grid gap-6 md:grid-cols-2">
+                <Card hover>
+                  <CardHeader>
+                    <Badge className="w-fit" variant="gradient">
+                      Intelligent delivery
+                    </Badge>
+                    <CardTitle>AI-native engineering</CardTitle>
+                    <CardDescription>
+                      A composable glass card with consistent hierarchy and
+                      spacing.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm leading-7 text-slate-300">
+                      Built to support service, portfolio, and insight content
+                      without prescribing business logic.
+                    </p>
+                  </CardContent>
+                  <CardFooter>
+                    <Button size="sm" variant="outline">
+                      Explore capability
+                    </Button>
+                  </CardFooter>
+                </Card>
+
+                <Card className="flex items-center justify-center text-center">
+                  <div>
+                    <AnimatedCounter suffix="%" value={98} />
+                    <p className="mt-3 text-sm text-slate-400">
+                      Client satisfaction target
+                    </p>
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section aria-labelledby="section-variants">
+              <h3
+                className="text-2xl font-semibold text-white"
+                id="section-variants"
+              >
+                Section treatments
+              </h3>
+              <div className="mt-6 grid gap-4 md:grid-cols-3">
+                <Section className="rounded-xl2 border border-white/10 !py-8">
+                  <Container className="text-center text-sm text-slate-300">
+                    Default
+                  </Container>
+                </Section>
+                <Section
+                  className="rounded-xl2 border border-white/10 !py-8"
+                  variant="aurora"
+                >
+                  <Container className="text-center text-sm text-slate-300">
+                    Aurora
+                  </Container>
+                </Section>
+                <Section className="rounded-xl2 !py-8" variant="glass">
+                  <Container className="text-center text-sm text-slate-300">
+                    Glass
+                  </Container>
+                </Section>
+              </div>
+            </section>
+          </div>
+        </Container>
+      </Section>
     </main>
   );
 }
