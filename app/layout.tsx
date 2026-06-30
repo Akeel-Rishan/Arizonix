@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 
+import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
 
 import './globals.css';
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body className={inter.variable}>
         <Header />
         <div className="pt-20">{children}</div>
+        <Footer />
       </body>
     </html>
   );
