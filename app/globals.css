@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Base typography and dark-first theme */
+@layer base {
+  body {
+    @apply bg-navy-950 font-sans text-slate-200 antialiased;
+  }
+
+  h1 {
+    @apply text-5xl font-bold tracking-tight md:text-7xl;
+  }
+
+  h2 {
+    @apply text-4xl font-bold tracking-tight md:text-5xl;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold md:text-3xl;
+  }
+}
+
+/* Reusable visual utilities */
+@layer utilities {
+  .glass-panel {
+    @apply rounded-xl2 border border-white/10 bg-white/5 backdrop-blur-xl;
+  }
+
+  .gradient-border {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(theme(colors.navy.900), theme(colors.navy.900))
+        padding-box,
+      linear-gradient(
+          120deg,
+          theme(colors.brand.blue),
+          theme(colors.brand.purple),
+          theme(colors.brand.cyan)
+        )
+        border-box;
+  }
+
+  .aurora-bg {
+    @apply bg-aurora bg-[length:140%_140%] bg-center;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-blue via-brand-purple to-brand-cyan bg-clip-text text-transparent;
+  }
+}
