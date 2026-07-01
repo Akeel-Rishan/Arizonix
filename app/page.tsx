@@ -1,3 +1,4 @@
+import { AIAutomation } from '@/components/sections/ai-automation';
 import { Hero } from '@/components/sections/hero';
 import { Industries } from '@/components/sections/industries';
 import { Services } from '@/components/sections/services';
@@ -10,6 +11,7 @@ export default function HomePage() {
       <TechShowcase />
       <Services />
       <Industries />
+      <AIAutomation />
     </main>
   );
 }
