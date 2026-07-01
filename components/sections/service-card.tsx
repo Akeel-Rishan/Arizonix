@@ -34,7 +34,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
           />
 
           <CardHeader className="pr-9">
-            <span className="mb-4 flex size-12 shrink-0 self-start items-center justify-center rounded-xl border border-brand-blue/20 bg-gradient-to-br from-brand-blue/15 via-brand-purple/15 to-brand-cyan/15 text-brand-cyan shadow-glow-blue transition duration-300 group-hover:scale-105 group-hover:border-brand-cyan/40 group-hover:from-brand-blue/30 group-hover:via-brand-purple/30 group-hover:to-brand-cyan/30 group-hover:text-white">
+            <span className="mb-4 flex size-12 shrink-0 items-center justify-center self-start rounded-xl border border-brand-blue/20 bg-gradient-to-br from-brand-blue/15 via-brand-purple/15 to-brand-cyan/15 text-brand-cyan shadow-glow-blue transition duration-300 group-hover:scale-105 group-hover:border-brand-cyan/40 group-hover:from-brand-blue/30 group-hover:via-brand-purple/30 group-hover:to-brand-cyan/30 group-hover:text-white">
               <Icon aria-hidden="true" className="size-6" />
             </span>
             <CardTitle>{service.name}</CardTitle>

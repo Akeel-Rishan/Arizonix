@@ -50,6 +50,7 @@ const config: Config = {
       boxShadow: {
         'glow-blue': '0 0 48px rgba(37, 99, 255, 0.28)',
         'glow-purple': '0 0 48px rgba(124, 58, 237, 0.28)',
+        'glow-cyan': '0 0 48px rgba(6, 182, 212, 0.28)',
       },
       backgroundImage: {
         aurora:
