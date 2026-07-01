@@ -1,43 +1,10 @@
-import {
-  Blocks,
-  Bot,
-  Building2,
-  Cloud,
-  Code2,
-  MessagesSquare,
-  PanelsTopLeft,
-  PenTool,
-  ReceiptText,
-  Smartphone,
-  Webhook,
-  Workflow,
-  type LucideIcon,
-} from 'lucide-react';
-
-import type { ServiceIconName } from '@/components/layout/nav-data';
-
-const serviceIcons: Record<ServiceIconName, LucideIcon> = {
-  blocks: Blocks,
-  bot: Bot,
-  building: Building2,
-  cloud: Cloud,
-  code: Code2,
-  messages: MessagesSquare,
-  panels: PanelsTopLeft,
-  'pen-tool': PenTool,
-  receipt: ReceiptText,
-  smartphone: Smartphone,
-  webhook: Webhook,
-  workflow: Workflow,
-};
+import type { LucideIcon } from 'lucide-react';
 
 interface ServiceIconProps {
   className?: string;
-  name: ServiceIconName;
+  icon: LucideIcon;
 }
 
-export function ServiceIcon({ className, name }: ServiceIconProps) {
-  const Icon = serviceIcons[name];
-
+export function ServiceIcon({ className, icon: Icon }: ServiceIconProps) {
   return <Icon aria-hidden="true" className={className} />;
 }

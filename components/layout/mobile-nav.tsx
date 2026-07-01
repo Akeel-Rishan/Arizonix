@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { navigation } from '@/components/layout/nav-data';
 import { ServiceIcon } from '@/components/layout/service-icon';
 import { fadeIn, slideInRight } from '@/lib/motion';
+import { getServiceHref } from '@/lib/services-data';
 import { cn } from '@/lib/utils';
 
 interface MobileNavProps {
@@ -77,14 +78,14 @@ export function MobileNav({
                                 'flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-slate-300 transition-colors duration-200 hover:bg-white/5 hover:text-white',
                                 focusStyles,
                               )}
-                              href={service.href}
-                              key={service.href}
+                              href={getServiceHref(service)}
+                              key={service.slug}
                               onClick={onClose}
                             >
                               <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-brand-blue/10 text-brand-cyan">
                                 <ServiceIcon
                                   className="size-4"
-                                  name={service.icon}
+                                  icon={service.icon}
                                 />
                               </span>
                               {service.name}

@@ -1,4 +1,5 @@
 import { Hero } from '@/components/sections/hero';
+import { Services } from '@/components/sections/services';
 import { TechShowcase } from '@/components/sections/tech-showcase';
 
 export default function HomePage() {
@@ -6,6 +7,7 @@ export default function HomePage() {
     <main>
       <Hero />
       <TechShowcase />
+      <Services />
     </main>
   );
 }
