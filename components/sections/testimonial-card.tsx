@@ -11,10 +11,7 @@ export interface TestimonialCardProps {
   testimonial: Testimonial;
 }
 
-const colorMap: Record<
-  TestimonialColor,
-  { avatar: string; glow: string }
-> = {
+const colorMap: Record<TestimonialColor, { avatar: string; glow: string }> = {
   blue: {
     avatar: 'from-brand-blue to-brand-purple',
     glow: 'shadow-glow-blue',
