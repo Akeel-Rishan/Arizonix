@@ -49,7 +49,7 @@ export function ProcessStepCard({
   return (
     <motion.article
       className={cn(
-        'relative h-fit overflow-hidden rounded-xl2 transition-shadow duration-300',
+        'relative h-fit min-w-0 max-w-full overflow-hidden rounded-xl2 transition-shadow duration-300',
         'glass-panel',
         isActive && 'gradient-border z-10',
         isActive && colors.glow,
@@ -70,7 +70,7 @@ export function ProcessStepCard({
       <button
         aria-controls={contentId}
         aria-expanded={isActive}
-        className="relative block w-full rounded-xl2 p-4 text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-cyan sm:p-5 lg:p-4"
+        className="relative block w-full min-w-0 rounded-xl2 p-4 text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-cyan sm:p-5 lg:p-4"
         onClick={onClick}
         type="button"
       >
@@ -100,7 +100,7 @@ export function ProcessStepCard({
         </span>
         <p
           className={cn(
-            'mt-3 text-sm leading-6 text-slate-300',
+            'mt-3 break-words text-sm leading-6 text-slate-300',
             !showFullContent && !isActive && 'line-clamp-3',
           )}
         >
@@ -118,10 +118,10 @@ export function ProcessStepCard({
               initial={{ height: 0, opacity: 0 }}
               transition={{ duration: reducedMotion ? 0 : 0.25 }}
             >
-              <div className="flex flex-wrap gap-2 px-4 pb-4 sm:px-5 sm:pb-5 lg:px-4 lg:pb-4">
+              <div className="flex min-w-0 flex-wrap gap-2 px-4 pb-4 sm:px-5 sm:pb-5 lg:px-4 lg:pb-4">
                 {phase.deliverables.map((deliverable) => (
                   <span
-                    className="glass-panel rounded-full px-2.5 py-1 text-[0.65rem] leading-4 text-slate-300"
+                    className="glass-panel max-w-full break-words rounded-full px-2.5 py-1 text-[0.65rem] leading-4 text-slate-300"
                     key={deliverable}
                   >
                     {deliverable}

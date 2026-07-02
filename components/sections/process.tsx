@@ -148,7 +148,12 @@ export function Process() {
   };
 
   return (
-    <Section id="process" ref={sectionRef} variant="default">
+    <Section
+      className="overflow-x-clip"
+      id="process"
+      ref={sectionRef}
+      variant="default"
+    >
       <Container onFocusCapture={pause}>
         <SectionHeading
           description="From initial discovery to ongoing growth, every phase of our process is designed to deliver on time, within budget, and beyond expectations."
@@ -164,7 +169,7 @@ export function Process() {
         {/* Desktop: alternating horizontal timeline */}
         {layout === 'desktop' ? (
           <motion.div
-            className="relative mt-16 grid min-h-[44rem] grid-cols-7 grid-rows-[1fr_4rem_1fr] gap-x-2"
+            className="relative mt-16 grid min-h-[44rem] min-w-0 grid-cols-7 grid-rows-[1fr_4rem_1fr] gap-x-2"
             initial="hidden"
             variants={desktopTimelineStagger}
             viewport={{ once: true, amount: 0.15 }}
@@ -200,7 +205,7 @@ export function Process() {
               return (
                 <motion.div
                   className={cn(
-                    'relative self-stretch',
+                    'relative min-w-0 self-stretch',
                     desktopColumnMap[phase.id],
                     isAbove
                       ? 'row-start-1 flex items-end pb-8'
