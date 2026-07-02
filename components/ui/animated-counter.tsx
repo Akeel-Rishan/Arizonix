@@ -13,6 +13,7 @@ import { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
 export interface AnimatedCounterProps {
+  ariaLabel?: string;
   className?: string;
   duration?: number;
   suffix?: string;
@@ -20,6 +21,7 @@ export interface AnimatedCounterProps {
 }
 
 export function AnimatedCounter({
+  ariaLabel,
   className,
   duration = 1.5,
   suffix = '',
@@ -32,10 +34,15 @@ export function AnimatedCounter({
   const rounded = useTransform(count, (latest) => Math.round(latest));
 
   useEffect(() => {
+    if (shouldReduceMotion) {
+      count.set(value);
+      return;
+    }
+
     if (!isInView) return;
 
     const controls = animate(count, value, {
-      duration: shouldReduceMotion ? 0 : duration,
+      duration,
       ease: [0.25, 0.1, 0.25, 1],
     });
 
@@ -44,7 +51,7 @@ export function AnimatedCounter({
 
   return (
     <span
-      aria-label={`${value}${suffix}`}
+      aria-label={ariaLabel ?? `${value}${suffix}`}
       className={cn(
         'inline-flex items-baseline text-4xl font-bold tracking-tight text-white',
         className,
