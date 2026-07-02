@@ -1,5 +1,6 @@
 import { AIAutomation } from '@/components/sections/ai-automation';
 import { FAQ } from '@/components/sections/faq';
+import { FinalCTA } from '@/components/sections/final-cta';
 import { Hero } from '@/components/sections/hero';
 import { Industries } from '@/components/sections/industries';
 import { PortfolioPreview } from '@/components/sections/portfolio-preview';
@@ -22,6 +23,7 @@ export default function HomePage() {
       <WhyChooseUs />
       <Testimonials />
       <FAQ />
+      <FinalCTA />
     </main>
   );
 }
