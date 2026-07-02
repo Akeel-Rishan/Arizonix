@@ -1,6 +1,8 @@
 import { AIAutomation } from '@/components/sections/ai-automation';
 import { Hero } from '@/components/sections/hero';
 import { Industries } from '@/components/sections/industries';
+import { PortfolioPreview } from '@/components/sections/portfolio-preview';
+import { Process } from '@/components/sections/process';
 import { Services } from '@/components/sections/services';
 import { TechShowcase } from '@/components/sections/tech-showcase';
 
@@ -12,6 +14,8 @@ export default function HomePage() {
       <Services />
       <Industries />
       <AIAutomation />
+      <PortfolioPreview />
+      <Process />
     </main>
   );
 }
