@@ -9,6 +9,7 @@ import {
   TrendingUp,
   Users,
 } from 'lucide-react';
+import Image from 'next/image';
 import type { FocusEvent, MouseEvent } from 'react';
 
 import { StarRating } from '@/components/sections/testimonial-card';
@@ -18,8 +19,7 @@ import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { useCarousel } from '@/hooks/use-carousel';
-import type { TestimonialColor } from '@/lib/testimonials-data';
-import { testimonials } from '@/lib/testimonials-data';
+import type { Testimonial, TestimonialColor } from '@/lib/testimonials-data';
 import { cn, getInitials } from '@/lib/utils';
 
 const colorMap: Record<TestimonialColor, { avatar: string; quote: string }> = {
@@ -39,7 +39,7 @@ const colorMap: Record<TestimonialColor, { avatar: string; quote: string }> = {
 
 const AUTO_PLAY_DURATION = 5000;
 
-export function Testimonials() {
+export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) {
   const reducedMotion = Boolean(useReducedMotion());
   const { activeIndex, goNext, goPrev, goTo, setIsPaused } = useCarousel({
     autoPlayDuration: AUTO_PLAY_DURATION,
@@ -137,7 +137,7 @@ export function Testimonials() {
                         colors.avatar,
                       )}
                     >
-                      {getInitials(activeTestimonial.name)}
+                      {activeTestimonial.avatar ? <Image alt={activeTestimonial.name} className="size-full rounded-full object-cover" height={56} sizes="56px" src={activeTestimonial.avatar} width={56} /> : getInitials(activeTestimonial.name)}
                     </div>
                     <div className="min-w-0">
                       <p className="font-semibold text-white">

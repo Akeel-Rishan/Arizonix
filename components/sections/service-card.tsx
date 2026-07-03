@@ -1,9 +1,7 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 
+import type { ServiceDisplay } from '@/components/sections/services';
 import {
   Card,
   CardContent,
@@ -11,21 +9,20 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { fadeInUp } from '@/lib/motion';
-import { getServiceHref, type Service } from '@/lib/services-data';
+import { getIcon } from '@/lib/icon-map';
 
 export interface ServiceCardProps {
-  service: Service;
+  service: ServiceDisplay;
 }
 
 export function ServiceCard({ service }: ServiceCardProps) {
-  const Icon = service.icon;
+  const Icon = getIcon(service.iconName);
 
   return (
-    <motion.div className="h-full" variants={fadeInUp}>
+    <div className="h-full">
       <Link
         className="group block h-full rounded-xl2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-4 focus-visible:ring-offset-navy-950"
-        href={getServiceHref(service)}
+        href={`/services/${service.slug}`}
       >
         <Card className="relative h-full" hover>
           <ArrowUpRight
@@ -48,6 +45,6 @@ export function ServiceCard({ service }: ServiceCardProps) {
           </CardContent>
         </Card>
       </Link>
-    </motion.div>
+    </div>
   );
 }

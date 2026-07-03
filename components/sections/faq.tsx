@@ -9,13 +9,13 @@ import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
 import { SectionHeading } from '@/components/ui/section-heading';
-import { faqData } from '@/lib/faq-data';
+import type { FAQCategory } from '@/lib/faq-data';
 import { fadeInUp } from '@/lib/motion';
 import { cn } from '@/lib/utils';
 
 const ALL_CATEGORIES = 'All';
 
-export function FAQ() {
+export function FAQ({ faqData }: { faqData: FAQCategory[] }) {
   const [activeCategory, setActiveCategory] = useState(ALL_CATEGORIES);
   const [openItems, setOpenItems] = useState<Set<string>>(() => new Set());
 
@@ -40,7 +40,7 @@ export function FAQ() {
         })),
       ),
     }),
-    [],
+    [faqData],
   );
 
   const selectCategory = (category: string) => {

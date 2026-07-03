@@ -1,13 +1,13 @@
-'use client';
-
 import { ArrowUpRight, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 
-import type { Industry, IndustryColor } from '@/lib/industries-data';
+import type { IndustryDisplay } from '@/components/sections/industries';
+import { getIcon } from '@/lib/icon-map';
+import type { IndustryColor } from '@/lib/industries-data';
 import { cn } from '@/lib/utils';
 
 export interface IndustryCardProps {
-  industry: Industry;
+  industry: IndustryDisplay;
 }
 
 const colorMap: Record<
@@ -48,7 +48,7 @@ const colorMap: Record<
 };
 
 export function IndustryCard({ industry }: IndustryCardProps) {
-  const Icon = industry.icon;
+  const Icon = getIcon(industry.iconName);
   const colors = colorMap[industry.color];
 
   return (

@@ -24,6 +24,8 @@ export interface PortfolioProject {
   device: PortfolioDevice;
   mockupBgColor: PortfolioColor;
   testimonial: ProjectTestimonial;
+  mainImageUrl?: string | null;
+  testimonialAvatarUrl?: string | null;
 }
 
 export const portfolioProjects: PortfolioProject[] = [

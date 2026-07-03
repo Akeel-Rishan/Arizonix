@@ -5,6 +5,7 @@ import { CTAForm } from '@/components/sections/cta-form';
 import { Badge } from '@/components/ui/badge';
 import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
+import type { SanitySiteSettings } from '@/lib/sanity/types';
 
 const trustSignals = [
   'Free 30-minute strategy consultation',
@@ -12,7 +13,7 @@ const trustSignals = [
   "No contracts until you're 100% ready",
 ];
 
-export function FinalCTA() {
+export function FinalCTA({ siteSettings }: { siteSettings: SanitySiteSettings | null }) {
   return (
     <Section
       className="relative overflow-hidden border-y border-white/10"
@@ -56,12 +57,12 @@ export function FinalCTA() {
               ))}
             </ul>
 
-            <CTAContactInfo />
+            <CTAContactInfo contactInfo={siteSettings?.contactInfo} />
 
             <div className="mt-8">
               <a
                 className="glass-panel min-h-13 inline-flex w-full items-center justify-center gap-2.5 rounded-xl px-6 py-3 text-base font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:border-brand-cyan/30 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950 sm:w-auto"
-                href="https://calendly.com"
+                href={siteSettings?.contactInfo?.calendlyUrl ?? 'https://calendly.com'}
                 rel="noopener noreferrer"
                 target="_blank"
               >

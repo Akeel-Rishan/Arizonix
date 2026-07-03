@@ -1,6 +1,7 @@
 'use client';
 
 import { Star } from 'lucide-react';
+import Image from 'next/image';
 
 import type { Testimonial, TestimonialColor } from '@/lib/testimonials-data';
 import { cn, getInitials } from '@/lib/utils';
@@ -80,7 +81,7 @@ export function TestimonialCard({
             colors.avatar,
           )}
         >
-          {getInitials(testimonial.name)}
+          {testimonial.avatar ? <Image alt={testimonial.name} className="size-full rounded-full object-cover" height={40} sizes="40px" src={testimonial.avatar} width={40} /> : getInitials(testimonial.name)}
         </span>
         <span className="min-w-0">
           <span className="block truncate text-sm font-semibold text-white">

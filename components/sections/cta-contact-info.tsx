@@ -1,6 +1,10 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
 
-export function CTAContactInfo() {
+import type { SanityContactInfo } from '@/lib/sanity/types';
+
+export function CTAContactInfo({ contactInfo }: { contactInfo?: SanityContactInfo }) {
+  const email = contactInfo?.email ?? 'hello@arizonix.com';
+  const phone = contactInfo?.phone ?? '+1 (555) 000-0000';
   return (
     <div className="mt-8 max-w-lg">
       <div className="flex items-center gap-3">
@@ -14,21 +18,21 @@ export function CTAContactInfo() {
       <div className="mt-5 space-y-4">
         <a
           className="group flex items-center gap-3 text-white transition hover:text-brand-blue"
-          href="mailto:hello@arizonix.com"
+          href={`mailto:${email}`}
         >
           <span className="glass-panel flex size-10 shrink-0 items-center justify-center rounded-lg border-brand-blue/20 bg-brand-blue/10">
             <Mail aria-hidden="true" className="size-4 text-brand-blue" />
           </span>
-          hello@arizonix.com
+          {email}
         </a>
         <a
           className="group flex items-center gap-3 text-white transition hover:text-brand-purple"
-          href="tel:+15550000000"
+          href={`tel:${phone.replace(/[^+\d]/g, '')}`}
         >
           <span className="glass-panel flex size-10 shrink-0 items-center justify-center rounded-lg border-brand-purple/20 bg-brand-purple/10">
             <Phone aria-hidden="true" className="size-4 text-brand-purple" />
           </span>
-          +1 (555) 000-0000
+          {phone}
         </a>
         <div className="flex items-center gap-3 text-slate-400">
           <span className="glass-panel flex size-10 shrink-0 items-center justify-center rounded-lg border-brand-cyan/20 bg-brand-cyan/10">

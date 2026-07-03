@@ -1,6 +1,7 @@
 'use client';
 
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 import { DeviceMockup } from '@/components/sections/device-mockup';
 import { Badge } from '@/components/ui/badge';
@@ -48,10 +49,10 @@ export function PortfolioCard({ project }: PortfolioCardProps) {
         )}
       >
         <div className="size-full transition duration-500 ease-out group-hover:scale-[1.03]">
-          <DeviceMockup
+          {project.mainImageUrl ? <Image alt={project.title} className="size-full object-cover" height={450} sizes="(max-width: 1024px) 100vw, 50vw" src={project.mainImageUrl} width={800} /> : <DeviceMockup
             bgColor={project.mockupBgColor}
             device={project.device}
-          />
+          />}
         </div>
       </div>
 
