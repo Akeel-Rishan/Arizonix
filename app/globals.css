@@ -21,6 +21,21 @@
   }
 }
 
+@layer components {
+  .service-prose p { @apply mb-4 text-base leading-relaxed text-slate-300; }
+  .service-prose h2 { @apply mb-4 mt-10 text-2xl font-bold text-white; }
+  .service-prose h3 { @apply mb-3 mt-8 text-xl font-semibold text-white; }
+  .service-prose h4 { @apply mb-2 mt-6 text-lg font-medium text-slate-200; }
+  .service-prose blockquote { @apply my-6 border-l-4 border-brand-blue pl-6 italic text-slate-400; }
+  .service-prose strong { @apply font-semibold text-white; }
+  .service-prose a { @apply text-brand-blue underline transition-colors hover:text-brand-cyan; }
+  .service-prose ul { @apply my-4 list-disc space-y-2 pl-6 text-slate-300; }
+  .service-prose ol { @apply my-4 list-decimal space-y-2 pl-6 text-slate-300; }
+  .service-prose img { @apply my-8 rounded-xl; }
+  .service-prose pre { @apply my-6 overflow-x-auto rounded-xl border border-white/10 bg-navy-900 p-6; }
+  .service-prose code { @apply font-mono text-sm text-brand-cyan; }
+}
+
 /* Reusable visual utilities */
 @layer utilities {
   .glass-panel {
