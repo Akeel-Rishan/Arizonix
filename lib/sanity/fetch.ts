@@ -1,6 +1,8 @@
 import { client } from '@/lib/sanity/client';
 import {
   blogPostBySlugQuery,
+  caseStudiesQuery,
+  caseStudyBySlugQuery,
   faqItemsQuery,
   featuredBlogPostsQuery,
   featuredProjectsQuery,
@@ -16,6 +18,8 @@ import {
 } from '@/lib/sanity/queries';
 import type {
   SanityBlogPost,
+  SanityCaseStudy,
+  SanityCaseStudyFull,
   SanityFAQItem,
   SanityIndustry,
   SanityPortfolioProject,
@@ -37,6 +41,14 @@ export async function getPortfolioProjects(): Promise<
   SanityPortfolioProject[]
 > {
   return client.fetch<SanityPortfolioProject[]>(portfolioProjectsQuery, {}, { next: { tags: ['portfolio'], revalidate: 3600 } });
+}
+
+export async function getCaseStudies(): Promise<SanityCaseStudy[]> {
+  return client.fetch<SanityCaseStudy[]>(caseStudiesQuery, {}, { next: { tags: ['case-studies'], revalidate: 3600 } });
+}
+
+export async function getCaseStudyBySlug(slug: string): Promise<SanityCaseStudyFull | null> {
+  return client.fetch<SanityCaseStudyFull | null>(caseStudyBySlugQuery, { slug }, { next: { tags: ['case-studies'], revalidate: 3600 } });
 }
 
 export async function getFeaturedProjects(): Promise<SanityPortfolioProject[]> {

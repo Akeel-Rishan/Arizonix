@@ -1,0 +1,8 @@
+'use client';
+import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { Badge } from '@/components/ui/badge';
+import type { SanityCaseStudy } from '@/lib/sanity/types';
+export function CaseStudyCard({ coverImageUrl, study }: { coverImageUrl?: string; study: SanityCaseStudy }) { return <Link className="block h-full" href={`/case-studies/${study.slug}`}><article className="glass-panel group h-full overflow-hidden rounded-xl2 transition hover:-translate-y-1 hover:shadow-glow-blue"><div className="relative aspect-video bg-gradient-to-br from-brand-blue/30 to-brand-purple/30">{coverImageUrl ? <Image alt={study.title} className="object-cover" fill sizes="(max-width:768px) 100vw, 33vw" src={coverImageUrl} /> : null}{study.featured ? <Badge className="absolute left-3 top-3" variant="gradient">FEATURED</Badge> : null}</div><div className="p-6"><Badge variant="outline">{study.industry}</Badge><p className="mt-4 text-xs uppercase tracking-wide text-slate-500">{study.client}</p><h2 className="mt-2 line-clamp-2 text-xl font-bold text-white">{study.title}</h2><p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-400">{study.summary}</p><div className="mt-5 flex justify-between text-xs text-slate-500"><time>{study.publishedAt ? new Date(study.publishedAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : ''}</time><span className="flex items-center gap-1 text-sm text-brand-blue">Read Case Study <ArrowRight className="size-4 transition group-hover:translate-x-1" /></span></div></div></article></Link>; }

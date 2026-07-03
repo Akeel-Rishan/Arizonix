@@ -78,6 +78,17 @@ export interface SanityCaseStudy {
   seo?: SanitySEO;
 }
 
+export interface SanityCaseStudyFull
+  extends Omit<SanityCaseStudy, 'relatedProject'> {
+  relatedProject?: {
+    title: string;
+    slug: string;
+    category: string;
+    tags: string[];
+    results: SanityProjectResult[];
+  };
+}
+
 export interface SanityTestimonial {
   _id: string;
   name: string;

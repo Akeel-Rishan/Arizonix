@@ -1,0 +1,8 @@
+'use client';
+import { AnimatedCounter } from '@/components/ui/animated-counter';
+import { Container } from '@/components/ui/container';
+import { Section } from '@/components/ui/section';
+import { SectionHeading } from '@/components/ui/section-heading';
+import type { ProjectResult, ProjectTestimonial } from '@/lib/portfolio-data';
+import { parseMetric } from '@/lib/utils';
+export function ProjectResults({ results, testimonial }: { results: ProjectResult[]; testimonial?: ProjectTestimonial }) { return <Section id="results" variant="aurora"><Container><SectionHeading eyebrow="BUSINESS IMPACT" title={<>The <span className="text-gradient">Results</span> We Delivered</>} /><dl className="mt-12 flex flex-col gap-6 md:flex-row">{results.map((result) => { const parsed = parseMetric(result.metric); return <div className="glass-panel flex-1 rounded-xl2 p-10 text-center" key={result.label}><dd className="text-gradient text-4xl font-bold">{'static' in parsed ? parsed.static : <AnimatedCounter suffix={parsed.suffix} value={parsed.value} />}</dd><dt className="mt-4 text-xl font-semibold text-white">{result.label}</dt><div className="mx-auto my-4 h-0.5 w-12 bg-gradient-to-r from-brand-blue to-brand-cyan" /><p className="text-sm text-slate-400">This result was achieved within the first months of launch.</p></div>; })}</dl><figure className="mx-auto mt-12 max-w-3xl text-center"><blockquote className="text-xl italic text-slate-200 md:text-2xl">{testimonial?.quote ?? 'This project exemplifies our commitment to delivering measurable business outcomes through engineering excellence.'}</blockquote>{testimonial ? <figcaption className="mt-4 text-sm text-slate-400">— {testimonial.author}, {testimonial.role}</figcaption> : null}</figure></Container></Section>; }

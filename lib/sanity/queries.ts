@@ -13,7 +13,7 @@ export const featuredServicesQuery = groq`*[_type == "service" && featured == tr
 /** Fetches every portfolio project in configured display order. */
 export const portfolioProjectsQuery = groq`*[_type == "portfolioProject"] | order(order asc) {
   _id, title, "slug": slug.current, category, featured, tags, challenge, solution,
-  results, device, mainImage, testimonial
+  results, device, mainImage, screenshots, testimonial, fullCaseStudy, seo
 }`;
 
 /** Fetches homepage-featured portfolio projects in configured display order. */
@@ -69,6 +69,17 @@ export const serviceBySlugQuery = groq`*[_type == "service" && slug.current == $
 export const projectBySlugQuery = groq`*[_type == "portfolioProject" && slug.current == $slug][0] {
   _id, title, "slug": slug.current, category, tags, challenge, solution,
   results, mainImage, screenshots, device, testimonial, fullCaseStudy, seo
+}`;
+
+export const caseStudiesQuery = groq`*[_type == "caseStudy"] | order(publishedAt desc) {
+  _id, title, "slug": slug.current, client, industry, summary,
+  coverImage, publishedAt, featured
+}`;
+
+export const caseStudyBySlugQuery = groq`*[_type == "caseStudy" && slug.current == $slug][0] {
+  _id, title, "slug": slug.current, client, industry, summary,
+  coverImage, publishedAt, featured, content,
+  relatedProject->{title, "slug": slug.current, category, tags, results}, seo
 }`;
 
 /** Fetches one complete blog post by the required $slug parameter. */

@@ -18,6 +18,11 @@ export function getInitials(name: string): string {
   return `${words[0][0]}${words[words.length - 1][0]}`.toUpperCase();
 }
 
+export function parseMetric(metric: string): { value: number; suffix: string } | { static: string } {
+  const match = metric.match(/^(\d+\.?\d*)(.*?)$/);
+  return match ? { value: Number(match[1]), suffix: match[2] } : { static: metric };
+}
+
 export function renderAnswerWithLinks(
   answer: string,
   links: FAQItem['links'] = [],

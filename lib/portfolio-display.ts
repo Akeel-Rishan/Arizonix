@@ -1,0 +1,3 @@
+import type { PortfolioColor, PortfolioDevice, ProjectResult, ProjectTestimonial } from '@/lib/portfolio-data';
+export interface PortfolioDisplayProject { id: string; slug: string; title: string; category: string; categoryColor: PortfolioColor; tags: string[]; challenge: string; solution: string; results: ProjectResult[]; device: PortfolioDevice; mockupBgColor: PortfolioColor; testimonial?: ProjectTestimonial; mainImageUrl?: string | null }
+export function portfolioColor(category: string): PortfolioColor { return category === 'Healthcare' ? 'cyan' : category === 'E-commerce' ? 'purple' : 'blue'; }

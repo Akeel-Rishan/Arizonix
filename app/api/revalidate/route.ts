@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 const tags: Record<string, string> = {
   service: 'services', portfolioProject: 'portfolio', testimonial: 'testimonials',
   faqItem: 'faq', industry: 'industries', blogPost: 'blog', siteSettings: 'settings',
-  teamMember: 'team',
+  teamMember: 'team', caseStudy: 'case-studies',
 };
 
 export async function POST(request: NextRequest) {
