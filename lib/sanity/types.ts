@@ -121,6 +121,8 @@ export interface SanityIndustry {
   stat: string;
   color: 'blue' | 'purple' | 'cyan';
   order: number;
+  fullPageContent?: SanityBlock[];
+  seo?: SanitySEO;
 }
 
 export interface SanityBlogPost {

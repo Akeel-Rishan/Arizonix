@@ -1,0 +1,6 @@
+import { Shield } from 'lucide-react';
+
+import { Container } from '@/components/ui/container';
+import { Section } from '@/components/ui/section';
+import type { IndustryStat } from '@/lib/industry-detail-data';
+export function IndustryStats({ complianceNote, industryName, stats }: { complianceNote?: string; industryName: string; stats?: IndustryStat[] }) { if (!stats?.length) return null; return <Section aria-label={`${industryName} statistics`} className="py-16" role="region"><dl className="grid border-y border-white/10 bg-white/5 md:grid-cols-3">{stats.map((stat) => <div className="p-8 text-center md:border-r md:border-white/10" key={stat.label}><dd className="text-gradient text-4xl font-bold">{stat.value}</dd><dt className="mt-2 text-sm text-slate-300">{stat.label}</dt>{stat.source ? <p className="mt-2 text-xs text-slate-500">Source: {stat.source}</p> : null}</div>)}</dl>{complianceNote ? <Container><div className="glass-panel mx-auto mt-8 flex max-w-4xl gap-4 rounded-xl p-5"><Shield className="size-6 shrink-0 text-brand-cyan" /><div><h2 className="font-semibold text-white">Compliance by design</h2><p className="mt-1 text-sm leading-6 text-slate-400">{complianceNote}</p></div></div></Container> : null}</Section>; }

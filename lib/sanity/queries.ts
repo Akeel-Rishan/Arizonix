@@ -42,6 +42,11 @@ export const industriesQuery = groq`*[_type == "industry"] | order(order asc) {
   _id, name, "slug": slug.current, description, icon, stat, color, order
 }`;
 
+export const industryBySlugQuery = groq`*[_type == "industry" && slug.current == $slug][0] {
+  _id, name, "slug": slug.current, description, icon, stat, color, order,
+  fullPageContent, seo
+}`;
+
 /** Fetches all blog post summaries, newest first. */
 export const blogPostsQuery = groq`*[_type == "blogPost"] | order(publishedAt desc) {
   _id, title, "slug": slug.current, excerpt, coverImage, publishedAt,

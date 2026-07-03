@@ -8,6 +8,7 @@ import {
   featuredProjectsQuery,
   featuredServicesQuery,
   industriesQuery,
+  industryBySlugQuery,
   portfolioProjectsQuery,
   projectBySlugQuery,
   serviceBySlugQuery,
@@ -69,6 +70,10 @@ export async function getFAQItems(): Promise<SanityFAQItem[]> {
 
 export async function getIndustries(): Promise<SanityIndustry[]> {
   return client.fetch<SanityIndustry[]>(industriesQuery, {}, { next: { tags: ['industries'], revalidate: 3600 } });
+}
+
+export async function getIndustryBySlug(slug: string): Promise<SanityIndustry | null> {
+  return client.fetch<SanityIndustry | null>(industryBySlugQuery, { slug }, { next: { tags: ['industries'], revalidate: 3600 } });
 }
 
 export async function getFeaturedBlogPosts(): Promise<SanityBlogPost[]> {

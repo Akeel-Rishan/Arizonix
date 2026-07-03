@@ -1,0 +1,7 @@
+import { MotionItem, MotionStagger } from '@/components/pages/about/about-motion';
+import { Container } from '@/components/ui/container';
+import { Section } from '@/components/ui/section';
+import { SectionHeading } from '@/components/ui/section-heading';
+import { getIcon } from '@/lib/icon-map';
+import type { IndustryUseCase } from '@/lib/industry-detail-data';
+export function IndustryUseCases({ industryName, useCases }: { industryName: string; useCases?: IndustryUseCase[] }) { if (!useCases?.length) return null; return <Section id="solutions" variant="aurora"><Container><SectionHeading description={`Purpose-built digital products and automation for ${industryName.toLowerCase()} operations.`} eyebrow="WHAT WE BUILD" title={<>Technology Designed For <span className="text-gradient">{industryName}</span></>} /><MotionStagger className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">{useCases.map((item) => { const Icon = getIcon(item.icon); return <MotionItem className="h-full" key={item.title}><article className="glass-panel h-full rounded-xl2 p-6"><span className="flex size-11 items-center justify-center rounded-xl border border-brand-blue/20 bg-brand-blue/10 text-brand-blue"><Icon className="size-5" /></span><h3 className="mt-5 font-bold text-white">{item.title}</h3><p className="mt-2 text-sm leading-6 text-slate-400">{item.description}</p></article></MotionItem>; })}</MotionStagger></Container></Section>; }

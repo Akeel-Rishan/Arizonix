@@ -68,12 +68,12 @@ export const footerColumns: readonly FooterColumn[] = [
   {
     title: 'Industries',
     links: [
-      { label: 'Healthcare', href: '/industries' },
-      { label: 'Finance', href: '/industries' },
-      { label: 'Retail', href: '/industries' },
-      { label: 'Real Estate', href: '/industries' },
-      { label: 'Manufacturing', href: '/industries' },
-      { label: 'Education', href: '/industries' },
+      { label: 'Healthcare', href: '/industries/healthcare' },
+      { label: 'Finance', href: '/industries/finance' },
+      { label: 'Retail', href: '/industries/retail' },
+      { label: 'Real Estate', href: '/industries/real-estate' },
+      { label: 'Manufacturing', href: '/industries/manufacturing' },
+      { label: 'Education', href: '/industries/education' },
     ],
   },
   {
