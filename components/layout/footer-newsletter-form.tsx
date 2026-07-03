@@ -19,6 +19,7 @@ type NewsletterFormValues = z.infer<typeof newsletterSchema>;
 
 export function FooterNewsletterForm() {
   const [isSuccess, setIsSuccess] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
   const {
     formState: { errors, isSubmitting },
     handleSubmit,
@@ -30,10 +31,13 @@ export function FooterNewsletterForm() {
   });
 
   const onSubmit = async ({ email }: NewsletterFormValues) => {
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    console.log('Newsletter subscription:', email);
-    reset();
-    setIsSuccess(true);
+    setApiError(null);
+    try {
+      const response = await fetch('/api/newsletter', { body: JSON.stringify({ email }), headers: { 'Content-Type': 'application/json' }, method: 'POST' });
+      const result = (await response.json()) as { error?: string; success?: boolean };
+      if (!response.ok || !result.success) { setApiError(result.error ?? 'Something went wrong. Please try again.'); return; }
+      reset(); setIsSuccess(true);
+    } catch { setApiError('Network error. Please check your connection and try again.'); }
   };
 
   if (isSuccess) {
@@ -95,6 +99,7 @@ export function FooterNewsletterForm() {
           {errors.email.message}
         </p>
       ) : null}
+      {apiError ? <p className="mt-2 text-xs text-red-400" role="alert">{apiError}</p> : null}
     </form>
   );
 }

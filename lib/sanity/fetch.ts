@@ -12,6 +12,7 @@ import {
   servicesQuery,
   siteSettingsQuery,
   testimonialsQuery,
+  teamMembersQuery,
 } from '@/lib/sanity/queries';
 import type {
   SanityBlogPost,
@@ -21,6 +22,7 @@ import type {
   SanityService,
   SanitySiteSettings,
   SanityTestimonial,
+  SanityTeamMember,
 } from '@/lib/sanity/types';
 
 export async function getServices(): Promise<SanityService[]> {
@@ -43,6 +45,10 @@ export async function getFeaturedProjects(): Promise<SanityPortfolioProject[]> {
 
 export async function getTestimonials(): Promise<SanityTestimonial[]> {
   return client.fetch<SanityTestimonial[]>(testimonialsQuery, {}, { next: { tags: ['testimonials'], revalidate: 3600 } });
+}
+
+export async function getTeamMembers(): Promise<SanityTeamMember[]> {
+  return client.fetch<SanityTeamMember[]>(teamMembersQuery, {}, { next: { tags: ['team'], revalidate: 3600 } });
 }
 
 export async function getFAQItems(): Promise<SanityFAQItem[]> {

@@ -13,6 +13,7 @@ export const ctaFormSchema = z.object({
     .min(20, 'Please describe your project in at least 20 characters')
     .max(1000, 'Description cannot exceed 1000 characters'),
   referral: z.string().optional(),
+  website_url: z.string().optional(),
 });
 
 export type CTAFormValues = z.infer<typeof ctaFormSchema>;

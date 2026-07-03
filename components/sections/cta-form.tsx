@@ -125,6 +125,7 @@ export function CTAForm() {
       phone: '',
       referral: '',
       service: '',
+      website_url: '',
     },
     mode: 'onSubmit',
     reValidateMode: 'onChange',
@@ -142,7 +143,12 @@ export function CTAForm() {
         method: 'POST',
       });
 
-      if (!response.ok) throw new Error('Contact request failed');
+      if (response.status === 429) {
+        setSubmitError("You've submitted too many requests. Please wait a few minutes before trying again.");
+        return;
+      }
+      const result = (await response.json()) as { error?: string; success?: boolean };
+      if (!response.ok || !result.success) throw new Error(result.error ?? 'Contact request failed');
       setSubmittedName(values.fullName.trim().split(/\s+/)[0]);
     } catch {
       setSubmitError(
@@ -176,6 +182,11 @@ export function CTAForm() {
             key="success"
             transition={{ duration: reducedMotion ? 0 : 0.35 }}
           >
+            {/* Honeypot — hidden visually, but intentionally present for bots. */}
+            <div aria-hidden="true" style={{ left: '-9999px', position: 'absolute', top: '-9999px' }} tabIndex={-1}>
+              <label htmlFor="website_url_field">Website URL</label>
+              <input autoComplete="off" id="website_url_field" tabIndex={-1} type="text" {...register('website_url')} />
+            </div>
             <CheckCircle2 className="size-16 text-brand-cyan" />
             <h3 className="mt-6 text-2xl font-bold text-white">
               Message Received!

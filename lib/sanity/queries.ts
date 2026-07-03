@@ -28,6 +28,10 @@ export const testimonialsQuery = groq`*[_type == "testimonial"] | order(order as
   result, color, featured
 }`;
 
+export const teamMembersQuery = groq`*[_type == "teamMember"] | order(order asc) {
+  _id, name, role, department, photo, bio, featured, order, social
+}`;
+
 /** Fetches homepage FAQ items grouped by category and display order. */
 export const faqItemsQuery = groq`*[_type == "faqItem" && featured == true] | order(category asc, order asc) {
   _id, question, answer, category, order
