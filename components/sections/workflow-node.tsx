@@ -9,7 +9,10 @@ import type { WorkflowColor, WorkflowStep } from '@/lib/workflow-data';
 export type WorkflowNodeState = 'active' | 'completed' | 'idle';
 
 export interface WorkflowNodeProps {
+  className?: string;
+  onClick?: () => void;
   reducedMotion?: boolean;
+  selected?: boolean;
   state: WorkflowNodeState;
   step: WorkflowStep;
 }
@@ -52,7 +55,10 @@ const colorMap: Record<
 };
 
 export function WorkflowNode({
+  className,
+  onClick,
   reducedMotion = false,
+  selected = false,
   state,
   step,
 }: WorkflowNodeProps) {
@@ -62,9 +68,10 @@ export function WorkflowNode({
   const isCompleted = state === 'completed';
 
   return (
-    <div
+    <button
+      aria-pressed={selected}
       className={cn(
-        'glass-panel relative h-full min-h-44 overflow-hidden p-5 transition duration-300 sm:p-6 lg:min-h-52',
+        'glass-panel relative h-full min-h-44 w-full overflow-hidden p-5 text-left transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan sm:p-6 lg:min-h-52',
         state === 'idle' && 'opacity-70',
         isCompleted && 'opacity-85',
         isActive && [
@@ -72,8 +79,13 @@ export function WorkflowNode({
           colors.activeBorder,
           colors.activeGlow,
         ],
+        selected && 'z-10 border-brand-cyan/70 shadow-glow-cyan',
+        className,
       )}
       data-state={state}
+      disabled={!onClick}
+      onClick={onClick}
+      type="button"
     >
       {isActive && !reducedMotion ? (
         <span
@@ -118,6 +130,6 @@ export function WorkflowNode({
       <p className="mt-2 line-clamp-2 text-xs leading-5 text-slate-400">
         {step.description}
       </p>
-    </div>
+    </button>
   );
 }
