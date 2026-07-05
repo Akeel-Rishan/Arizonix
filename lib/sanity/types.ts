@@ -10,6 +10,8 @@ export interface SanityImage {
 
 export interface SanityBlock {
   _type: 'block';
+  children?: Array<{ _key?: string; _type?: string; marks?: string[]; text?: string }>;
+  style?: string;
   [key: string]: unknown;
 }
 
@@ -78,8 +80,10 @@ export interface SanityCaseStudy {
   seo?: SanitySEO;
 }
 
-export interface SanityCaseStudyFull
-  extends Omit<SanityCaseStudy, 'relatedProject'> {
+export interface SanityCaseStudyFull extends Omit<
+  SanityCaseStudy,
+  'relatedProject'
+> {
   relatedProject?: {
     title: string;
     slug: string;
@@ -133,7 +137,12 @@ export interface SanityBlogPost {
   coverImage?: SanityImage;
   publishedAt: string;
   updatedAt?: string;
-  author?: { name: string; avatar?: SanityImage; bio?: string };
+  author?: {
+    name: string;
+    avatar?: SanityImage;
+    bio?: string;
+    social?: { linkedin?: string; github?: string; twitter?: string };
+  };
   categories: string[];
   tags: string[];
   readingTime?: number;

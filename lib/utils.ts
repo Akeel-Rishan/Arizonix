@@ -4,9 +4,22 @@ import { createElement, Fragment, type ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import type { FAQItem } from '@/lib/faq-data';
+import type { SanityBlock } from '@/lib/sanity/types';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .trim();
+}
+
+export function extractText(block: SanityBlock): string {
+  return block.children?.map((child) => child.text ?? '').join('') ?? '';
 }
 
 export function getInitials(name: string): string {
@@ -18,9 +31,13 @@ export function getInitials(name: string): string {
   return `${words[0][0]}${words[words.length - 1][0]}`.toUpperCase();
 }
 
-export function parseMetric(metric: string): { value: number; suffix: string } | { static: string } {
+export function parseMetric(
+  metric: string,
+): { value: number; suffix: string } | { static: string } {
   const match = metric.match(/^(\d+\.?\d*)(.*?)$/);
-  return match ? { value: Number(match[1]), suffix: match[2] } : { static: metric };
+  return match
+    ? { value: Number(match[1]), suffix: match[2] }
+    : { static: metric };
 }
 
 export function renderAnswerWithLinks(

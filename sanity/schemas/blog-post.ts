@@ -56,6 +56,16 @@ export default defineType({
           options: { hotspot: true },
         },
         { name: 'bio', type: 'text', title: 'Short Bio' },
+        {
+          name: 'social',
+          type: 'object',
+          title: 'Social Links',
+          fields: [
+            { name: 'linkedin', type: 'url', title: 'LinkedIn' },
+            { name: 'github', type: 'url', title: 'GitHub' },
+            { name: 'twitter', type: 'url', title: 'Twitter / X' },
+          ],
+        },
       ],
     }),
     defineField({
