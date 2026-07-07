@@ -44,6 +44,7 @@
   .blog-prose .hljs-string, .blog-prose .hljs-attr { @apply text-brand-cyan; }
   .blog-prose .hljs-number, .blog-prose .hljs-literal { @apply text-brand-blue; }
   .blog-prose .hljs-comment { @apply text-slate-500; }
+  .legal-prose h2 { @apply scroll-mt-28 text-xl; }
 }
 
 /* Reusable visual utilities */

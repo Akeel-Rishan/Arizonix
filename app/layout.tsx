@@ -4,6 +4,9 @@ import type { ReactNode } from 'react';
 
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
+import { AnnouncementBanner } from '@/components/ui/announcement-banner';
+import { CookieConsent } from '@/components/ui/cookie-consent';
+import { getSiteSettings } from '@/lib/sanity/fetch';
 
 import './globals.css';
 
@@ -23,13 +26,16 @@ type RootLayoutProps = Readonly<{
   children: ReactNode;
 }>;
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const siteSettings = await getSiteSettings().catch(() => null);
   return (
     <html lang="en">
       <body className={inter.variable}>
+        <AnnouncementBanner banner={siteSettings?.announcementBanner ?? null} />
         <Header />
         <div className="pt-20">{children}</div>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );

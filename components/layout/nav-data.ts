@@ -33,6 +33,7 @@ export const navigation: readonly NavItem[] = [
   { label: 'Case Studies', type: 'link', href: '/case-studies' },
   { label: 'About', type: 'link', href: '/about' },
   { label: 'Blog', type: 'link', href: '/blog' },
+  { label: 'Careers', type: 'link', href: '/careers' },
 ];
 
 export const footerColumns: readonly FooterColumn[] = [
@@ -81,8 +82,8 @@ export const footerColumns: readonly FooterColumn[] = [
     links: [
       { label: 'Portfolio', href: '/portfolio' },
       { label: 'Case Studies', href: '/case-studies' },
-      { label: 'Privacy Policy', href: '/privacy-policy' },
-      { label: 'Terms of Service', href: '/terms-of-service' },
+      { label: 'Privacy Policy', href: '/privacy' },
+      { label: 'Terms of Service', href: '/terms' },
     ],
   },
 ];
