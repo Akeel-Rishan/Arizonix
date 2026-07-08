@@ -8,8 +8,15 @@ import { HeroMockup } from '@/components/sections/hero-mockup';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
+import { GradientTextAnimate } from '@/components/ui/gradient-text-animate';
+import { MagneticButton } from '@/components/ui/magnetic-button';
 import { Section } from '@/components/ui/section';
-import { fadeInUp, staggerContainer } from '@/lib/motion';
+import {
+  blurIn,
+  fadeInUp,
+  premiumScaleIn,
+  staggerContainer,
+} from '@/lib/motion';
 
 const HERO_EYEBROW = 'AI-Powered Software Engineering';
 const HERO_DESCRIPTION =
@@ -41,7 +48,7 @@ export function Hero() {
           initial="hidden"
           variants={staggerContainer}
         >
-          <motion.div data-hero-step="eyebrow" variants={fadeInUp}>
+          <motion.div data-hero-step="eyebrow" variants={premiumScaleIn}>
             <Badge className="gap-2 border-brand-cyan/20 bg-navy-900/60 px-4 py-2 text-slate-200">
               <span className="relative flex size-2">
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand-cyan opacity-60 motion-reduce:animate-none" />
@@ -51,14 +58,14 @@ export function Hero() {
             </Badge>
           </motion.div>
 
-          <motion.div data-hero-step="headline" variants={fadeInUp}>
+          <motion.div data-hero-step="headline" variants={blurIn}>
             <h1
               className="mx-auto mt-7 max-w-6xl text-5xl font-extrabold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
               id="hero-heading"
             >
               We Engineer{' '}
-              <span className="text-gradient">Intelligent Software</span> That
-              Scales Your Business
+              <GradientTextAnimate>Intelligent Software</GradientTextAnimate>{' '}
+              That Scales Your Business
             </h1>
           </motion.div>
 
@@ -73,15 +80,17 @@ export function Hero() {
             data-hero-step="ctas"
             variants={fadeInUp}
           >
-            <Button
-              className="w-full sm:w-auto"
-              href="/contact"
-              icon={ArrowRight}
-              iconPosition="right"
-              size="lg"
-            >
-              Schedule a Free Consultation
-            </Button>
+            <MagneticButton>
+              <Button
+                className="w-full sm:w-auto"
+                href="/contact"
+                icon={ArrowRight}
+                iconPosition="right"
+                size="lg"
+              >
+                Schedule a Free Consultation
+              </Button>
+            </MagneticButton>
             <Button
               className="w-full sm:w-auto"
               href="/portfolio"

@@ -110,13 +110,13 @@ export function Footer() {
           <div className="flex items-center gap-5">
             <Link
               className={`rounded transition-colors duration-200 hover:text-white ${focusStyles}`}
-              href="/privacy-policy"
+              href="/privacy"
             >
               Privacy Policy
             </Link>
             <Link
               className={`rounded transition-colors duration-200 hover:text-white ${focusStyles}`}
-              href="/terms-of-service"
+              href="/terms"
             >
               Terms of Service
             </Link>

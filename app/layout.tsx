@@ -6,6 +6,8 @@ import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
 import { AnnouncementBanner } from '@/components/ui/announcement-banner';
 import { CookieConsent } from '@/components/ui/cookie-consent';
+import CursorGlow from '@/components/ui/cursor-glow';
+import { PageTransition } from '@/components/ui/page-transition';
 import { getSiteSettings } from '@/lib/sanity/fetch';
 
 import './globals.css';
@@ -27,13 +29,19 @@ type RootLayoutProps = Readonly<{
 }>;
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const siteSettings = await getSiteSettings().catch(() => null);
+  const siteSettings = await Promise.race([
+    getSiteSettings().catch(() => null),
+    new Promise<null>((resolve) => setTimeout(() => resolve(null), 1500)),
+  ]);
   return (
     <html lang="en">
       <body className={inter.variable}>
         <AnnouncementBanner banner={siteSettings?.announcementBanner ?? null} />
+        <CursorGlow />
         <Header />
-        <div className="pt-20">{children}</div>
+        <div className="pt-20">
+          <PageTransition>{children}</PageTransition>
+        </div>
         <Footer />
         <CookieConsent />
       </body>

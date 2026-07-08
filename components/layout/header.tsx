@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from 'react';
 import { MobileNav } from '@/components/layout/mobile-nav';
 import { navigation } from '@/components/layout/nav-data';
 import { ServicesMegaMenu } from '@/components/layout/services-mega-menu';
+import { MagneticButton } from '@/components/ui/magnetic-button';
 import { cn } from '@/lib/utils';
 
 const focusStyles =
@@ -174,16 +175,18 @@ export function Header() {
         </nav>
 
         <div className="hidden shrink-0 lg:block">
-          <Link
-            className={cn(
-              'flex min-h-11 items-center justify-center rounded-xl bg-gradient-to-r from-brand-blue via-brand-purple to-brand-cyan px-4 py-2.5 text-sm font-semibold text-white shadow-glow-blue transition duration-200 hover:brightness-110 xl:px-5',
-              focusStyles,
-            )}
-            href="/contact"
-            onClick={closeDesktopMenu}
-          >
-            Schedule a Call
-          </Link>
+          <MagneticButton>
+            <Link
+              className={cn(
+                'flex min-h-11 items-center justify-center rounded-xl bg-gradient-to-r from-brand-blue via-brand-purple to-brand-cyan px-4 py-2.5 text-sm font-semibold text-white shadow-glow-blue transition duration-200 hover:brightness-110 xl:px-5',
+                focusStyles,
+              )}
+              href="/contact"
+              onClick={closeDesktopMenu}
+            >
+              Schedule a Call
+            </Link>
+          </MagneticButton>
         </div>
 
         <button

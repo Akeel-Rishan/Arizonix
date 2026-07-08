@@ -14,6 +14,7 @@ import {
   Users,
   Zap,
 } from 'lucide-react';
+
 import { Section } from '@/components/ui/section';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { fadeInUp, staggerContainer } from '@/lib/motion';

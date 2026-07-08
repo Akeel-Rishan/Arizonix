@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Cookie } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+
 import { Button } from '@/components/ui/button';
 export function CookieConsent() {
   const [mounted, setMounted] = useState(false);

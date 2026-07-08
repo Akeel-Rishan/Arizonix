@@ -6,6 +6,7 @@ import {
   MessageSquare,
   ShieldCheck,
 } from 'lucide-react';
+
 import { ContactMapPlaceholder } from './contact-map-placeholder';
 const cards = [
   [

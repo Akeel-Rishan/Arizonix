@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+
 import { ContactFAQStrip } from '@/components/pages/contact/contact-faq-strip';
 import { ContactFormSection } from '@/components/pages/contact/contact-form-section';
 import { ContactHero } from '@/components/pages/contact/contact-hero';

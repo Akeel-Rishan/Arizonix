@@ -1,9 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
 
-import { fadeInUp } from '@/lib/motion';
+import { ScrollReveal } from '@/components/ui/scroll-reveal';
 import { cn } from '@/lib/utils';
 
 export interface SectionHeadingProps {
@@ -22,16 +21,12 @@ export function SectionHeading({
   title,
 }: SectionHeadingProps) {
   return (
-    <motion.div
+    <ScrollReveal
       className={cn(
         'max-w-3xl',
         align === 'center' ? 'mx-auto text-center' : 'text-left',
         className,
       )}
-      initial="hidden"
-      variants={fadeInUp}
-      viewport={{ once: true, amount: 0.25 }}
-      whileInView="visible"
     >
       {eyebrow ? (
         <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-brand-cyan sm:text-sm">
@@ -51,6 +46,6 @@ export function SectionHeading({
           {description}
         </p>
       ) : null}
-    </motion.div>
+    </ScrollReveal>
   );
 }

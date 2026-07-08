@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import type { SanityAnnouncementBanner } from '@/lib/sanity/types';
 export function AnnouncementBanner({
   banner,

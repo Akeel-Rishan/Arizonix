@@ -1,5 +1,6 @@
 'use client';
 import { CheckCircle2, MessageSquare } from 'lucide-react';
+
 import { Badge } from '@/components/ui/badge';
 import { Section } from '@/components/ui/section';
 export function ContactHero() {

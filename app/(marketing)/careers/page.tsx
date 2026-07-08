@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+
 import { CareersBenefits } from '@/components/pages/careers/careers-benefits';
 import { CareersCTA } from '@/components/pages/careers/careers-cta';
 import { CareersCulture } from '@/components/pages/careers/careers-culture';

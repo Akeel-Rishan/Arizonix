@@ -2,6 +2,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle2, ChevronDown, MapPin, Star } from 'lucide-react';
 import { useState } from 'react';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Section } from '@/components/ui/section';

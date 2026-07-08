@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+
 import { LegalHero } from './legal-hero';
 export function LegalLayout({
   children,
