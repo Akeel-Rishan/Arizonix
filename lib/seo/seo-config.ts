@@ -1,0 +1,48 @@
+export const SEO_CONFIG = {
+  siteName: 'Arizonix',
+  siteUrl: 'https://arizonix.com',
+  siteDescription:
+    'Premium AI automation and software engineering company building intelligent software solutions for ambitious businesses worldwide.',
+  defaultTitle: 'Arizonix — AI & Software Engineering',
+  titleTemplate: '%s | Arizonix',
+  twitterHandle: '@arizonix',
+  locale: 'en_US',
+  themeColor: '#2563FF',
+  ogImage: { width: 1200, height: 630, type: 'image/png' },
+  socialProfiles: [
+    'https://linkedin.com/company/arizonix',
+    'https://twitter.com/arizonix',
+    'https://github.com/arizonix',
+    'https://instagram.com/arizonix',
+  ],
+  organization: {
+    name: 'Arizonix',
+    legalName: 'Arizonix Technologies',
+    foundingDate: '2019',
+    email: 'hello@arizonix.com',
+    telephone: '+15550000000',
+    address: {
+      streetAddress: 'Remote-First Company',
+      addressLocality: 'Worldwide',
+      addressCountry: 'US',
+    },
+    logo: 'https://arizonix.com/logo.png',
+    image: 'https://arizonix.com/opengraph-image',
+  },
+  pages: {
+    home: { url: '/', priority: 1, changeFreq: 'weekly' },
+    about: { url: '/about', priority: 0.8, changeFreq: 'monthly' },
+    services: { url: '/services', priority: 0.9, changeFreq: 'monthly' },
+    portfolio: { url: '/portfolio', priority: 0.8, changeFreq: 'weekly' },
+    caseStudies: { url: '/case-studies', priority: 0.7, changeFreq: 'weekly' },
+    industries: { url: '/industries', priority: 0.8, changeFreq: 'monthly' },
+    aiAutomation: {
+      url: '/ai-automation',
+      priority: 0.9,
+      changeFreq: 'monthly',
+    },
+    blog: { url: '/blog', priority: 0.8, changeFreq: 'daily' },
+    careers: { url: '/careers', priority: 0.6, changeFreq: 'weekly' },
+    contact: { url: '/contact', priority: 0.9, changeFreq: 'monthly' },
+  },
+} as const;

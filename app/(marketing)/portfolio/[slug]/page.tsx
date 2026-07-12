@@ -19,8 +19,191 @@ import { sanityImage } from '@/lib/sanity/image';
 import type { SanityPortfolioProject } from '@/lib/sanity/types';
 
 export const revalidate = 3600;
-function fallbackProject(slug: string): SanityPortfolioProject | null { const p = fallback.find((item) => item.id === slug); return p ? { _id: p.id, title: p.title, slug: p.id, category: p.category, featured: true, tags: p.tags, challenge: p.challenge, solution: p.solution, results: p.results, device: p.device, testimonial: p.testimonial } : null; }
-function display(p: SanityPortfolioProject): PortfolioDisplayProject { const color = portfolioColor(p.category); return { id: p._id, slug: p.slug, title: p.title, category: p.category, categoryColor: color, tags: p.tags, challenge: p.challenge, solution: p.solution, results: p.results, device: p.device, mockupBgColor: color, testimonial: p.testimonial, mainImageUrl: p.mainImage ? sanityImage(p.mainImage, { width: 1200, quality: 90 }) : null }; }
-export async function generateStaticParams() { const cms = await getPortfolioProjects().catch(() => []); return (cms.length ? cms : fallback).map((p) => ({ slug: 'slug' in p ? p.slug : p.id })); }
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> { const project = (await getProjectBySlug(params.slug).catch(() => null)) ?? fallbackProject(params.slug); if (!project) return { title: 'Project Not Found — Arizonix' }; return { title: `${project.title} — Portfolio | Arizonix`, description: project.seo?.description ?? `${project.challenge.slice(0, 150)}...`, openGraph: { title: project.title, description: project.challenge.slice(0, 200), type: 'website', url: `https://arizonix.com/portfolio/${project.slug}`, images: project.mainImage ? [{ url: sanityImage(project.mainImage, { width: 1200, height: 630 }) }] : [] } }; }
-export default async function ProjectPage({ params }: { params: { slug: string } }) { const [cmsProject, cmsAll] = await Promise.all([getProjectBySlug(params.slug).catch(() => null), getPortfolioProjects().catch(() => [])]); const raw = cmsProject ?? fallbackProject(params.slug); if (!raw) notFound(); const project = display(raw); const all = (cmsAll.length ? cmsAll : fallback.map((p) => fallbackProject(p.id)!)).map(display); const screenshots = (raw.screenshots ?? []).map((image) => sanityImage(image, { width: 900, quality: 85 })); const avatar = raw.testimonial?.avatar ? sanityImage(raw.testimonial.avatar, { width: 100, quality: 90 }) : null; const related = [...all.filter((p) => p.slug !== project.slug && p.category === project.category), ...all.filter((p) => p.slug !== project.slug && p.category !== project.category)].slice(0, 3); const schema = [{ '@context': 'https://schema.org', '@type': 'Article', headline: project.title, description: project.challenge, author: { '@type': 'Organization', name: 'Arizonix' }, publisher: { '@type': 'Organization', name: 'Arizonix' }, url: `https://arizonix.com/portfolio/${project.slug}`, image: project.mainImageUrl ?? '', articleSection: project.category, keywords: project.tags.join(', ') }, { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://arizonix.com' }, { '@type': 'ListItem', position: 2, name: 'Portfolio', item: 'https://arizonix.com/portfolio' }, { '@type': 'ListItem', position: 3, name: project.title, item: `https://arizonix.com/portfolio/${project.slug}` }] }]; return <main><script dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }} type="application/ld+json" /><ProjectDetailHero mainImageUrl={project.mainImageUrl} project={project} /><ProjectChallengeSolution content={raw.fullCaseStudy as unknown as PortableTextBlock[] | undefined} project={project} /><ProjectResults results={project.results} testimonial={project.testimonial} /><ProjectScreenshots projectTitle={project.title} screenshots={screenshots} /><ProjectTechStack tags={project.tags} />{project.testimonial ? <ProjectTestimonial avatarUrl={avatar} projectTitle={project.title} testimonial={project.testimonial} /> : null}<section className="py-20"><Container><h2 className="text-3xl font-bold text-white">Related Projects</h2><div className="mt-8 grid gap-6 md:grid-cols-3">{related.map((p) => <PortfolioGridCard key={p.slug} project={p} />)}</div></Container></section><PortfolioCTA /></main>; }
+function fallbackProject(slug: string): SanityPortfolioProject | null {
+  const p = fallback.find((item) => item.id === slug);
+  return p
+    ? {
+        _id: p.id,
+        title: p.title,
+        slug: p.id,
+        category: p.category,
+        featured: true,
+        tags: p.tags,
+        challenge: p.challenge,
+        solution: p.solution,
+        results: p.results,
+        device: p.device,
+        testimonial: p.testimonial,
+      }
+    : null;
+}
+function display(p: SanityPortfolioProject): PortfolioDisplayProject {
+  const color = portfolioColor(p.category);
+  return {
+    id: p._id,
+    slug: p.slug,
+    title: p.title,
+    category: p.category,
+    categoryColor: color,
+    tags: p.tags,
+    challenge: p.challenge,
+    solution: p.solution,
+    results: p.results,
+    device: p.device,
+    mockupBgColor: color,
+    testimonial: p.testimonial,
+    mainImageUrl: p.mainImage
+      ? sanityImage(p.mainImage, { width: 1200, quality: 90 })
+      : null,
+  };
+}
+export async function generateStaticParams() {
+  const cms = await getPortfolioProjects().catch(() => []);
+  return (cms.length ? cms : fallback).map((p) => ({
+    slug: 'slug' in p ? p.slug : p.id,
+  }));
+}
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const project =
+    (await getProjectBySlug(params.slug).catch(() => null)) ??
+    fallbackProject(params.slug);
+  if (!project) return { title: 'Project Not Found — Arizonix' };
+  return {
+    alternates: { canonical: `https://arizonix.com/portfolio/${project.slug}` },
+    title: `${project.title} — Portfolio | Arizonix`,
+    description:
+      project.seo?.description ?? `${project.challenge.slice(0, 150)}...`,
+    openGraph: {
+      title: project.title,
+      description: project.challenge.slice(0, 200),
+      type: 'website',
+      url: `https://arizonix.com/portfolio/${project.slug}`,
+      images: project.mainImage
+        ? [
+            {
+              url: sanityImage(project.mainImage, { width: 1200, height: 630 }),
+            },
+          ]
+        : [],
+    },
+  };
+}
+export default async function ProjectPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const [cmsProject, cmsAll] = await Promise.all([
+    getProjectBySlug(params.slug).catch(() => null),
+    getPortfolioProjects().catch(() => []),
+  ]);
+  const raw = cmsProject ?? fallbackProject(params.slug);
+  if (!raw) notFound();
+  const project = display(raw);
+  const all = (
+    cmsAll.length ? cmsAll : fallback.map((p) => fallbackProject(p.id)!)
+  ).map(display);
+  const screenshots = (raw.screenshots ?? []).map((image) =>
+    sanityImage(image, { width: 900, quality: 85 }),
+  );
+  const avatar = raw.testimonial?.avatar
+    ? sanityImage(raw.testimonial.avatar, { width: 100, quality: 90 })
+    : null;
+  const related = [
+    ...all.filter(
+      (p) => p.slug !== project.slug && p.category === project.category,
+    ),
+    ...all.filter(
+      (p) => p.slug !== project.slug && p.category !== project.category,
+    ),
+  ].slice(0, 3);
+  const schema = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: project.title,
+      description: project.challenge,
+      author: { '@type': 'Organization', name: 'Arizonix' },
+      publisher: { '@type': 'Organization', name: 'Arizonix' },
+      url: `https://arizonix.com/portfolio/${project.slug}`,
+      image: project.mainImageUrl ?? '',
+      articleSection: project.category,
+      keywords: project.tags.join(', '),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://arizonix.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Portfolio',
+          item: 'https://arizonix.com/portfolio',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: project.title,
+          item: `https://arizonix.com/portfolio/${project.slug}`,
+        },
+      ],
+    },
+  ];
+  return (
+    <main>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schema).replace(/</g, '\\u003c'),
+        }}
+        type="application/ld+json"
+      />
+      <ProjectDetailHero
+        mainImageUrl={project.mainImageUrl}
+        project={project}
+      />
+      <ProjectChallengeSolution
+        content={
+          raw.fullCaseStudy as unknown as PortableTextBlock[] | undefined
+        }
+        project={project}
+      />
+      <ProjectResults
+        results={project.results}
+        testimonial={project.testimonial}
+      />
+      <ProjectScreenshots
+        projectTitle={project.title}
+        screenshots={screenshots}
+      />
+      <ProjectTechStack tags={project.tags} />
+      {project.testimonial ? (
+        <ProjectTestimonial
+          avatarUrl={avatar}
+          projectTitle={project.title}
+          testimonial={project.testimonial}
+        />
+      ) : null}
+      <section className="py-20">
+        <Container>
+          <h2 className="text-3xl font-bold text-white">Related Projects</h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {related.map((p) => (
+              <PortfolioGridCard key={p.slug} project={p} />
+            ))}
+          </div>
+        </Container>
+      </section>
+      <PortfolioCTA />
+    </main>
+  );
+}

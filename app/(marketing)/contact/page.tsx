@@ -5,6 +5,7 @@ import { ContactFormSection } from '@/components/pages/contact/contact-form-sect
 import { ContactHero } from '@/components/pages/contact/contact-hero';
 import { ContactInfoSection } from '@/components/pages/contact/contact-info-section';
 export const metadata: Metadata = {
+  alternates: { canonical: 'https://arizonix.com/contact' },
   title: 'Contact Arizonix — Start Your Project',
   description:
     "Get in touch with Arizonix. Tell us about your project and we'll respond within 48 hours with a detailed proposal.",

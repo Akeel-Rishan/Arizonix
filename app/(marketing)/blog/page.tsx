@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     url: 'https://arizonix.com/blog',
   },
   alternates: {
+    canonical: 'https://arizonix.com/blog',
     types: { 'application/rss+xml': 'https://arizonix.com/blog/rss.xml' },
   },
 };
@@ -57,17 +58,15 @@ export default async function BlogPage() {
         name: 'Arizonix',
         url: 'https://arizonix.com',
       },
-      blogPost: posts
-        .slice(0, 10)
-        .map((post) => ({
-          '@type': 'BlogPosting',
-          headline: post.title,
-          url: `https://arizonix.com/blog/${post.slug}`,
-          datePublished: post.publishedAt,
-          author: post.author
-            ? { '@type': 'Person', name: post.author.name }
-            : { '@type': 'Organization', name: 'Arizonix' },
-        })),
+      blogPost: posts.slice(0, 10).map((post) => ({
+        '@type': 'BlogPosting',
+        headline: post.title,
+        url: `https://arizonix.com/blog/${post.slug}`,
+        datePublished: post.publishedAt,
+        author: post.author
+          ? { '@type': 'Person', name: post.author.name }
+          : { '@type': 'Organization', name: 'Arizonix' },
+      })),
     },
     {
       '@context': 'https://schema.org',

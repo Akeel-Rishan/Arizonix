@@ -5,7 +5,76 @@ import { IndustriesOverviewGrid } from '@/components/pages/industries/industries
 import { industries as fallback } from '@/lib/industries-data';
 import { getIndustries } from '@/lib/sanity/fetch';
 import type { SanityIndustry } from '@/lib/sanity/types';
-export const metadata: Metadata = { title: 'Industries We Serve — Software & AI Solutions | Arizonix', description: 'Arizonix builds specialized software and AI solutions for 12+ industries including Healthcare, Finance, Retail, Construction, Logistics, and more. Industry-specific expertise, enterprise-grade execution.', openGraph: { title: 'Industries We Serve — Arizonix', description: 'Specialized software engineering and AI solutions across 12+ industries. We understand your domain as deeply as we understand your technology.', type: 'website', url: 'https://arizonix.com/industries' } };
+export const metadata: Metadata = {
+  alternates: { canonical: 'https://arizonix.com/industries' },
+  title: 'Industries We Serve — Software & AI Solutions | Arizonix',
+  description:
+    'Arizonix builds specialized software and AI solutions for 12+ industries including Healthcare, Finance, Retail, Construction, Logistics, and more. Industry-specific expertise, enterprise-grade execution.',
+  openGraph: {
+    title: 'Industries We Serve — Arizonix',
+    description:
+      'Specialized software engineering and AI solutions across 12+ industries. We understand your domain as deeply as we understand your technology.',
+    type: 'website',
+    url: 'https://arizonix.com/industries',
+  },
+};
 export const revalidate = 3600;
-function fallbackIndustries(): SanityIndustry[] { return fallback.map((item, order) => ({ _id: item.slug, name: item.name, slug: item.slug, description: item.description, icon: item.icon.displayName ?? item.icon.name, stat: item.stat, color: item.color, order })); }
-export default async function IndustriesPage() { const cms = await getIndustries().catch(() => []); const industries = cms.length ? cms : fallbackIndustries(); const data = [{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://arizonix.com' }, { '@type': 'ListItem', position: 2, name: 'Industries', item: 'https://arizonix.com/industries' }] }, { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Industries Served by Arizonix', itemListElement: industries.map((industry, index) => ({ '@type': 'ListItem', position: index + 1, name: industry.name, url: `https://arizonix.com/industries/${industry.slug}` })) }]; return <main><script dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }} type="application/ld+json" /><IndustriesListingHero industries={industries} /><IndustriesOverviewGrid industries={industries} /></main>; }
+function fallbackIndustries(): SanityIndustry[] {
+  return fallback.map((item, order) => ({
+    _id: item.slug,
+    name: item.name,
+    slug: item.slug,
+    description: item.description,
+    icon: item.icon.displayName ?? item.icon.name,
+    stat: item.stat,
+    color: item.color,
+    order,
+  }));
+}
+export default async function IndustriesPage() {
+  const cms = await getIndustries().catch(() => []);
+  const industries = cms.length ? cms : fallbackIndustries();
+  const data = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://arizonix.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Industries',
+          item: 'https://arizonix.com/industries',
+        },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Industries Served by Arizonix',
+      itemListElement: industries.map((industry, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: industry.name,
+        url: `https://arizonix.com/industries/${industry.slug}`,
+      })),
+    },
+  ];
+  return (
+    <main>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(data).replace(/</g, '\\u003c'),
+        }}
+        type="application/ld+json"
+      />
+      <IndustriesListingHero industries={industries} />
+      <IndustriesOverviewGrid industries={industries} />
+    </main>
+  );
+}

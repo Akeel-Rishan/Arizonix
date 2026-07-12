@@ -6,10 +6,11 @@ import {
 } from '@/components/pages/legal/legal-content';
 import { LegalLayout } from '@/components/pages/legal/legal-layout';
 export const metadata: Metadata = {
+  alternates: { canonical: 'https://arizonix.com/privacy' },
   title: 'Privacy Policy — Arizonix',
   description:
     'How Arizonix collects, uses, and protects your personal information.',
-  robots: { index: true, follow: false },
+  robots: { index: false, follow: false },
 };
 export const revalidate = 86400;
 // LEGAL NOTE: Review this content with a qualified lawyer before launch. Placeholder content only.

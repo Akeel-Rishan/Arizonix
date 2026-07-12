@@ -12,6 +12,7 @@ import { AIUseCasesTabs } from '@/components/pages/ai-automation/ai-use-cases-ta
 import { AIWorkflowBuilder } from '@/components/pages/ai-automation/ai-workflow-builder';
 import { aiFaqItems } from '@/lib/ai-faq-data';
 export const metadata: Metadata = {
+  alternates: { canonical: 'https://arizonix.com/ai-automation' },
   title: 'AI Automation Solutions — Intelligent Business Automation | Arizonix',
   description:
     'Arizonix builds custom AI automation systems — from intelligent chatbots and AI agents to full business process automation. Reduce manual work by 80%, accelerate decision-making, and scale operations without headcount growth.',

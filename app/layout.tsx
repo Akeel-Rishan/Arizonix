@@ -4,11 +4,17 @@ import type { ReactNode } from 'react';
 
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
+import { JsonLd } from '@/components/seo/json-ld';
 import { AnnouncementBanner } from '@/components/ui/announcement-banner';
 import { CookieConsent } from '@/components/ui/cookie-consent';
 import CursorGlow from '@/components/ui/cursor-glow';
 import { PageTransition } from '@/components/ui/page-transition';
 import { getSiteSettings } from '@/lib/sanity/fetch';
+import {
+  buildOrganizationSchema,
+  buildWebSiteSchema,
+} from '@/lib/seo/schema-builder';
+import { SEO_CONFIG } from '@/lib/seo/seo-config';
 
 import './globals.css';
 
@@ -20,8 +26,55 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Arizonix',
-  description: 'Premium AI & Software Engineering Solutions',
+  metadataBase: new URL(SEO_CONFIG.siteUrl),
+  title: {
+    default: SEO_CONFIG.defaultTitle,
+    template: SEO_CONFIG.titleTemplate,
+  },
+  description: SEO_CONFIG.siteDescription,
+  applicationName: SEO_CONFIG.siteName,
+  alternates: {
+    canonical: SEO_CONFIG.siteUrl,
+    languages: { 'en-US': SEO_CONFIG.siteUrl, 'x-default': SEO_CONFIG.siteUrl },
+  },
+  icons: { icon: '/icon', apple: '/apple-icon' },
+  manifest: '/site.webmanifest',
+  openGraph: {
+    title: SEO_CONFIG.defaultTitle,
+    description: SEO_CONFIG.siteDescription,
+    url: SEO_CONFIG.siteUrl,
+    siteName: SEO_CONFIG.siteName,
+    locale: SEO_CONFIG.locale,
+    type: 'website',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Arizonix — AI and Software Engineering',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: SEO_CONFIG.twitterHandle,
+    creator: SEO_CONFIG.twitterHandle,
+    title: SEO_CONFIG.defaultTitle,
+    description: SEO_CONFIG.siteDescription,
+    images: ['/opengraph-image'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+  verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION },
 };
 
 type RootLayoutProps = Readonly<{
@@ -36,6 +89,10 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body className={inter.variable}>
+        <JsonLd
+          id="global-schema"
+          schema={[buildOrganizationSchema(), buildWebSiteSchema()]}
+        />
         <AnnouncementBanner banner={siteSettings?.announcementBanner ?? null} />
         <CursorGlow />
         <Header />

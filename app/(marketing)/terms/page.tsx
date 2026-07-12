@@ -6,9 +6,10 @@ import {
 } from '@/components/pages/legal/legal-content';
 import { LegalLayout } from '@/components/pages/legal/legal-layout';
 export const metadata: Metadata = {
+  alternates: { canonical: 'https://arizonix.com/terms' },
   title: 'Terms of Service — Arizonix',
   description: 'The terms governing use of the Arizonix website and services.',
-  robots: { index: true, follow: false },
+  robots: { index: false, follow: false },
 };
 export const revalidate = 86400;
 // LEGAL NOTE: Review this content with a qualified lawyer before launch. Placeholder content only.
