@@ -1,21 +1,43 @@
-import { AIAutomation } from '@/components/sections/ai-automation';
+import dynamic from 'next/dynamic';
+
+import { ErrorBoundary } from '@/components/monitoring/error-boundary';
 import { FAQ } from '@/components/sections/faq';
 import { FinalCTA } from '@/components/sections/final-cta';
 import { Hero } from '@/components/sections/hero';
 import { Industries } from '@/components/sections/industries';
-import { PortfolioPreview } from '@/components/sections/portfolio-preview';
 import { Process } from '@/components/sections/process';
 import { Services } from '@/components/sections/services';
 import { TechShowcase } from '@/components/sections/tech-showcase';
-import { Testimonials } from '@/components/sections/testimonials';
 import { WhyChooseUs } from '@/components/sections/why-choose-us';
-import { CMSErrorBoundary } from '@/components/ui/cms-error-boundary';
+import { SectionSkeleton } from '@/components/ui/section-skeleton';
 import { faqData as staticFAQ } from '@/lib/faq-data';
 import { getFAQItems, getFeaturedProjects, getIndustries, getServices, getSiteSettings, getTestimonials } from '@/lib/sanity/fetch';
 import { sanityImage } from '@/lib/sanity/image';
 import { testimonials as staticTestimonials, type Testimonial } from '@/lib/testimonials-data';
 
 export const revalidate = 3600;
+
+const AIAutomation = dynamic(
+  () =>
+    import('@/components/sections/ai-automation').then(
+      (module) => module.AIAutomation,
+    ),
+  { loading: () => <SectionSkeleton /> },
+);
+const PortfolioPreview = dynamic(
+  () =>
+    import('@/components/sections/portfolio-preview').then(
+      (module) => module.PortfolioPreview,
+    ),
+  { loading: () => <SectionSkeleton /> },
+);
+const Testimonials = dynamic(
+  () =>
+    import('@/components/sections/testimonials').then(
+      (module) => module.Testimonials,
+    ),
+  { loading: () => <SectionSkeleton /> },
+);
 
 export default async function HomePage() {
   const [services, projects, cmsTestimonials, faqItems, industries, siteSettings] = await Promise.all([
@@ -29,14 +51,14 @@ export default async function HomePage() {
   return <main>
     {/* Future CMS migration candidate. */}<Hero />
     {/* Future CMS migration candidate. */}<TechShowcase />
-    <CMSErrorBoundary fallback={<Services services={[]} />}><Services services={services} /></CMSErrorBoundary>
-    <CMSErrorBoundary fallback={<Industries industries={[]} />}><Industries industries={industries} /></CMSErrorBoundary>
+    <ErrorBoundary fallback={<Services services={[]} />} sectionName="Services"><Services services={services} /></ErrorBoundary>
+    <ErrorBoundary fallback={<Industries industries={[]} />} sectionName="Industries"><Industries industries={industries} /></ErrorBoundary>
     {/* Future CMS migration candidate. */}<AIAutomation />
-    <CMSErrorBoundary fallback={<PortfolioPreview projects={[]} />}><PortfolioPreview projects={projects} /></CMSErrorBoundary>
+    <ErrorBoundary fallback={<PortfolioPreview projects={[]} />} sectionName="PortfolioPreview"><PortfolioPreview projects={projects} /></ErrorBoundary>
     {/* Future CMS migration candidate. */}<Process />
     {/* Future CMS migration candidate. */}<WhyChooseUs />
-    <CMSErrorBoundary fallback={<Testimonials testimonials={staticTestimonials} />}><Testimonials testimonials={testimonials} /></CMSErrorBoundary>
-    <CMSErrorBoundary fallback={<FAQ faqData={staticFAQ} />}><FAQ faqData={faqData} /></CMSErrorBoundary>
-    <CMSErrorBoundary fallback={<FinalCTA siteSettings={null} />}><FinalCTA siteSettings={siteSettings} /></CMSErrorBoundary>
+    <ErrorBoundary fallback={<Testimonials testimonials={staticTestimonials} />} sectionName="Testimonials"><Testimonials testimonials={testimonials} /></ErrorBoundary>
+    <ErrorBoundary fallback={<FAQ faqData={staticFAQ} />} sectionName="FAQ"><FAQ faqData={faqData} /></ErrorBoundary>
+    <ErrorBoundary fallback={<FinalCTA siteSettings={null} />} sectionName="FinalCTA"><FinalCTA siteSettings={siteSettings} /></ErrorBoundary>
   </main>;
 }

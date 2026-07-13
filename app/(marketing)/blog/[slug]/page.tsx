@@ -6,10 +6,10 @@ import { BlogCTA } from '@/components/pages/blog/blog-cta';
 import { BlogPostContent } from '@/components/pages/blog/blog-post-content';
 import { BlogPostHero } from '@/components/pages/blog/blog-post-hero';
 import { BlogPostRelated } from '@/components/pages/blog/blog-post-related';
-import { BlogPostSidebar } from '@/components/pages/blog/blog-post-sidebar';
+import { BlogPostSidebar } from '@/components/pages/blog/blog-post-sidebar-dynamic';
 import { fallbackBlogPosts, withBlogImages } from '@/lib/blog-data';
 import { getBlogPostBySlug, getBlogPosts } from '@/lib/sanity/fetch';
-import { sanityImage } from '@/lib/sanity/image';
+import { sanityBlurImage, sanityImage } from '@/lib/sanity/image';
 export const revalidate = 3600;
 export async function generateStaticParams() {
   const cms = await getBlogPosts().catch(() => []);
@@ -75,10 +75,14 @@ export default async function BlogPostPage({
   const cover = post.coverImage
     ? sanityImage(post.coverImage, { width: 1400, quality: 90 })
     : null;
+  const coverBlur = post.coverImage ? sanityBlurImage(post.coverImage) : null;
   const avatar = post.author?.avatar
     ? sanityImage(post.author.avatar, { width: 120, quality: 90 })
     : null;
-  const display = withBlogImages(post, cover, avatar);
+  const display = {
+    ...withBlogImages(post, cover, avatar),
+    coverImageBlurUrl: coverBlur,
+  };
   const related = all
     .filter(
       (item) =>

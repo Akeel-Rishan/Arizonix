@@ -1,8 +1,7 @@
 'use client';
 
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-
 import { Badge } from '@/components/ui/badge';
+import { AnimatePresence, motion, useReducedMotion } from '@/lib/framer-motion';
 import type { ProcessColor, ProcessPhase } from '@/lib/process-data';
 import { cn } from '@/lib/utils';
 

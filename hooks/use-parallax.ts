@@ -1,12 +1,13 @@
 'use client';
+import { useEffect, useState } from 'react';
+
 import {
   useMotionValue,
   useReducedMotion,
   useScroll,
   useTransform,
   type MotionValue,
-} from 'framer-motion';
-import { useEffect, useState } from 'react';
+} from '@/lib/framer-motion';
 export function useParallax(speed = 0.3): { y: MotionValue<number> } {
   const { scrollY } = useScroll();
   const transformed = useTransform(scrollY, [0, 1000], [0, -speed * 200]);

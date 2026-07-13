@@ -1,10 +1,11 @@
 'use client';
-import { AnimatePresence, motion } from 'framer-motion';
 import { Cookie } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
+import { setAnalyticsConsent } from '@/lib/analytics/consent';
+import { AnimatePresence, motion } from '@/lib/framer-motion';
 export function CookieConsent() {
   const [mounted, setMounted] = useState(false);
   const [show, setShow] = useState(false);
@@ -17,7 +18,7 @@ export function CookieConsent() {
     if (show) acceptRef.current?.focus();
   }, [show]);
   const choose = (value: 'accepted' | 'declined') => {
-    window.localStorage.setItem('arizonix-cookie-consent', value);
+    setAnalyticsConsent(value);
     setShow(false);
   };
   if (!mounted) return null;

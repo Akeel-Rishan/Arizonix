@@ -1,6 +1,7 @@
 'use client';
-import { useMotionValue, useSpring, type MotionValue } from 'framer-motion';
 import { useEffect, useState } from 'react';
+
+import { useMotionValue, useSpring, type MotionValue } from '@/lib/framer-motion';
 export interface UseCursorPositionReturn {
   x: MotionValue<number>;
   y: MotionValue<number>;

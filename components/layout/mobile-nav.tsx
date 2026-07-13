@@ -1,9 +1,9 @@
-import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 
 import { navigation } from '@/components/layout/nav-data';
 import { ServiceIcon } from '@/components/layout/service-icon';
+import { AnimatePresence, motion } from '@/lib/framer-motion';
 import { fadeIn, slideInRight } from '@/lib/motion';
 import { getServiceHref } from '@/lib/services-data';
 import { cn } from '@/lib/utils';

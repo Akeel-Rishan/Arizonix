@@ -1,6 +1,5 @@
 'use client';
 
-import { useReducedMotion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 import {
@@ -9,6 +8,7 @@ import {
 } from '@/components/sections/tech-marquee-row';
 import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
+import { useReducedMotion } from '@/lib/framer-motion';
 import { techStack } from '@/lib/tech-stack-data';
 
 const topRow = techStack.slice(0, 6);

@@ -1,9 +1,9 @@
 'use client';
 
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 
 import type { FAQItem as FAQItemData } from '@/lib/faq-data';
+import { AnimatePresence, motion, useReducedMotion } from '@/lib/framer-motion';
 import { cn, renderAnswerWithLinks } from '@/lib/utils';
 
 export interface FAQItemProps {

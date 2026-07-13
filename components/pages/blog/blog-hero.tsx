@@ -1,11 +1,11 @@
 'use client';
-import { motion } from 'framer-motion';
 
 import { BlogCard } from './blog-card';
 
 import { NewsletterInlineForm } from '@/components/ui/newsletter-inline-form';
 import { Section } from '@/components/ui/section';
 import type { PostWithImages } from '@/lib/blog-data';
+import { motion } from '@/lib/framer-motion';
 
 export function BlogHero({
   categories,

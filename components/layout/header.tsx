@@ -1,6 +1,5 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown, Menu, Sparkles, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -10,6 +9,7 @@ import { MobileNav } from '@/components/layout/mobile-nav';
 import { navigation } from '@/components/layout/nav-data';
 import { ServicesMegaMenu } from '@/components/layout/services-mega-menu';
 import { MagneticButton } from '@/components/ui/magnetic-button';
+import { AnimatePresence, motion } from '@/lib/framer-motion';
 import { cn } from '@/lib/utils';
 
 const focusStyles =

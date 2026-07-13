@@ -1,10 +1,10 @@
 'use client';
 
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useState } from 'react';
 
 import { Section } from '@/components/ui/section';
 import { SectionHeading } from '@/components/ui/section-heading';
+import { AnimatePresence, motion, useReducedMotion } from '@/lib/framer-motion';
 import { cn } from '@/lib/utils';
 
 const comparisons = [

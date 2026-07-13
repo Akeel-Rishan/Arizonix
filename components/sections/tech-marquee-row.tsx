@@ -1,8 +1,8 @@
 'use client';
 
-import { motion, useAnimationFrame, useMotionValue } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
+import { motion, useAnimationFrame, useMotionValue } from '@/lib/framer-motion';
 import type { TechItem } from '@/lib/tech-stack-data';
 import { cn } from '@/lib/utils';
 

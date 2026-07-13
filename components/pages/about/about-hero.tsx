@@ -1,11 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Building2, MapPin } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
+import { motion } from '@/lib/framer-motion';
 import { fadeInUp, staggerContainer } from '@/lib/motion';
 import { cn } from '@/lib/utils';
 

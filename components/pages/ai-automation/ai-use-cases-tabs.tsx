@@ -1,11 +1,12 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
 import { TrendingUp } from 'lucide-react';
+import { memo } from 'react';
 import { useState } from 'react';
 
 import { Section } from '@/components/ui/section';
 import { SectionHeading } from '@/components/ui/section-heading';
+import { AnimatePresence, motion } from '@/lib/framer-motion';
 import { getIcon } from '@/lib/icon-map';
 import { cn } from '@/lib/utils';
 
@@ -171,6 +172,29 @@ const cases: IndustryCases[] = [
     ],
   },
 ];
+
+const UseCaseCard = memo(function UseCaseCard({ item }: { item: UseCase }) {
+  return (
+    <article className="glass-panel rounded-xl2 p-6">
+      <h3 className="font-bold text-white">{item.title}</h3>
+      <p className="mt-5 text-xs font-semibold uppercase text-red-400">
+        Problem
+      </p>
+      <p className="mt-1 text-sm leading-6 text-slate-400">{item.problem}</p>
+      <p className="mt-4 text-xs font-semibold uppercase text-brand-cyan">
+        AI Solution
+      </p>
+      <p className="mt-1 text-sm leading-6 text-slate-300">
+        {item.aiSolution}
+      </p>
+      <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-emerald-400/10 px-3 py-1.5 text-xs font-semibold text-emerald-400">
+        <TrendingUp className="size-4" />
+        {item.result}
+      </p>
+    </article>
+  );
+});
+
 export function AIUseCasesTabs() {
   const [activeIndex, setActiveIndex] = useState(0);
   const active = cases[activeIndex];
@@ -216,25 +240,7 @@ export function AIUseCasesTabs() {
             key={active.industry}
           >
             {active.useCases.map((item) => (
-              <article className="glass-panel rounded-xl2 p-6" key={item.title}>
-                <h3 className="font-bold text-white">{item.title}</h3>
-                <p className="mt-5 text-xs font-semibold uppercase text-red-400">
-                  Problem
-                </p>
-                <p className="mt-1 text-sm leading-6 text-slate-400">
-                  {item.problem}
-                </p>
-                <p className="mt-4 text-xs font-semibold uppercase text-brand-cyan">
-                  AI Solution
-                </p>
-                <p className="mt-1 text-sm leading-6 text-slate-300">
-                  {item.aiSolution}
-                </p>
-                <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-emerald-400/10 px-3 py-1.5 text-xs font-semibold text-emerald-400">
-                  <TrendingUp className="size-4" />
-                  {item.result}
-                </p>
-              </article>
+              <UseCaseCard item={item} key={item.title} />
             ))}
           </motion.div>
         </AnimatePresence>

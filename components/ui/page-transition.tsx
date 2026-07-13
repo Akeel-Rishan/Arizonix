@@ -1,10 +1,10 @@
 'use client';
-import { motion, useReducedMotion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { useEffect } from 'react';
 
 import { ANIMATION } from '@/lib/animation-config';
+import { motion, useReducedMotion } from '@/lib/framer-motion';
 export function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const reduced = useReducedMotion();

@@ -1,8 +1,8 @@
 'use client';
-import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 import { useMagnetic } from '@/hooks/use-magnetic';
+import { motion } from '@/lib/framer-motion';
 import { cn } from '@/lib/utils';
 export function MagneticButton({
   children,

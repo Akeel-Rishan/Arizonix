@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 import { ServiceIcon } from '@/components/layout/service-icon';
+import { motion } from '@/lib/framer-motion';
 import { scaleIn } from '@/lib/motion';
 import { getServiceHref, type Service } from '@/lib/services-data';
 

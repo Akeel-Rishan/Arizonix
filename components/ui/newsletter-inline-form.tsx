@@ -6,6 +6,7 @@ import { useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { Analytics } from '@/lib/analytics/events';
 import { cn } from '@/lib/utils';
 
 const schema = z.object({
@@ -36,6 +37,7 @@ export function NewsletterInlineForm({ className }: { className?: string }) {
       };
       if (!response.ok || !result.success)
         return setApiError(result.error ?? 'Unable to subscribe.');
+      Analytics.newsletterSubmit('inline');
       setSuccess(true);
     } catch {
       setApiError('Network error. Please try again.');

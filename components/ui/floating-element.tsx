@@ -1,7 +1,7 @@
 'use client';
-import { motion, useReducedMotion } from 'framer-motion';
 import type { ReactNode } from 'react';
 
+import { motion, useReducedMotion } from '@/lib/framer-motion';
 import { cn } from '@/lib/utils';
 export function FloatingElement({
   amplitude = 12,

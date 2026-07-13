@@ -19,3 +19,7 @@ export function sanityImage(
   if (options?.quality) image = image.quality(options.quality);
   return image.url();
 }
+
+export function sanityBlurImage(source: SanityImageSource) {
+  return builder.image(source).width(20).quality(30).blur(10).url();
+}

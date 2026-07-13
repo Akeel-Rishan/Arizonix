@@ -1,13 +1,13 @@
 'use client';
+import { useRef } from 'react';
+
+import { ANIMATION } from '@/lib/animation-config';
 import {
   useMotionValue,
   useReducedMotion,
   useSpring,
   type MotionValue,
-} from 'framer-motion';
-import { useRef } from 'react';
-
-import { ANIMATION } from '@/lib/animation-config';
+} from '@/lib/framer-motion';
 export interface UseMagneticReturn {
   ref: React.RefObject<HTMLDivElement>;
   x: MotionValue<number>;

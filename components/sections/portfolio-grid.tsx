@@ -1,8 +1,8 @@
 'use client';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useMemo, useState } from 'react';
 
 import { PortfolioCard } from '@/components/sections/portfolio-card';
+import { AnimatePresence, motion, useReducedMotion } from '@/lib/framer-motion';
 import type { PortfolioProject } from '@/lib/portfolio-data';
 import { cn } from '@/lib/utils';
 export function PortfolioGrid({ projects }: { projects: PortfolioProject[] }) {

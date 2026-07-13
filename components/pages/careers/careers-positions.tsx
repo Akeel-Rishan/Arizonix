@@ -1,5 +1,4 @@
 'use client';
-import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle2, ChevronDown, MapPin, Star } from 'lucide-react';
 import { useState } from 'react';
 
@@ -8,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Section } from '@/components/ui/section';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { openPositions } from '@/lib/careers-data';
+import { AnimatePresence, motion } from '@/lib/framer-motion';
 import { cn } from '@/lib/utils';
 const departments = [
   'All Departments',

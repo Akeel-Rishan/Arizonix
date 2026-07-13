@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 
+import { PreconnectHints } from '@/components/head/preconnect-hints';
+import { ClientEffects } from '@/components/layout/client-effects';
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
 import { JsonLd } from '@/components/seo/json-ld';
 import { AnnouncementBanner } from '@/components/ui/announcement-banner';
-import { CookieConsent } from '@/components/ui/cookie-consent';
-import CursorGlow from '@/components/ui/cursor-glow';
 import { PageTransition } from '@/components/ui/page-transition';
 import { getSiteSettings } from '@/lib/sanity/fetch';
 import {
@@ -23,6 +23,17 @@ const inter = Inter({
   weight: ['400', '500', '600', '700', '800'],
   variable: '--font-inter',
   display: 'swap',
+  preload: true,
+  fallback: [
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Roboto',
+    'Helvetica Neue',
+    'Arial',
+    'sans-serif',
+  ],
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
@@ -88,19 +99,21 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   ]);
   return (
     <html lang="en">
+      <head>
+        <PreconnectHints />
+      </head>
       <body className={inter.variable}>
         <JsonLd
           id="global-schema"
           schema={[buildOrganizationSchema(), buildWebSiteSchema()]}
         />
         <AnnouncementBanner banner={siteSettings?.announcementBanner ?? null} />
-        <CursorGlow />
         <Header />
         <div className="pt-20">
           <PageTransition>{children}</PageTransition>
         </div>
         <Footer />
-        <CookieConsent />
+        <ClientEffects />
       </body>
     </html>
   );

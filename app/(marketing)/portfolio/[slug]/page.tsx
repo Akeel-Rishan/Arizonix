@@ -15,7 +15,7 @@ import { portfolioProjects as fallback } from '@/lib/portfolio-data';
 import type { PortfolioDisplayProject } from '@/lib/portfolio-display';
 import { portfolioColor } from '@/lib/portfolio-display';
 import { getPortfolioProjects, getProjectBySlug } from '@/lib/sanity/fetch';
-import { sanityImage } from '@/lib/sanity/image';
+import { sanityBlurImage, sanityImage } from '@/lib/sanity/image';
 import type { SanityPortfolioProject } from '@/lib/sanity/types';
 
 export const revalidate = 3600;
@@ -104,6 +104,7 @@ export default async function ProjectPage({
   const raw = cmsProject ?? fallbackProject(params.slug);
   if (!raw) notFound();
   const project = display(raw);
+  const mainImageBlurUrl = raw.mainImage ? sanityBlurImage(raw.mainImage) : null;
   const all = (
     cmsAll.length ? cmsAll : fallback.map((p) => fallbackProject(p.id)!)
   ).map(display);
@@ -168,6 +169,7 @@ export default async function ProjectPage({
         type="application/ld+json"
       />
       <ProjectDetailHero
+        mainImageBlurUrl={mainImageBlurUrl}
         mainImageUrl={project.mainImageUrl}
         project={project}
       />

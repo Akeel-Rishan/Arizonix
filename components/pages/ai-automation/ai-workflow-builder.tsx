@@ -1,11 +1,5 @@
 'use client';
 
-import {
-  AnimatePresence,
-  motion,
-  useInView,
-  useReducedMotion,
-} from 'framer-motion';
 import { ChevronRight, MousePointer2, Pause, Play } from 'lucide-react';
 import { useMemo, useRef, useState } from 'react';
 
@@ -15,6 +9,12 @@ import { Section } from '@/components/ui/section';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { useWorkflowPlayer } from '@/hooks/use-workflow-player';
 import { aiWorkflows, type AIWorkflow } from '@/lib/ai-workflows-data';
+import {
+  AnimatePresence,
+  motion,
+  useInView,
+  useReducedMotion,
+} from '@/lib/framer-motion';
 import { getIcon } from '@/lib/icon-map';
 import { cn } from '@/lib/utils';
 import type { WorkflowStep } from '@/lib/workflow-data';

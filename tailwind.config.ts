@@ -5,6 +5,25 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './hooks/**/*.{js,ts,jsx,tsx,mdx}',
+    './lib/**/*.{js,ts,jsx,tsx,mdx}',
+    './sanity/**/*.{js,ts,jsx,tsx}',
+  ],
+  safelist: [
+    'bg-brand-blue/10',
+    'bg-brand-purple/10',
+    'bg-brand-cyan/10',
+    'text-brand-blue',
+    'text-brand-purple',
+    'text-brand-cyan',
+    'shadow-glow-blue',
+    'shadow-glow-purple',
+    'shadow-glow-cyan',
+    'hover:shadow-glow-blue',
+    'hover:shadow-glow-purple',
+    'hover:shadow-glow-cyan',
+    'border-brand-blue',
+    'border-brand-purple',
+    'border-brand-cyan',
   ],
   theme: {
     extend: {
@@ -43,7 +62,12 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
+        sans: [
+          'var(--font-inter)',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'sans-serif',
+        ],
       },
       borderRadius: {
         xl2: '1.25rem',

@@ -2,11 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --brand-blue: #2563FF;
+  --brand-purple: #7C3AED;
+  --brand-cyan: #06B6D4;
+  --navy-950: #0A0A12;
+}
+
 /* Base typography and dark-first theme */
 @layer base {
   html { scroll-behavior: smooth; }
   body {
     @apply bg-navy-950 font-sans text-slate-200 antialiased;
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   h1 {

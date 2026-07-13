@@ -1,6 +1,5 @@
 'use client';
 
-import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
 import { ProcessStepCard } from '@/components/sections/process-step-card';
@@ -8,6 +7,7 @@ import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { useProcessPlayer } from '@/hooks/use-process-player';
+import { motion, useInView, useReducedMotion } from '@/lib/framer-motion';
 import { fadeInUp, staggerContainer } from '@/lib/motion';
 import {
   processPhases,

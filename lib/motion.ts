@@ -1,6 +1,6 @@
-import type { Variants } from 'framer-motion';
-
 import { ANIMATION } from '@/lib/animation-config';
+import type { Variants } from '@/lib/framer-motion';
+
 
 const easeOut = [0.25, 0.1, 0.25, 1] as const;
 

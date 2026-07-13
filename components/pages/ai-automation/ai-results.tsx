@@ -1,10 +1,10 @@
 'use client';
-import { motion } from 'framer-motion';
 
 import { AnimatedCounter } from '@/components/ui/animated-counter';
 import { Badge } from '@/components/ui/badge';
 import { Section } from '@/components/ui/section';
 import { SectionHeading } from '@/components/ui/section-heading';
+import { motion } from '@/lib/framer-motion';
 import { fadeInUp, staggerContainer } from '@/lib/motion';
 const stats = [
   { value: 80, suffix: '%', label: 'Reduction in manual work' },

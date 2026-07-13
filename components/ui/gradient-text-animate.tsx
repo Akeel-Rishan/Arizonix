@@ -1,7 +1,7 @@
 'use client';
-import { useReducedMotion } from 'framer-motion';
 import type { ReactNode } from 'react';
 
+import { useReducedMotion } from '@/lib/framer-motion';
 import { cn } from '@/lib/utils';
 export function GradientTextAnimate({
   children,

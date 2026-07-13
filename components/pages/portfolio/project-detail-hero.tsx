@@ -1,9 +1,98 @@
 'use client';
-import { motion } from 'framer-motion';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { DeviceMockup } from '@/components/sections/device-mockup';
 import { Badge } from '@/components/ui/badge';
+import { motion } from '@/lib/framer-motion';
 import type { PortfolioDisplayProject } from '@/lib/portfolio-display';
-export function ProjectDetailHero({ mainImageUrl, project }: { mainImageUrl?: string | null; project: PortfolioDisplayProject }) { return <section className="min-h-[70vh]"> <motion.div animate={{ opacity: 1 }} className="relative h-[55vh] overflow-hidden bg-gradient-to-br from-brand-blue/40 to-brand-purple/30" initial={{ opacity: 0 }}>{mainImageUrl ? <Image alt={project.title} className="object-cover" fill priority sizes="100vw" src={mainImageUrl} /> : <div className="mx-auto h-full max-w-4xl"><DeviceMockup bgColor={project.mockupBgColor} device={project.device} /></div>}<div className="absolute inset-0 bg-gradient-to-b from-transparent via-navy-950/50 to-navy-950" /></motion.div><motion.div animate={{ opacity: 1, y: 0 }} className="relative mx-auto -mt-24 max-w-7xl px-4 sm:px-6 md:-mt-32 lg:px-8" initial={{ opacity: 0, y: 30 }} transition={{ delay: 0.25 }}><nav aria-label="Breadcrumb"><ol className="flex gap-2 text-sm"><li><Link className="text-slate-500" href="/portfolio">Portfolio</Link></li><li aria-hidden>/</li><li aria-current="page" className="text-white">{project.title}</li></ol></nav><Badge className="mt-5" variant="gradient">{project.category}</Badge><div className="mt-3 flex flex-wrap gap-2">{project.tags.map((tag) => <span className="glass-panel rounded-full px-3 py-1 text-xs text-slate-300" key={tag}>{tag}</span>)}</div><h1 className="mt-5 max-w-5xl text-4xl font-bold text-white md:text-5xl lg:text-6xl">{project.title}</h1><dl className="mt-8 flex flex-wrap gap-6">{project.results.map((result) => <div className="border-r border-white/10 pr-6" key={result.label}><dd className="text-gradient text-3xl font-bold">{result.metric}</dd><dt className="text-sm text-slate-400">{result.label}</dt></div>)}</dl><p className="mt-6 max-w-3xl text-slate-300">{project.challenge.slice(0, 200)}{project.challenge.length > 200 ? '…' : ''} <a className="text-brand-blue" href="#challenge">Read more ↓</a></p><p className="mt-4 text-xs text-slate-500">Challenge → Solution → Results → Launch</p></motion.div></section>; }
+
+export function ProjectDetailHero({
+  mainImageBlurUrl,
+  mainImageUrl,
+  project,
+}: {
+  mainImageBlurUrl?: string | null;
+  mainImageUrl?: string | null;
+  project: PortfolioDisplayProject;
+}) {
+  return (
+    <section className="min-h-[70vh]">
+      <motion.div
+        animate={{ opacity: 1 }}
+        className="relative h-[55vh] overflow-hidden bg-gradient-to-br from-brand-blue/40 to-brand-purple/30"
+        initial={{ opacity: 0 }}
+      >
+        {mainImageUrl ? (
+          <Image
+            alt={project.title}
+            blurDataURL={mainImageBlurUrl ?? undefined}
+            className="object-cover"
+            fill
+            placeholder={mainImageBlurUrl ? 'blur' : 'empty'}
+            priority
+            sizes="100vw"
+            src={mainImageUrl}
+          />
+        ) : (
+          <div className="mx-auto h-full max-w-4xl">
+            <DeviceMockup bgColor={project.mockupBgColor} device={project.device} />
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-navy-950/50 to-navy-950" />
+      </motion.div>
+      <motion.div
+        animate={{ opacity: 1, y: 0 }}
+        className="relative mx-auto -mt-24 max-w-7xl px-4 sm:px-6 md:-mt-32 lg:px-8"
+        initial={{ opacity: 0, y: 30 }}
+        transition={{ delay: 0.25 }}
+      >
+        <nav aria-label="Breadcrumb">
+          <ol className="flex gap-2 text-sm">
+            <li>
+              <Link className="text-slate-500" href="/portfolio">
+                Portfolio
+              </Link>
+            </li>
+            <li aria-hidden>/</li>
+            <li aria-current="page" className="text-white">
+              {project.title}
+            </li>
+          </ol>
+        </nav>
+        <Badge className="mt-5" variant="gradient">
+          {project.category}
+        </Badge>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <span className="glass-panel rounded-full px-3 py-1 text-xs text-slate-300" key={tag}>
+              {tag}
+            </span>
+          ))}
+        </div>
+        <h1 className="mt-5 max-w-5xl text-4xl font-bold text-white md:text-5xl lg:text-6xl">
+          {project.title}
+        </h1>
+        <dl className="mt-8 flex flex-wrap gap-6">
+          {project.results.map((result) => (
+            <div className="border-r border-white/10 pr-6" key={result.label}>
+              <dd className="text-gradient text-3xl font-bold">{result.metric}</dd>
+              <dt className="text-sm text-slate-400">{result.label}</dt>
+            </div>
+          ))}
+        </dl>
+        <p className="mt-6 max-w-3xl text-slate-300">
+          {project.challenge.slice(0, 200)}
+          {project.challenge.length > 200 ? '…' : ''}{' '}
+          <a className="text-brand-blue" href="#challenge">
+            Read more ↓
+          </a>
+        </p>
+        <p className="mt-4 text-xs text-slate-500">
+          Challenge → Solution → Results → Launch
+        </p>
+      </motion.div>
+    </section>
+  );
+}

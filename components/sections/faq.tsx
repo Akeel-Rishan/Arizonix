@@ -1,6 +1,5 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
 import { Mail, MessageCircle, PhoneCall } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
@@ -10,6 +9,7 @@ import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
 import { SectionHeading } from '@/components/ui/section-heading';
 import type { FAQCategory } from '@/lib/faq-data';
+import { AnimatePresence, motion } from '@/lib/framer-motion';
 import { fadeInUp } from '@/lib/motion';
 import { cn } from '@/lib/utils';
 

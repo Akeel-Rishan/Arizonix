@@ -1,5 +1,4 @@
 'use client';
-import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -8,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
+import { motion } from '@/lib/framer-motion';
 import { getIcon } from '@/lib/icon-map';
 import { getServiceCategory, getServiceCategoryColor } from '@/lib/services-categories';
 import { cn } from '@/lib/utils';

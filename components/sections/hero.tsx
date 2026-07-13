@@ -1,6 +1,5 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 import { HeroBackgroundOrbs } from '@/components/sections/hero-background-orbs';
@@ -11,6 +10,7 @@ import { Container } from '@/components/ui/container';
 import { GradientTextAnimate } from '@/components/ui/gradient-text-animate';
 import { MagneticButton } from '@/components/ui/magnetic-button';
 import { Section } from '@/components/ui/section';
+import { motion, useReducedMotion } from '@/lib/framer-motion';
 import {
   blurIn,
   fadeInUp,

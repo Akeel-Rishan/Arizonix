@@ -1,6 +1,7 @@
 'use client';
-import { useReducedMotion } from 'framer-motion';
 import type { AnchorHTMLAttributes, ReactNode } from 'react';
+
+import { useReducedMotion } from '@/lib/framer-motion';
 export function SmoothScrollLink({
   children,
   href,

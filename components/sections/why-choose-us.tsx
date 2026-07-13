@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 import { AdvantageCard } from '@/components/sections/advantage-card';
@@ -9,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
 import { SectionHeading } from '@/components/ui/section-heading';
+import { motion } from '@/lib/framer-motion';
 import { fadeInUp, staggerContainer } from '@/lib/motion';
 import { advantages, whyChooseUsStats } from '@/lib/why-choose-us-data';
 

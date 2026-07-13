@@ -51,10 +51,11 @@ export function BlogCard({
               alt={post.title}
               className="object-cover transition duration-500 group-hover:scale-105"
               fill
+              loading="lazy"
               sizes={
                 variant === 'large'
                   ? '(max-width: 1024px) 100vw, 66vw'
-                  : '(max-width: 768px) 100vw, 33vw'
+                  : '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
               }
               src={post.coverImageUrl}
             />
@@ -95,6 +96,8 @@ export function BlogCard({
                   alt=""
                   className="rounded-full"
                   height={28}
+                  loading="lazy"
+                  sizes="28px"
                   src={post.authorAvatarUrl}
                   width={28}
                 />

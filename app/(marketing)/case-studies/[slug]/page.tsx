@@ -9,7 +9,7 @@ import { CaseStudyDetailHero } from '@/components/pages/case-studies/case-study-
 import { CaseStudyResultsPanel } from '@/components/pages/case-studies/case-study-results-panel';
 import { Container } from '@/components/ui/container';
 import { getCaseStudies, getCaseStudyBySlug } from '@/lib/sanity/fetch';
-import { sanityImage } from '@/lib/sanity/image';
+import { sanityBlurImage, sanityImage } from '@/lib/sanity/image';
 export const revalidate = 3600;
 export async function generateStaticParams() {
   return (await getCaseStudies().catch(() => [])).map((study) => ({
@@ -52,6 +52,9 @@ export default async function CaseStudyPage({
   if (!study) notFound();
   const cover = study.coverImage
     ? sanityImage(study.coverImage, { width: 1400, quality: 90 })
+    : undefined;
+  const coverBlur = study.coverImage
+    ? sanityBlurImage(study.coverImage)
     : undefined;
   const related = all.filter((item) => item.slug !== study.slug).slice(0, 3);
   const schema = [
@@ -97,7 +100,11 @@ export default async function CaseStudyPage({
         }}
         type="application/ld+json"
       />
-      <CaseStudyDetailHero coverImageUrl={cover} study={study} />
+      <CaseStudyDetailHero
+        coverImageBlurUrl={coverBlur}
+        coverImageUrl={cover}
+        study={study}
+      />
       <CaseStudyContent
         content={study.content as unknown as PortableTextBlock[] | undefined}
       />

@@ -1,5 +1,4 @@
 'use client';
-import { AnimatePresence, motion } from 'framer-motion';
 import { Search, X } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -9,6 +8,7 @@ import { BlogCategoryFilter } from './blog-category-filter';
 import { Button } from '@/components/ui/button';
 import { Section } from '@/components/ui/section';
 import type { PostWithImages } from '@/lib/blog-data';
+import { AnimatePresence, motion } from '@/lib/framer-motion';
 export function BlogGrid({
   posts,
 }: {

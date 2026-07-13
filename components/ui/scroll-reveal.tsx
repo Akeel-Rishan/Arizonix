@@ -1,8 +1,8 @@
 'use client';
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 import { ANIMATION } from '@/lib/animation-config';
+import { motion, useReducedMotion, type Variants } from '@/lib/framer-motion';
 import {
   blurIn,
   fadeIn,

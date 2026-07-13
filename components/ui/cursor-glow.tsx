@@ -1,9 +1,9 @@
 'use client';
-import { motion, useReducedMotion, useTransform } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 import { useCursorPosition } from '@/hooks/use-cursor-position';
 import { ANIMATION } from '@/lib/animation-config';
+import { motion, useReducedMotion, useTransform } from '@/lib/framer-motion';
 export default function CursorGlow({
   color = 'mixed',
   size = ANIMATION.cursor.size,

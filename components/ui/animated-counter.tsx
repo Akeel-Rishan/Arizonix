@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
+
 import {
   animate,
   motion,
@@ -7,9 +9,7 @@ import {
   useMotionValue,
   useReducedMotion,
   useTransform,
-} from 'framer-motion';
-import { useEffect, useRef } from 'react';
-
+} from '@/lib/framer-motion';
 import { cn } from '@/lib/utils';
 
 export interface AnimatedCounterProps {

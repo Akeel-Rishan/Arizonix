@@ -1,7 +1,6 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { AlertCircle, CheckCircle2, Send } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -12,6 +11,8 @@ import {
 } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
+import { Analytics } from '@/lib/analytics/events';
+import { AnimatePresence, motion, useReducedMotion } from '@/lib/framer-motion';
 import { ctaFormSchema, type CTAFormValues } from '@/lib/schemas/contact';
 import { cn } from '@/lib/utils';
 
@@ -135,6 +136,7 @@ export function CTAForm() {
 
   const onSubmit = async (values: CTAFormValues) => {
     setSubmitError(null);
+    Analytics.contactFormStart();
 
     try {
       const response = await fetch('/api/contact', {
@@ -149,8 +151,10 @@ export function CTAForm() {
       }
       const result = (await response.json()) as { error?: string; success?: boolean };
       if (!response.ok || !result.success) throw new Error(result.error ?? 'Contact request failed');
+      Analytics.contactFormSubmit(values.service, values.budget);
       setSubmittedName(values.fullName.trim().split(/\s+/)[0]);
     } catch {
+      Analytics.contactFormError(values.service);
       setSubmitError(
         'Something went wrong. Please try again or email us at hello@arizonix.com',
       );

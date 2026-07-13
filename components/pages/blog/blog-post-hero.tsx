@@ -1,5 +1,4 @@
 'use client';
-import { motion } from 'framer-motion';
 import { Clock, Link2, Linkedin, Twitter } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,8 +6,13 @@ import { useState } from 'react';
 
 import { Badge } from '@/components/ui/badge';
 import type { PostWithImages } from '@/lib/blog-data';
+import { motion } from '@/lib/framer-motion';
 import { getInitials } from '@/lib/utils';
 export function BlogPostHero({ post }: { post: PostWithImages }) {
+  const coverBlur =
+    'coverImageBlurUrl' in post && typeof post.coverImageBlurUrl === 'string'
+      ? post.coverImageBlurUrl
+      : undefined;
   const [copied, setCopied] = useState(false);
   const url = `https://arizonix.com/blog/${post.slug}`;
   const copy = async () => {
@@ -93,6 +97,8 @@ export function BlogPostHero({ post }: { post: PostWithImages }) {
             alt={post.title}
             className="object-cover"
             fill
+            blurDataURL={coverBlur}
+            placeholder={coverBlur ? 'blur' : 'empty'}
             priority
             sizes="(max-width: 896px) 100vw, 896px"
             src={post.coverImageUrl}

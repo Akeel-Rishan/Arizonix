@@ -1,12 +1,12 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
+import { motion } from '@/lib/framer-motion';
 import { fadeInUp, staggerContainer } from '@/lib/motion';
 
 export function AboutCTA() {

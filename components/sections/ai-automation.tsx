@@ -1,6 +1,5 @@
 'use client';
 
-import { motion, useInView, useReducedMotion } from 'framer-motion';
 import {
   ArrowRight,
   CheckCircle,
@@ -24,6 +23,7 @@ import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { useWorkflowPlayer } from '@/hooks/use-workflow-player';
+import { motion, useInView, useReducedMotion } from '@/lib/framer-motion';
 import { fadeInUp, staggerContainer } from '@/lib/motion';
 import { cn } from '@/lib/utils';
 import { workflowSteps } from '@/lib/workflow-data';

@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { Analytics } from '@/lib/analytics/events';
 import { cn } from '@/lib/utils';
 
 const newsletterSchema = z.object({
@@ -36,6 +37,7 @@ export function FooterNewsletterForm() {
       const response = await fetch('/api/newsletter', { body: JSON.stringify({ email }), headers: { 'Content-Type': 'application/json' }, method: 'POST' });
       const result = (await response.json()) as { error?: string; success?: boolean };
       if (!response.ok || !result.success) { setApiError(result.error ?? 'Something went wrong. Please try again.'); return; }
+      Analytics.newsletterSubmit('footer');
       reset(); setIsSuccess(true);
     } catch { setApiError('Network error. Please check your connection and try again.'); }
   };

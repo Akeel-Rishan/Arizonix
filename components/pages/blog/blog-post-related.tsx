@@ -7,7 +7,10 @@ import type { PostWithImages } from '@/lib/blog-data';
 export function BlogPostRelated({ posts }: { posts: PostWithImages[] }) {
   if (!posts.length) return null;
   return (
-    <Section id="related-posts">
+    <Section
+      className="[content-visibility:auto] [contain-intrinsic-size:0_500px]"
+      id="related-posts"
+    >
       <div className="container mx-auto px-4">
         <SectionHeading eyebrow="KEEP READING" title="Related Articles" />
         <div className="mt-10 grid gap-6 md:grid-cols-3">

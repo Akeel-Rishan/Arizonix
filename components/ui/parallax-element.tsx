@@ -1,8 +1,8 @@
 'use client';
-import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 import { useParallax } from '@/hooks/use-parallax';
+import { motion } from '@/lib/framer-motion';
 import { cn } from '@/lib/utils';
 export function ParallaxElement({
   children,
