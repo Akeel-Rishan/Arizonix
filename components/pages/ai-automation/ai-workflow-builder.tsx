@@ -222,7 +222,7 @@ export function AIWorkflowBuilder() {
                   </motion.div>
                 ) : (
                   <motion.div
-                    className="flex min-h-32 flex-col items-center justify-center text-center text-slate-600"
+                    className="flex min-h-32 flex-col items-center justify-center text-center text-slate-500"
                     key="prompt"
                   >
                     <MousePointer2 className="size-6" />

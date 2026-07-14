@@ -110,11 +110,11 @@ export function AIComparison() {
               >
                 <thead>
                   <tr>
-                    <th className="w-1/5" />
-                    <th className="glass-panel rounded-xl p-4 text-red-400">
+                    <th aria-label="Metric" className="w-1/5" scope="col" />
+                    <th className="glass-panel rounded-xl p-4 text-red-400" scope="col">
                       ✕ Manual Process
                     </th>
-                    <th className="glass-panel rounded-xl p-4 text-emerald-400">
+                    <th className="glass-panel rounded-xl p-4 text-emerald-400" scope="col">
                       ✓ With AI Automation
                     </th>
                   </tr>
@@ -122,7 +122,7 @@ export function AIComparison() {
                 <tbody>
                   {labels.map((label, row) => (
                     <tr key={label}>
-                      <th className="text-left text-xs uppercase tracking-wide text-slate-500">
+                      <th className="text-left text-xs uppercase tracking-wide text-slate-500" scope="row">
                         {label}
                       </th>
                       <td className="glass-panel rounded-lg px-4 py-3 text-red-400/80">

@@ -11,7 +11,12 @@
 
 /* Base typography and dark-first theme */
 @layer base {
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+  :focus-visible {
+    outline: 2px solid theme('colors.brand.blue');
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
   body {
     @apply bg-navy-950 font-sans text-slate-200 antialiased;
     font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
@@ -37,6 +42,12 @@
   .noise-texture { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E"); mix-blend-mode: soft-light; }
   .skeleton-shimmer { background-image: linear-gradient(90deg, rgb(255 255 255 / .03), rgb(255 255 255 / .1), rgb(255 255 255 / .03)); background-size: 200% 100%; animation: skeleton-sweep 1.8s ease-in-out infinite; }
   .glass-panel-hover { @apply transition duration-300 hover:-translate-y-1 hover:border-brand-cyan/30 hover:bg-white/10 hover:shadow-glow-blue; }
+}
+html[data-motion='paused'] *,
+html[data-motion='paused'] *::before,
+html[data-motion='paused'] *::after {
+  animation-play-state: paused !important;
+  scroll-behavior: auto !important;
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .shimmer-gradient { animation: none; } .skeleton-shimmer { animation: none; } }
 
@@ -69,7 +80,7 @@
 /* Reusable visual utilities */
 @layer utilities {
   .glass-panel {
-    @apply rounded-xl2 border border-white/10 bg-white/5 backdrop-blur-xl;
+    @apply rounded-xl2 border border-white/20 bg-white/5 backdrop-blur-xl;
   }
 
   .gradient-border {

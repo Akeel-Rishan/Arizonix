@@ -2,10 +2,10 @@ import {
   Github,
   Instagram,
   Linkedin,
-  Sparkles,
   Twitter,
   type LucideIcon,
 } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { FooterNewsletterForm } from '@/components/layout/footer-newsletter-form';
@@ -37,14 +37,17 @@ export function Footer() {
           <div className="col-span-2 lg:pr-8">
             <Link
               aria-label="Arizonix home"
-              className={`inline-flex items-center gap-2 rounded-lg ${focusStyles}`}
+              className={`inline-flex rounded-lg ${focusStyles}`}
               href="/"
             >
-              <span className="flex size-10 items-center justify-center rounded-xl border border-brand-blue/30 bg-brand-blue/10 text-brand-cyan shadow-glow-blue">
-                <Sparkles aria-hidden="true" className="size-5" />
-              </span>
-              <span className="text-gradient text-2xl font-extrabold tracking-tight">
-                Arizonix
+              <span className="relative h-10 w-44 overflow-hidden rounded-lg sm:w-52">
+                <Image
+                  alt="Arizonix"
+                  className="object-contain object-left"
+                  fill
+                  sizes="(max-width: 640px) 176px, 208px"
+                  src="/images/arizonix-navbar-logo-transparent-v2.png"
+                />
               </span>
             </Link>
 

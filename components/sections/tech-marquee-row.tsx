@@ -12,6 +12,7 @@ export interface TechMarqueeRowProps {
   className?: string;
   direction?: MarqueeDirection;
   duration?: number;
+  forcePaused?: boolean;
   items: readonly TechItem[];
 }
 
@@ -34,6 +35,7 @@ export function TechMarqueeRow({
   className,
   direction = 'left',
   duration = 36,
+  forcePaused = false,
   items,
 }: TechMarqueeRowProps) {
   const firstGroupRef = useRef<HTMLDivElement>(null);
@@ -59,7 +61,7 @@ export function TechMarqueeRow({
   }, [direction, x]);
 
   useAnimationFrame((_time, delta) => {
-    if (isPaused || loopWidth === 0) return;
+    if (forcePaused || isPaused || loopWidth === 0) return;
 
     const distance = (loopWidth / Math.max(duration, 1)) * (delta / 1000);
     const current = x.get();
@@ -81,7 +83,7 @@ export function TechMarqueeRow({
         className,
       )}
       data-direction={direction}
-      data-paused={isPaused}
+      data-paused={forcePaused || isPaused}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >

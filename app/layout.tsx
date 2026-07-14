@@ -6,9 +6,10 @@ import { PreconnectHints } from '@/components/head/preconnect-hints';
 import { ClientEffects } from '@/components/layout/client-effects';
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
+import { MainContent } from '@/components/layout/main-content';
 import { JsonLd } from '@/components/seo/json-ld';
 import { AnnouncementBanner } from '@/components/ui/announcement-banner';
-import { PageTransition } from '@/components/ui/page-transition';
+import { SkipLink } from '@/components/ui/skip-link';
 import { getSiteSettings } from '@/lib/sanity/fetch';
 import {
   buildOrganizationSchema,
@@ -48,7 +49,23 @@ export const metadata: Metadata = {
     canonical: SEO_CONFIG.siteUrl,
     languages: { 'en-US': SEO_CONFIG.siteUrl, 'x-default': SEO_CONFIG.siteUrl },
   },
-  icons: { icon: '/icon', apple: '/apple-icon' },
+  icons: {
+    icon: [
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '512x512',
+        url: '/images/arizonix-icon-logo-transparent-v2.png',
+      },
+    ],
+    apple: [
+      {
+        rel: 'apple-touch-icon',
+        sizes: '512x512',
+        url: '/images/arizonix-icon-logo-transparent-v2.png',
+      },
+    ],
+  },
   manifest: '/site.webmanifest',
   openGraph: {
     title: SEO_CONFIG.defaultTitle,
@@ -103,6 +120,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <PreconnectHints />
       </head>
       <body className={inter.variable}>
+        <SkipLink />
         <JsonLd
           id="global-schema"
           schema={[buildOrganizationSchema(), buildWebSiteSchema()]}
@@ -110,7 +128,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <AnnouncementBanner banner={siteSettings?.announcementBanner ?? null} />
         <Header />
         <div className="pt-20">
-          <PageTransition>{children}</PageTransition>
+          <MainContent>{children}</MainContent>
         </div>
         <Footer />
         <ClientEffects />

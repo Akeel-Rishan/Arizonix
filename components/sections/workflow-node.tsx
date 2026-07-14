@@ -124,12 +124,12 @@ export function WorkflowNode({
         <Icon aria-hidden="true" className={cn('size-5', colors.icon)} />
       </span>
 
-      <h3 className="text-base font-semibold tracking-tight text-white">
+      <span className="block text-base font-semibold tracking-tight text-white">
         {step.label}
-      </h3>
-      <p className="mt-2 line-clamp-2 text-xs leading-5 text-slate-400">
+      </span>
+      <span className="mt-2 block line-clamp-2 text-xs leading-5 text-slate-400">
         {step.description}
-      </p>
+      </span>
     </button>
   );
 }

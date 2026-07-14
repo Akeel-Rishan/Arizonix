@@ -10,6 +10,8 @@
     "analyze": "set ANALYZE=true&& npm run build",
     "lighthouse:ci": "lhci autorun",
     "lighthouse:local": "lhci autorun --collect.url=http://localhost:3000",
+    "a11y:axe": "axe http://localhost:3000 http://localhost:3000/about http://localhost:3000/services http://localhost:3000/ai-automation http://localhost:3000/blog http://localhost:3000/contact --exit",
+    "html:validate": "html-validate .next/server/app/**/*.html",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
@@ -34,6 +36,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@axe-core/cli": "^4.12.1",
     "@lhci/cli": "^0.15.1",
     "@next/bundle-analyzer": "^16.2.10",
     "@next/swc-win32-x64-msvc": "^14.2.31",
@@ -48,11 +51,13 @@
     "eslint-config-next": "14.2.31",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
+    "html-validate": "^11.5.6",
     "postcss": "^8.5.1",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3",
+    "wait-on": "^9.0.10",
     "web-vitals": "^5.3.0"
   },
   "overrides": {

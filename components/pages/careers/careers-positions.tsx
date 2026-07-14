@@ -76,9 +76,9 @@ export function CareersPositions() {
                 >
                   <div className="flex flex-col justify-between gap-4 md:flex-row">
                     <div>
-                      <h3 className="text-lg font-bold text-white">
+                      <span className="block text-lg font-bold text-white">
                         {position.title}
-                      </h3>
+                      </span>
                       <div className="mt-2 flex flex-wrap gap-2">
                         {[
                           position.department,
@@ -101,7 +101,7 @@ export function CareersPositions() {
                         ))}
                       </div>
                     </div>
-                    <div className="text-sm text-slate-400">
+                    <span className="block text-sm text-slate-400">
                       <span className="flex items-center gap-1">
                         <MapPin className="size-4" />
                         Remote
@@ -119,7 +119,7 @@ export function CareersPositions() {
                           expanded && 'rotate-180',
                         )}
                       />
-                    </div>
+                    </span>
                   </div>
                 </button>
                 <AnimatePresence initial={false}>

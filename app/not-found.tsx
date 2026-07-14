@@ -47,7 +47,7 @@ export default function NotFound() {
             </Link>
           ))}
         </div>
-        <p className="mt-8 text-xs text-slate-600">
+        <p className="mt-8 text-xs text-slate-500">
           Error code: 404 · Our AI searched for this page · Still not found ·
           Switching to manual search… 🔍
         </p>

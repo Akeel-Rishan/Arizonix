@@ -47,7 +47,7 @@ const referralOptions = [
 ];
 
 const fieldClassName =
-  'w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue';
+  'w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue';
 
 interface FieldShellProps {
   children: React.ReactNode;
@@ -181,9 +181,11 @@ export function CTAForm() {
         {submittedName ? (
           <motion.div
             animate={{ opacity: 1, scale: 1 }}
+            aria-live="polite"
             className="flex min-h-[36rem] flex-col items-center justify-center text-center"
             initial={{ opacity: 0, scale: reducedMotion ? 1 : 0.94 }}
             key="success"
+            role="status"
             transition={{ duration: reducedMotion ? 0 : 0.35 }}
           >
             {/* Honeypot — hidden visually, but intentionally present for bots. */}

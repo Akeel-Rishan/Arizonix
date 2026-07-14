@@ -17,6 +17,7 @@ const bottomRow = techStack.slice(6);
 export function TechShowcase() {
   const shouldReduceMotion = useReducedMotion() ?? false;
   const [hasMounted, setHasMounted] = useState(false);
+  const [isFocusPaused, setIsFocusPaused] = useState(false);
 
   useEffect(() => setHasMounted(true), []);
 
@@ -58,9 +59,21 @@ export function TechShowcase() {
           aria-hidden="true"
           className="mt-8 space-y-4"
           data-marquee-mode="animated"
+          onBlur={() => setIsFocusPaused(false)}
+          onFocus={() => setIsFocusPaused(true)}
         >
-          <TechMarqueeRow direction="left" duration={34} items={topRow} />
-          <TechMarqueeRow direction="right" duration={39} items={bottomRow} />
+          <TechMarqueeRow
+            direction="left"
+            duration={34}
+            forcePaused={isFocusPaused}
+            items={topRow}
+          />
+          <TechMarqueeRow
+            direction="right"
+            duration={39}
+            forcePaused={isFocusPaused}
+            items={bottomRow}
+          />
         </div>
       )}
     </Section>

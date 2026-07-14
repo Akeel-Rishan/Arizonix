@@ -86,6 +86,7 @@ export function BlogGrid({
               id="blog-search"
               onChange={(event) => setInput(event.target.value)}
               placeholder="Search articles"
+              type="search"
               value={input}
             />
             {input ? (
@@ -139,7 +140,7 @@ export function BlogGrid({
           </>
         ) : (
           <div className="py-20 text-center">
-            <Search className="mx-auto size-12 text-slate-600" />
+            <Search className="mx-auto size-12 text-slate-500" />
             <h3 className="mt-4 text-xl font-bold text-white">
               No articles found
             </h3>

@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 
 import { AnalyticsProvider } from '@/components/analytics/analytics-provider';
 import { PerformanceObserver } from '@/components/monitoring/performance-observer';
+import { MotionPreferenceToggle } from '@/components/ui/motion-preference-toggle';
 
 const CookieConsent = dynamic(
   () =>
@@ -23,6 +24,7 @@ export function ClientEffects() {
       <CookieConsent />
       <AnalyticsProvider />
       <PerformanceObserver />
+      <MotionPreferenceToggle />
     </>
   );
 }

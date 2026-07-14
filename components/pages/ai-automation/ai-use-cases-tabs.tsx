@@ -211,18 +211,23 @@ export function AIUseCasesTabs() {
           }
           description="Explore how AI automation solves specific, expensive operational problems."
         />
-        <div className="mt-10 flex gap-2 overflow-x-auto pb-3">
+        <div
+          aria-label="AI automation industry use cases"
+          className="mt-10 flex gap-2 overflow-x-auto pb-3"
+          role="tablist"
+        >
           {cases.map((item, index) => {
             const Icon = getIcon(item.icon);
             return (
               <button
-                aria-pressed={index === activeIndex}
+                aria-selected={index === activeIndex}
                 className={cn(
                   'glass-panel flex min-h-11 shrink-0 items-center gap-2 rounded-full px-4 text-sm text-slate-300 focus-visible:ring-2 focus-visible:ring-brand-cyan',
                   index === activeIndex && 'gradient-border text-white',
                 )}
                 key={item.industry}
                 onClick={() => setActiveIndex(index)}
+                role="tab"
                 type="button"
               >
                 <Icon className="size-4" />
@@ -238,6 +243,7 @@ export function AIUseCasesTabs() {
             exit={{ opacity: 0, y: 8 }}
             initial={{ opacity: 0, y: 8 }}
             key={active.industry}
+            role="tabpanel"
           >
             {active.useCases.map((item) => (
               <UseCaseCard item={item} key={item.title} />

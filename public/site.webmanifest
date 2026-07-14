@@ -7,7 +7,16 @@
   "background_color": "#020617",
   "theme_color": "#2563ff",
   "icons": [
-    { "src": "/icon", "sizes": "32x32", "type": "image/png" },
-    { "src": "/apple-icon", "sizes": "180x180", "type": "image/png" }
+    {
+      "src": "/images/arizonix-icon-logo-transparent-v2.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/arizonix-icon-logo-transparent-v2.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }

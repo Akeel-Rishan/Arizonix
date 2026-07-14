@@ -4,6 +4,8 @@ import {
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
+  Pause,
+  Play,
   Star,
   TrendingUp,
   Users,
@@ -41,7 +43,8 @@ const AUTO_PLAY_DURATION = 5000;
 
 export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) {
   const reducedMotion = Boolean(useReducedMotion());
-  const { activeIndex, goNext, goPrev, goTo, setIsPaused } = useCarousel({
+  const { activeIndex, goNext, goPrev, goTo, isPaused, setIsPaused } =
+    useCarousel({
     autoPlayDuration: AUTO_PLAY_DURATION,
     isPaused: reducedMotion,
     totalItems: testimonials.length,
@@ -182,6 +185,21 @@ export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) 
               Explore all client stories
             </p>
             <div className="flex gap-2">
+              <button
+                aria-label={
+                  isPaused ? 'Resume testimonials' : 'Pause testimonials'
+                }
+                aria-pressed={isPaused}
+                className="glass-panel inline-flex size-11 items-center justify-center rounded-full text-slate-200 transition duration-200 hover:-translate-y-0.5 hover:border-brand-cyan/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950"
+                onClick={() => setIsPaused(!isPaused)}
+                type="button"
+              >
+                {isPaused ? (
+                  <Play aria-hidden="true" className="size-5" />
+                ) : (
+                  <Pause aria-hidden="true" className="size-5" />
+                )}
+              </button>
               <button
                 aria-label="Previous testimonial"
                 className="glass-panel inline-flex size-11 items-center justify-center rounded-full text-slate-200 transition duration-200 hover:-translate-y-0.5 hover:border-brand-cyan/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950"

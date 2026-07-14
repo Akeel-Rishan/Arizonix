@@ -1,6 +1,7 @@
 'use client';
 
-import { ChevronDown, Menu, Sparkles, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -100,11 +101,15 @@ export function Header() {
           href="/"
           onClick={closeDesktopMenu}
         >
-          <span className="flex size-9 items-center justify-center rounded-xl border border-brand-blue/30 bg-brand-blue/10 text-brand-cyan shadow-glow-blue">
-            <Sparkles aria-hidden="true" className="size-5" />
-          </span>
-          <span className="text-gradient text-xl font-extrabold tracking-tight">
-            Arizonix
+          <span className="relative h-8 w-36 overflow-hidden rounded-lg sm:w-44">
+            <Image
+              alt="Arizonix"
+              className="object-contain object-left"
+              fill
+              priority
+              sizes="(max-width: 640px) 144px, 176px"
+              src="/images/arizonix-navbar-logo-transparent-v2.png"
+            />
           </span>
         </Link>
 

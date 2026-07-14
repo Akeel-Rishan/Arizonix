@@ -1,0 +1,43 @@
+name: Lighthouse CI
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  lighthouse:
+    name: Lighthouse Audit
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+      NEXT_PUBLIC_SANITY_DATASET: production
+      NEXT_PUBLIC_SANITY_API_VERSION: '2024-01-01'
+      SANITY_API_TOKEN: ${{ secrets.SANITY_API_TOKEN }}
+      RESEND_API_KEY: placeholder
+      RESEND_FROM_EMAIL: noreply@example.com
+      RESEND_TO_EMAIL: team@example.com
+      UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+      UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+      SANITY_REVALIDATE_SECRET: placeholder
+      NEXT_PUBLIC_GA_MEASUREMENT_ID: ''
+      NEXT_PUBLIC_SENTRY_DSN: ''
+      SENTRY_AUTH_TOKEN: ''
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Start server
+        run: npm run start &
+        env:
+          PORT: 3000
+      - name: Wait for server
+        run: npx wait-on http://localhost:3000 --timeout 60000
+      - name: Run Lighthouse CI
+        run: npx lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}

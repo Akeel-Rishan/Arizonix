@@ -115,7 +115,7 @@ export function BlogCard({
               {post.readingTime ?? 5} min read
             </span>
           </div>
-          <p className="mt-2 text-xs text-slate-600">
+          <p className="mt-2 text-xs text-slate-500">
             {formatDate(post.publishedAt)}
           </p>
           <span className="absolute bottom-5 right-6 text-xs text-brand-blue opacity-0 transition group-hover:opacity-100">
