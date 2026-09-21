@@ -1,53 +1,53 @@
-# Final QA Checklist — Arizonix Website
+# Final QA Checklist - Arizonix Website
 
-## Local automated checks
+Verification date: 2026-09-21
 
-- [x] `npm run lint`
+## Automated Local Checks
+
 - [x] `npx tsc --noEmit`
+- [x] `npm run lint`
 - [x] `npm run build`
-- [ ] `npm run a11y:axe` against a running local server — attempted in Codex; Chrome/ChromeDriver crashed before returning results
-- [ ] `npm run lighthouse:local`
-- [ ] `npm run html:validate` after build
+- [x] `npm run html:validate` - zero errors
+- [x] axe CLI on six primary pages - zero violations
+- [x] Desktop Lighthouse on six primary pages - Accessibility and SEO 100
+- [x] Production smoke test - all nine public routes returned HTTP 200
+- [x] Newsletter admin endpoint fails closed with HTTP 503 when unconfigured
+- [x] Studio route fails closed with HTTP 503 and sends `X-Robots-Tag: noindex, nofollow`
+- [x] Placeholder phone, Calendly, WhatsApp, and `href="#"` values absent from rendered home HTML
+- [x] Development server starts with Turbopack and serves all six primary routes
+- [x] Production dependency audit has zero critical and zero high findings
 
-## Browser and device QA
+## Verified Public Routes
 
-- [ ] Chrome desktop
-- [ ] Edge desktop
-- [ ] Firefox desktop
-- [ ] Safari macOS
-- [ ] Safari iOS
-- [ ] Android Chrome
-- [ ] 320px viewport: no horizontal scroll
-- [ ] 200% zoom: no clipped text or unusable controls
-- [ ] Touch targets at least 44px on mobile interactive elements
+`/`, `/about`, `/services`, `/ai-automation`, `/blog`, `/contact`,
+`/robots.txt`, `/sitemap.xml`, and `/blog/rss.xml`.
 
-## Functional QA
+## Manual Browser And Device QA
 
-- [ ] Header navigation links work
-- [ ] Footer navigation links work
-- [ ] Mobile menu opens, closes, and navigates
-- [ ] Services mega menu works with mouse and keyboard
-- [ ] Contact form validates invalid input
-- [ ] Contact form sends email in production
-- [ ] Newsletter form stores subscribers
-- [ ] Cookie consent accept/decline stores localStorage value
-- [ ] Sanity Studio loads at `/studio`
-- [ ] Sitemap loads at `/sitemap.xml`
-- [ ] Robots loads at `/robots.txt`
-- [ ] RSS feed loads at `/blog/rss.xml`
+- [ ] Chrome and Edge desktop interaction pass
+- [ ] Firefox desktop interaction pass
+- [ ] Safari macOS interaction pass
+- [ ] Safari iOS interaction pass on iPhone and iPad
+- [ ] Android Chrome interaction pass
+- [ ] 320px reflow and 200% zoom pass across representative templates
+- [ ] Keyboard-only navigation and focus-order pass
+- [ ] Screen-reader pass with NVDA and VoiceOver
+- [ ] Mobile menu, lightbox, carousels, filters, and form behavior on real devices
 
-## Content QA
+## Production Integration QA
 
-- [ ] No lorem ipsum
-- [ ] Placeholder phone number replaced
-- [ ] Placeholder Calendly URL replaced
-- [ ] Real social links added
-- [ ] Real service content reviewed
-- [ ] Real portfolio/case-study content reviewed
-- [ ] Legal review completed for Privacy Policy and Terms
+- [ ] Contact and confirmation emails arrive through the production Resend domain
+- [ ] Newsletter storage and confirmation email work with production Upstash/Resend
+- [ ] Rate limiting and honeypot behavior verified against production infrastructure
+- [ ] Real Calendly, mailbox, social profile, and optional WhatsApp details configured
+- [ ] Final Sanity content reviewed; test content removed or unpublished
+- [ ] Sanity webhook, GA4, Sentry, Search Console, and uptime alerts verified
+- [ ] Vercel domain, redirects, TLS, environment variables, and deployment protection verified
+- [ ] Privacy Policy and Terms approved by qualified legal counsel
 
-## Launch sign-off
+## Sign-Off
 
-Owner: Arizonix team
+Code and local automated QA: passed.
 
-Status: Ready for external deployment tasks after final manual QA and production environment configuration.
+Production launch: pending the external account, real-device, content, legal,
+and assistive-technology checks above.

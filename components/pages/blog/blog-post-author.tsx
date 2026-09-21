@@ -36,6 +36,7 @@ export function BlogPostAuthor({
         {author?.social?.linkedin ? (
           <a
             aria-label={`${name} on LinkedIn`}
+            className="glass-panel flex size-11 items-center justify-center rounded-full"
             href={author.social.linkedin}
             rel="noopener noreferrer"
             target="_blank"
@@ -46,6 +47,7 @@ export function BlogPostAuthor({
         {author?.social?.github ? (
           <a
             aria-label={`${name} on GitHub`}
+            className="glass-panel flex size-11 items-center justify-center rounded-full"
             href={author.social.github}
             rel="noopener noreferrer"
             target="_blank"
@@ -56,6 +58,7 @@ export function BlogPostAuthor({
         {author?.social?.twitter ? (
           <a
             aria-label={`${name} on Twitter`}
+            className="glass-panel flex size-11 items-center justify-center rounded-full"
             href={author.social.twitter}
             rel="noopener noreferrer"
             target="_blank"

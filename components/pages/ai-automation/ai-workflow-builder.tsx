@@ -56,10 +56,9 @@ function WorkflowCanvas({
   );
   return (
     <div ref={ref}>
-      <div
+      <section
         aria-label={`${workflow.name} automation workflow with ${workflow.nodes.length} connected steps`}
         className="grid gap-3 md:grid-cols-[1fr_auto_1fr]"
-        role="img"
       >
         {steps.map((step, index) => {
           const state =
@@ -86,27 +85,27 @@ function WorkflowCanvas({
               />
               {index < steps.length - 1 ? (
                 <div className="flex items-center justify-center py-1 md:px-1">
-                  <span className="md:hidden">
+                  <div className="md:hidden">
                     <WorkflowConnector
                       orientation="vertical"
                       reducedMotion={Boolean(reduced)}
                       state={state}
                     />
-                  </span>
-                  <span className="hidden w-8 md:block">
+                  </div>
+                  <div className="hidden w-8 md:block">
                     <WorkflowConnector
                       orientation="horizontal"
                       reducedMotion={Boolean(reduced)}
                       state={state}
                     />
-                  </span>
+                  </div>
                 </div>
               ) : null}
             </div>
           );
         })}
-      </div>
-      <div className="mt-6 flex items-center justify-center gap-3 text-xs text-slate-500">
+      </section>
+      <div className="mt-6 flex items-center justify-center gap-3 text-xs text-slate-400">
         <button
           aria-label={
             player.isPlaying
@@ -150,7 +149,7 @@ export function AIWorkflowBuilder() {
         />
         <div className="mt-12 grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-400">
               Choose a Workflow
             </p>
             <div className="space-y-3">
@@ -222,7 +221,7 @@ export function AIWorkflowBuilder() {
                   </motion.div>
                 ) : (
                   <motion.div
-                    className="flex min-h-32 flex-col items-center justify-center text-center text-slate-500"
+                    className="flex min-h-32 flex-col items-center justify-center text-center text-slate-400"
                     key="prompt"
                   >
                     <MousePointer2 className="size-6" />

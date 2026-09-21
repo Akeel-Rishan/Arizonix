@@ -25,7 +25,7 @@ export function BlogCategoryFilter({
           type="button"
         >
           {category}{' '}
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-slate-400">
             ({counts[category] ?? 0})
           </span>
         </button>

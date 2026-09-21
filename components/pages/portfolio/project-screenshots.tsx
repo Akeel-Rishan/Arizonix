@@ -2,7 +2,7 @@
 
 import { ZoomIn } from 'lucide-react';
 import Image from 'next/image';
-import { lazy, Suspense, useCallback, useState } from 'react';
+import { lazy, Suspense, useCallback, useRef, useState } from 'react';
 
 import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
@@ -21,8 +21,11 @@ export function ProjectScreenshots({
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const thumbnailRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
 
   const openLightbox = useCallback((index: number) => {
+    triggerRef.current = thumbnailRefs.current[index];
     setActiveIndex(index);
     setLightboxOpen(true);
   }, []);
@@ -47,6 +50,9 @@ export function ProjectScreenshots({
               className="group relative aspect-video overflow-hidden rounded-xl"
               key={src}
               onClick={() => openLightbox(index)}
+              ref={(node) => {
+                thumbnailRefs.current[index] = node;
+              }}
               type="button"
             >
               <Image
@@ -71,7 +77,9 @@ export function ProjectScreenshots({
             onClose={() => setLightboxOpen(false)}
             onNext={handleNext}
             onPrev={handlePrev}
+            projectTitle={projectTitle}
             screenshots={screenshots}
+            triggerRef={triggerRef}
           />
         </Suspense>
       ) : null}

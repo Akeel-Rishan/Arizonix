@@ -1,5 +1,6 @@
-import { loadEnvConfig } from '@next/env';
 import { basename, resolve } from 'node:path';
+
+import { loadEnvConfig } from '@next/env';
 
 const currentDirectory = process.cwd();
 const projectRoot =

@@ -11,7 +11,7 @@ import { getSiteSettings, getTeamMembers } from '@/lib/sanity/fetch';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://arizonix.com/about' },
-  title: 'About Arizonix — Our Story, Team & Mission',
+  title: 'About Our Story, Team & Mission',
   description:
     'Learn about Arizonix — a premium AI and software engineering company built by senior engineers who believe technology should drive real business outcomes. Meet our team.',
   openGraph: {
@@ -61,7 +61,7 @@ export default async function AboutPage() {
       '@type': 'Organization',
       name: siteSettings?.siteName ?? 'Arizonix',
       url: 'https://arizonix.com',
-      logo: 'https://arizonix.com/logo.png',
+      logo: 'https://arizonix.com/opengraph-image',
       description:
         siteSettings?.siteTagline ??
         'Premium AI and software engineering company building intelligent software for ambitious businesses.',
@@ -86,7 +86,7 @@ export default async function AboutPage() {
     },
   ];
   return (
-    <main>
+    <div>
       <script
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
@@ -100,6 +100,6 @@ export default async function AboutPage() {
       <TeamGrid teamMembers={teamMembers} />
       <CultureSection />
       <AboutCTA />
-    </main>
+    </div>
   );
 }

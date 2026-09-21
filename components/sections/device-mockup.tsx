@@ -90,7 +90,7 @@ function DesktopMockup({
         <span className="size-2 rounded-full bg-red-400/70" />
         <span className="size-2 rounded-full bg-amber-300/70" />
         <span className="size-2 rounded-full bg-emerald-400/70" />
-        <div className="ml-2 flex h-4 max-w-52 flex-1 items-center justify-center gap-1 rounded-full bg-white/5 px-2 text-[0.45rem] text-slate-500">
+        <div className="ml-2 flex h-4 max-w-52 flex-1 items-center justify-center gap-1 rounded-full bg-white/5 px-2 text-[0.45rem] text-slate-400">
           <Lock className="size-2" /> arizonix.io/project
         </div>
       </div>

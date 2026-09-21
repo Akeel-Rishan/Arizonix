@@ -31,7 +31,7 @@ export function BlogCTA() {
           </Button>
         </div>
         <Link
-          className="mt-4 inline-block text-sm text-slate-500 hover:text-brand-cyan"
+          className="mt-4 inline-block text-sm text-slate-400 hover:text-brand-cyan"
           href="/portfolio"
         >
           Or explore our portfolio for inspiration →

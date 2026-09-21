@@ -12,7 +12,7 @@ const pages = [
 ] as const;
 export default function NotFound() {
   return (
-    <main className="aurora-bg min-h-screen px-4 py-28">
+    <div className="aurora-bg min-h-screen px-4 py-28">
       <div className="mx-auto max-w-3xl text-center">
         <p className="text-gradient text-[80px] font-extrabold leading-none md:text-[120px]">
           404
@@ -33,7 +33,7 @@ export default function NotFound() {
             Contact Us
           </Button>
         </div>
-        <p className="mb-4 mt-10 text-sm text-slate-500">Popular Pages:</p>
+        <p className="mb-4 mt-10 text-sm text-slate-400">Popular Pages:</p>
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
           {pages.map(([Icon, name, description, href]) => (
             <Link
@@ -43,15 +43,15 @@ export default function NotFound() {
             >
               <Icon className="size-5 text-brand-cyan" />
               <strong className="mt-2 block text-sm text-white">{name}</strong>
-              <span className="text-xs text-slate-500">{description}</span>
+              <span className="text-xs text-slate-400">{description}</span>
             </Link>
           ))}
         </div>
-        <p className="mt-8 text-xs text-slate-500">
+        <p className="mt-8 text-xs text-slate-400">
           Error code: 404 · Our AI searched for this page · Still not found ·
           Switching to manual search… 🔍
         </p>
       </div>
-    </main>
+    </div>
   );
 }

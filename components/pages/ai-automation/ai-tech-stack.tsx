@@ -151,7 +151,7 @@ export function AITechStack() {
                         <strong className="block text-sm font-medium text-white">
                           {tool.name}
                         </strong>
-                        <span className="text-xs text-slate-500">
+                        <span className="text-xs text-slate-400">
                           {tool.description}
                         </span>
                       </span>

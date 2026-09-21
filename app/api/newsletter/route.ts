@@ -1,3 +1,5 @@
+import { timingSafeEqual } from 'node:crypto';
+
 import type { NextRequest } from 'next/server';
 import { z } from 'zod';
 
@@ -27,7 +29,26 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
-  if (request.headers.get('authorization') !== `Bearer ${process.env.SANITY_REVALIDATE_SECRET}`) return Response.json({ error: 'Unauthorized' }, { status: 401 });
-  try { const count = (await redis.get<number>('newsletter:total_count')) ?? 0; const subscribers = await redis.smembers('newsletter:subscribers'); return Response.json({ count, subscribers: subscribers.slice(0, 100) }); }
+  const adminToken = process.env.NEWSLETTER_ADMIN_TOKEN;
+  if (!adminToken) {
+    return Response.json(
+      { error: 'Newsletter export is not configured' },
+      { status: 503 },
+    );
+  }
+
+  const providedToken =
+    request.headers.get('authorization')?.replace(/^Bearer\s+/i, '') ?? '';
+  const providedBuffer = Buffer.from(providedToken);
+  const expectedBuffer = Buffer.from(adminToken);
+  const authorized =
+    providedBuffer.length === expectedBuffer.length &&
+    timingSafeEqual(providedBuffer, expectedBuffer);
+
+  if (!authorized) {
+    return Response.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  try { const count = (await redis.get<number>('newsletter:total_count')) ?? 0; return Response.json({ count, message: 'Use the Upstash dashboard for subscriber exports.' }); }
   catch { return Response.json({ error: 'Unable to retrieve subscribers' }, { status: 500 }); }
 }

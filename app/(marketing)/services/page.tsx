@@ -6,7 +6,7 @@ import { getServices } from '@/lib/sanity/fetch';
 import { services as staticServices } from '@/lib/services-data';
 export const metadata: Metadata = {
   alternates: { canonical: 'https://arizonix.com/services' },
-  title: 'Our Services — AI, Software & Mobile Development | Arizonix',
+  title: 'Software & AI Development Services',
   description:
     "Explore Arizonix's full range of services: AI automation, web & mobile application development, enterprise software, cloud solutions, and more. Built for ambitious businesses worldwide.",
   openGraph: {
@@ -63,7 +63,7 @@ export default async function ServicesPage() {
     },
   ];
   return (
-    <main>
+    <div>
       <script
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(data).replace(/</g, '\\u003c'),
@@ -72,6 +72,6 @@ export default async function ServicesPage() {
       />
       <ServicesHero count={services.length} />
       <ServicesList services={services} />
-    </main>
+    </div>
   );
 }

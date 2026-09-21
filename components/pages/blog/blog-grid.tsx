@@ -67,6 +67,7 @@ export function BlogGrid({
   return (
     <Section id="blog-grid">
       <div className="container mx-auto px-4">
+        <h2 className="sr-only">All articles</h2>
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <BlogCategoryFilter
             activeCategory={category}
@@ -99,11 +100,11 @@ export function BlogGrid({
                 <X className="size-4" />
               </button>
             ) : (
-              <Search className="absolute right-3 top-3 size-4 text-slate-500" />
+              <Search className="absolute right-3 top-3 size-4 text-slate-400" />
             )}
           </div>
         </div>
-        <p className="mb-6 mt-7 text-sm text-slate-500">
+        <p className="mb-6 mt-7 text-sm text-slate-400">
           Showing {filtered.length} articles
         </p>
         {filtered.length ? (
@@ -140,7 +141,7 @@ export function BlogGrid({
           </>
         ) : (
           <div className="py-20 text-center">
-            <Search className="mx-auto size-12 text-slate-500" />
+            <Search className="mx-auto size-12 text-slate-400" />
             <h3 className="mt-4 text-xl font-bold text-white">
               No articles found
             </h3>

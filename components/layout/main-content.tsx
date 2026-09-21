@@ -7,7 +7,7 @@ import { PageTransition } from '@/components/ui/page-transition';
 
 export function MainContent({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const mainRef = useRef<HTMLDivElement>(null);
+  const mainRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (document.activeElement?.tagName === 'BODY') return;
@@ -15,8 +15,8 @@ export function MainContent({ children }: { children: ReactNode }) {
   }, [pathname]);
 
   return (
-    <div id="main-content" ref={mainRef} tabIndex={-1}>
+    <main id="main-content" ref={mainRef} tabIndex={-1}>
       <PageTransition>{children}</PageTransition>
-    </div>
+    </main>
   );
 }

@@ -41,7 +41,6 @@ export function TestimonialsCarousel({
       <ul
         className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 pb-5 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         ref={carouselRef}
-        role="list"
       >
         {testimonials.map((testimonial, index) => (
           <li
@@ -50,7 +49,6 @@ export function TestimonialsCarousel({
             ref={(node) => {
               cardRefs.current[index] = node;
             }}
-            role="listitem"
           >
             <TestimonialCard
               isActive={index === activeIndex}
@@ -69,16 +67,21 @@ export function TestimonialsCarousel({
             <button
               aria-label={`Go to testimonial ${index + 1}`}
               aria-pressed={isActive}
-              className={cn(
-                'h-2 rounded-full outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950',
-                isActive
-                  ? 'w-7 bg-gradient-to-r from-brand-blue via-brand-purple to-brand-cyan'
-                  : 'w-2 bg-white/20 hover:bg-white/35',
-              )}
+              className="flex size-11 items-center justify-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950"
               key={testimonial.id}
               onClick={() => goTo(index)}
               type="button"
-            />
+            >
+              <span
+                aria-hidden="true"
+                className={cn(
+                  'h-2 rounded-full transition-all duration-300',
+                  isActive
+                    ? 'w-7 bg-gradient-to-r from-brand-blue via-brand-purple to-brand-cyan'
+                    : 'w-2 bg-white/20 group-hover:bg-white/35',
+                )}
+              />
+            </button>
           );
         })}
       </div>

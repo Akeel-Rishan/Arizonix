@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --brand-blue: #2563FF;
-  --brand-purple: #7C3AED;
-  --brand-cyan: #06B6D4;
+  --brand-blue: #3B82F6;
+  --brand-purple: #A78BFA;
+  --brand-cyan: #22D3EE;
   --navy-950: #0A0A12;
 }
 
@@ -43,13 +43,24 @@
   .skeleton-shimmer { background-image: linear-gradient(90deg, rgb(255 255 255 / .03), rgb(255 255 255 / .1), rgb(255 255 255 / .03)); background-size: 200% 100%; animation: skeleton-sweep 1.8s ease-in-out infinite; }
   .glass-panel-hover { @apply transition duration-300 hover:-translate-y-1 hover:border-brand-cyan/30 hover:bg-white/10 hover:shadow-glow-blue; }
 }
-html[data-motion='paused'] *,
-html[data-motion='paused'] *::before,
-html[data-motion='paused'] *::after {
-  animation-play-state: paused !important;
+html[data-reduce-motion='true'] *,
+html[data-reduce-motion='true'] *::before,
+html[data-reduce-motion='true'] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
   scroll-behavior: auto !important;
 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .shimmer-gradient { animation: none; } .skeleton-shimmer { animation: none; } }
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 @layer components {
   .cms-prose p { @apply mb-4 text-base leading-relaxed text-slate-300; }
@@ -73,7 +84,7 @@ html[data-motion='paused'] *::after {
   .blog-prose .hljs-keyword, .blog-prose .hljs-selector-tag { @apply text-brand-purple; }
   .blog-prose .hljs-string, .blog-prose .hljs-attr { @apply text-brand-cyan; }
   .blog-prose .hljs-number, .blog-prose .hljs-literal { @apply text-brand-blue; }
-  .blog-prose .hljs-comment { @apply text-slate-500; }
+  .blog-prose .hljs-comment { @apply text-slate-400; }
   .legal-prose h2 { @apply scroll-mt-28 text-xl; }
 }
 

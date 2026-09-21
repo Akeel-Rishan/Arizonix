@@ -5,6 +5,7 @@ import { CTAForm } from '@/components/sections/cta-form';
 import { Badge } from '@/components/ui/badge';
 import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
+import { getCalendlyUrl } from '@/lib/contact-links';
 import type { SanitySiteSettings } from '@/lib/sanity/types';
 
 const trustSignals = [
@@ -14,6 +15,10 @@ const trustSignals = [
 ];
 
 export function FinalCTA({ siteSettings }: { siteSettings: SanitySiteSettings | null }) {
+  const calendlyUrl = getCalendlyUrl(
+    siteSettings?.contactInfo?.calendlyUrl ??
+      process.env.NEXT_PUBLIC_CALENDLY_URL,
+  );
   return (
     <Section
       className="relative overflow-hidden border-y border-white/10"
@@ -59,20 +64,20 @@ export function FinalCTA({ siteSettings }: { siteSettings: SanitySiteSettings | 
 
             <CTAContactInfo contactInfo={siteSettings?.contactInfo} />
 
-            <div className="mt-8">
+            {calendlyUrl ? <div className="mt-8">
               <a
                 className="glass-panel min-h-13 inline-flex w-full items-center justify-center gap-2.5 rounded-xl px-6 py-3 text-base font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:border-brand-cyan/30 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950 sm:w-auto"
-                href={siteSettings?.contactInfo?.calendlyUrl ?? 'https://calendly.com'}
+                href={calendlyUrl}
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 <Calendar aria-hidden="true" className="size-4" />
                 Schedule a Call on Calendly
               </a>
-              <p className="mt-2 text-xs text-slate-500">
+              <p className="mt-2 text-xs text-slate-400">
                 Usually responds within 2 business hours
               </p>
-            </div>
+            </div> : null}
           </div>
 
           <div className="glass-panel rounded-xl2 p-4 sm:p-6 md:p-8">

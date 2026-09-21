@@ -44,8 +44,11 @@ export function ProjectTestimonial({
             ))}
           </span>
           <blockquote className="relative mt-6 text-xl italic leading-8 text-slate-200 md:text-2xl">
-            {testimonial.quote}
+            <p>{testimonial.quote}</p>
           </blockquote>
+          <p className="relative mt-4 text-xs italic text-slate-400">
+            Regarding the {projectTitle} project
+          </p>
           <figcaption className="relative mt-8 flex items-center gap-4">
             {avatarUrl ? (
               <Image
@@ -70,9 +73,6 @@ export function ProjectTestimonial({
               </span>
             </span>
           </figcaption>
-          <p className="relative mt-4 text-xs italic text-slate-500">
-            Regarding the {projectTitle} project
-          </p>
         </motion.figure>
       </Container>
     </Section>

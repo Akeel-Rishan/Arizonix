@@ -23,6 +23,7 @@ const socialLinks: readonly SocialLink[] = [
   { label: 'Follow us on GitHub', href: '#', icon: Github },
   { label: 'Follow us on Instagram', href: '#', icon: Instagram },
 ];
+const visibleSocialLinks = socialLinks.filter((link) => link.href !== '#');
 
 const focusStyles =
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950';
@@ -56,18 +57,22 @@ export function Footer() {
               solutions for ambitious businesses worldwide.
             </p>
 
+            {visibleSocialLinks.length ? (
             <div className="mt-6 flex items-center gap-3">
-              {socialLinks.map(({ href, icon: Icon, label }) => (
+              {visibleSocialLinks.map(({ href, icon: Icon, label }) => (
                 <a
                   aria-label={label}
-                  className={`glass-panel flex size-10 items-center justify-center !rounded-full text-slate-400 transition duration-200 hover:scale-105 hover:border-brand-cyan/30 hover:text-white hover:shadow-glow-blue ${focusStyles}`}
+                  className={`glass-panel flex size-11 items-center justify-center !rounded-full text-slate-400 transition duration-200 hover:scale-105 hover:border-brand-cyan/30 hover:text-white hover:shadow-glow-blue ${focusStyles}`}
                   href={href}
                   key={label}
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   <Icon aria-hidden="true" className="size-4" />
                 </a>
               ))}
             </div>
+            ) : null}
 
             <div className="mt-9">
               <h3 className="text-sm font-semibold text-slate-100">
@@ -108,7 +113,7 @@ export function Footer() {
           })}
         </div>
 
-        <div className="flex flex-col items-center gap-4 border-t border-white/10 py-7 text-center text-sm text-slate-500 sm:flex-row sm:justify-between sm:text-left">
+        <div className="flex flex-col items-center gap-4 border-t border-white/10 py-7 text-center text-sm text-slate-400 sm:flex-row sm:justify-between sm:text-left">
           <p>© {currentYear} Arizonix. All rights reserved.</p>
           <div className="flex items-center gap-5">
             <Link

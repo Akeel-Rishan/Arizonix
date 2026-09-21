@@ -1,7 +1,7 @@
 import { Skeleton } from '@/components/ui/skeleton';
 export default function Loading() {
   return (
-    <main>
+    <div aria-label="Loading AI automation page" role="status">
       <Skeleton className="min-h-screen rounded-none" />
       <section className="container mx-auto px-4 py-24">
         <Skeleton className="mx-auto h-12 max-w-xl" />
@@ -15,6 +15,6 @@ export default function Loading() {
         <Skeleton className="h-96 rounded-xl2" />
         <Skeleton className="h-96 rounded-xl2" />
       </section>
-    </main>
+    </div>
   );
 }

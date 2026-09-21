@@ -27,7 +27,7 @@ export function BlogPostHero({ post }: { post: PostWithImages }) {
       initial={{ opacity: 0, y: 20 }}
     >
       <nav aria-label="Breadcrumb">
-        <ol className="flex flex-wrap gap-2 text-sm text-slate-500">
+        <ol className="flex flex-wrap gap-2 text-sm text-slate-400">
           <li>
             <Link href="/blog">Blog</Link>
           </li>
@@ -86,7 +86,7 @@ export function BlogPostHero({ post }: { post: PostWithImages }) {
           {post.readingTime ?? 5} min read
         </span>
         {post.tags.slice(0, 2).map((tag) => (
-          <span className="text-xs text-slate-500" key={tag}>
+          <span className="text-xs text-slate-400" key={tag}>
             #{tag}
           </span>
         ))}
@@ -108,7 +108,7 @@ export function BlogPostHero({ post }: { post: PostWithImages }) {
       <div className="mt-4 flex justify-end gap-2">
         <button
           aria-label="Copy article link"
-          className="glass-panel relative flex size-10 items-center justify-center rounded-full focus-visible:ring-2 focus-visible:ring-brand-cyan"
+          className="glass-panel relative flex size-11 items-center justify-center rounded-full focus-visible:ring-2 focus-visible:ring-brand-cyan"
           onClick={copy}
           type="button"
         >
@@ -124,7 +124,7 @@ export function BlogPostHero({ post }: { post: PostWithImages }) {
         </button>
         <a
           aria-label="Share on Twitter"
-          className="glass-panel flex size-10 items-center justify-center rounded-full"
+          className="glass-panel flex size-11 items-center justify-center rounded-full"
           href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(post.title)}`}
           rel="noopener noreferrer"
           target="_blank"
@@ -133,7 +133,7 @@ export function BlogPostHero({ post }: { post: PostWithImages }) {
         </a>
         <a
           aria-label="Share on LinkedIn"
-          className="glass-panel flex size-10 items-center justify-center rounded-full"
+          className="glass-panel flex size-11 items-center justify-center rounded-full"
           href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`}
           rel="noopener noreferrer"
           target="_blank"

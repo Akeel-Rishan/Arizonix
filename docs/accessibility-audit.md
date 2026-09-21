@@ -1,96 +1,54 @@
-# Accessibility Audit — Arizonix Website
+# Accessibility Audit - Arizonix Website
 
-## Scope
+Audit date: 2026-09-21
 
-Target standard: WCAG 2.1 AA. Target Lighthouse Accessibility score: 100.
+Target: WCAG 2.1 Level AA and Lighthouse Accessibility 100 on primary pages.
 
-Pages in scope:
+## Automated Results
 
-- `/`
-- `/about`
-- `/services`
-- `/ai-automation`
-- `/blog`
-- `/contact`
-- Representative detail pages: `/services/ai-automation-solutions`, `/industries/healthcare`, `/blog/[slug]`, `/portfolio/[slug]`
+The production build was tested at `/`, `/about`, `/services`,
+`/ai-automation`, `/blog`, and `/contact`.
 
-## Automated tooling
+- axe-core 4.12.1: zero violations on all six pages.
+- Lighthouse Accessibility: 100 on all six pages.
+- `html-validate`: zero errors in all generated static HTML files.
+- TypeScript, ESLint, and the production build pass.
 
-Installed tools:
+Automated tools cannot establish full WCAG conformance. The manual tests listed
+below remain launch gates.
 
-- `@axe-core/cli`
-- `html-validate`
-- Lighthouse CI
+## Remediation Completed
 
-Commands:
+- Added the first-focus skip link and one shared `main#main-content` landmark.
+- Added route-change focus handling, global visible focus styles, and sticky-header scroll offset.
+- Added form autocomplete, error associations, live status messages, and higher-contrast borders.
+- Updated brand colors and normal body copy to AA-compatible contrast tokens.
+- Removed small gradient text and ambiguous AI capability link names.
+- Added complete ARIA tab behavior and arrow-key navigation to AI view tabs.
+- Added a modal dialog pattern, focus trap, Escape handling, and focus restoration to the screenshot lightbox.
+- Added pause controls for testimonials and site animations, including stored reduced-motion preference.
+- Prevented animated counters from announcing intermediate values.
+- Increased audited icon and social controls to at least 44 by 44 CSS pixels.
+- Removed nested main/banner landmarks, interactive controls inside `role="img"`, and invalid legal-page landmarks.
+- Corrected semantic lists, testimonial figure markup, headings, labels, and status announcements.
 
-```powershell
-npm run build
-npm run dev -- -H 0.0.0.0
-npm run a11y:axe
-npm run lighthouse:local
-```
+## Manual Launch Gates
 
-Local limitation: the Codex environment cannot complete manual browser-extension, screen-reader, or production-domain checks. Those are tracked below as launch-gate tasks.
+- [ ] Complete a keyboard-only session across every production page.
+- [ ] Test NVDA on Windows and VoiceOver on macOS/iOS.
+- [ ] Test 200% zoom and 320px reflow on all representative page templates.
+- [ ] Verify orientation changes and mobile virtual-keyboard behavior on physical devices.
+- [ ] Run the axe DevTools browser extension on the deployed production URL.
+- [ ] Verify the mobile menu and screenshot dialog with real assistive technology.
+- [ ] Review final Sanity content for alt text, heading order, and descriptive links.
 
-## Fixes completed in Phase 5.4
+## Future Enhancement
 
-- Added first-focus skip link targeting `#main-content`.
-- Added a focusable `#main-content` skip target while preserving each page's native `<main>` landmark.
-- Added route-change focus handling for the main content region.
-- Added global `:focus-visible` outline.
-- Added `scroll-padding-top: 88px` for sticky-header anchor/focus offset.
-- Increased `.glass-panel` and CTA form input border contrast to `border-white/20`.
-- Replaced `text-slate-600` usages with `text-slate-500`.
-- Added a visible keyboard-accessible testimonials pause/resume button.
-- Added site-level pause/resume animations toggle.
-- Added focus-pause plumbing for technology marquee rows.
-- Added `role="tablist"`, `role="tab"`, `role="tabpanel"`, and `aria-selected` to AI use-case tabs.
-- Kept blog search label as `sr-only` with `htmlFor="blog-search"`.
-- Updated AnimatedCounter to avoid live announcements during animation and announce politely only after completion.
+A light color scheme may help some low-vision users. Treat this as a post-launch
+enhancement; it is not required for WCAG 2.1 AA when the existing dark theme
+meets contrast and user-preference requirements.
 
-## Manual audit checklist
+## Status
 
-### Perceivable
-
-- [x] Decorative images/icons are hidden or empty-alt where audited in modified components.
-- [x] Primary form fields include autocomplete for name, email, organization, and telephone.
-- [x] Body copy avoids `text-slate-600`.
-- [x] Gradient text remains headline-scale, not body-copy scale.
-- [ ] Verify 200% zoom across all key pages in browser.
-- [ ] Verify 320px viewport reflow across all key pages.
-
-### Operable
-
-- [x] Skip link added.
-- [x] Global focus-visible style added.
-- [x] Testimonials have a pause/resume control.
-- [x] Site-level animation pause/resume control added.
-- [ ] Keyboard-only 30-minute session across all key pages.
-- [ ] Verify no focus traps in mobile nav and screenshot lightbox.
-
-### Understandable
-
-- [x] Page language is `en`.
-- [x] Contact form errors are associated with fields and use `role="alert"`.
-- [x] Blog search input has an accessible label.
-- [ ] Review production content for ambiguous link text after final CMS content entry.
-
-### Robust
-
-- [x] CI added for lint, typecheck, and build.
-- [x] Lighthouse CI workflow added.
-- [ ] Run axe DevTools browser extension on production URL.
-- [ ] Run NVDA on Windows for homepage, contact page, blog post, and AI automation page.
-
-## Local verification notes
-
-- `npm run lint`: passed.
-- `npx tsc --noEmit`: passed.
-- `npm run build`: passed.
-- `npx axe` attempted against a local production server on port 3020; Chrome/ChromeDriver crashed before reporting results in this Windows Codex environment. Re-run `npm run a11y:axe` locally with a stable browser session before production sign-off.
-- `npm run html:validate` should be run after `npm run build`; the validator is configured to ignore React/Next static-render serialization noise and focus on meaningful document issues.
-
-## Sign-off status
-
-Code-level accessibility remediation is complete for this pass. Final WCAG sign-off requires manual browser, keyboard, and screen-reader testing on the deployed production URL.
+Automated accessibility gates pass. Final WCAG sign-off is pending the manual
+assistive-technology and device tests above.

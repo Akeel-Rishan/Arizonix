@@ -86,7 +86,7 @@ export function AIResults() {
               <div className="mt-5 flex flex-wrap gap-2">
                 {story.tags.map((tag) => (
                   <span
-                    className="rounded-md bg-white/5 px-2 py-1 font-mono text-xs text-slate-500"
+                    className="rounded-md bg-white/5 px-2 py-1 font-mono text-xs text-slate-400"
                     key={tag}
                   >
                     {tag}

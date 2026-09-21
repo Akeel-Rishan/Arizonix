@@ -106,22 +106,22 @@ export function Hero() {
             data-hero-step="trust"
             variants={fadeInUp}
           >
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500">
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-400">
               {TRUST_LABEL}
             </p>
-            <div
+            <ul
               aria-label={TRUST_LABEL}
               className="mx-auto mt-5 flex max-w-4xl flex-wrap items-center justify-center gap-x-7 gap-y-3 sm:gap-x-10"
             >
               {TRUST_MARKS.map((mark) => (
-                <span
+                <li
                   className="text-sm font-semibold tracking-wide text-slate-400 opacity-60 sm:text-base"
                   key={mark}
                 >
                   {mark}
-                </span>
+                </li>
               ))}
-            </div>
+            </ul>
           </motion.div>
 
           <motion.div

@@ -4,7 +4,7 @@ export function ContactMapPlaceholder() {
       aria-hidden="true"
       className="glass-panel relative mt-6 flex h-48 items-center justify-center overflow-hidden rounded-xl2"
     >
-      <p className="absolute left-4 top-3 text-xs text-slate-500">
+      <p className="absolute left-4 top-3 text-xs text-slate-400">
         Our team is distributed across 3 continents
       </p>
       <div className="flex gap-8 text-sm text-slate-300">

@@ -45,9 +45,12 @@ export function ContactFAQStrip() {
             </p>
           </article>
         ))}
-        <p className="mt-8 text-center text-sm text-slate-500">
+        <p className="mt-8 text-center text-sm text-slate-400">
           Have a specific question?{' '}
-          <a className="text-brand-blue" href="mailto:hello@arizonix.com">
+          <a
+            className="text-brand-blue underline underline-offset-2"
+            href="mailto:hello@arizonix.com"
+          >
             hello@arizonix.com
           </a>
         </p>

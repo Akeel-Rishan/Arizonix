@@ -49,7 +49,7 @@ export function AICTA() {
           <p className="mt-1 text-sm text-slate-400">
             3 automation opportunities identified in 48 hours
           </p>
-          <p className="mt-1 text-xs text-slate-500">No commitment required</p>
+          <p className="mt-1 text-xs text-slate-400">No commitment required</p>
         </motion.div>
         <motion.div
           className="mt-8 flex flex-col justify-center gap-4 sm:flex-row"
@@ -67,7 +67,7 @@ export function AICTA() {
             Schedule AI Demo
           </Button>
         </motion.div>
-        <motion.p className="mt-5 text-sm text-slate-500" variants={fadeInUp}>
+        <motion.p className="mt-5 text-sm text-slate-400" variants={fadeInUp}>
           Or email us directly at{' '}
           <a
             className="text-brand-cyan hover:underline"
@@ -76,7 +76,7 @@ export function AICTA() {
             ai@arizonix.com
           </a>
         </motion.p>
-        <motion.p className="mt-2 text-xs text-slate-500" variants={fadeInUp}>
+        <motion.p className="mt-2 text-xs text-slate-400" variants={fadeInUp}>
           <span className="text-emerald-400">●</span> Currently accepting AI
           projects — 3 spots available this quarter.
         </motion.p>

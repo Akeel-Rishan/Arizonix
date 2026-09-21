@@ -7,7 +7,7 @@ import { fallbackBlogPosts, withBlogImages } from '@/lib/blog-data';
 import { getBlogPosts, getFeaturedBlogPosts } from '@/lib/sanity/fetch';
 import { sanityImage } from '@/lib/sanity/image';
 export const metadata: Metadata = {
-  title: 'Blog — AI, Software Engineering & Technology Insights | Arizonix',
+  title: 'AI & Software Engineering Insights',
   description:
     'Expert insights on AI automation, software engineering, mobile development, and building technology that drives business growth. Written by the engineers at Arizonix.',
   openGraph: {
@@ -88,7 +88,7 @@ export default async function BlogPage() {
     },
   ];
   return (
-    <main>
+    <div>
       {schema.map((item, index) => (
         <script
           dangerouslySetInnerHTML={{
@@ -105,6 +105,6 @@ export default async function BlogPage() {
       />
       <BlogGrid featuredPostId={featured?._id ?? null} posts={displayPosts} />
       <BlogCTA />
-    </main>
+    </div>
   );
 }

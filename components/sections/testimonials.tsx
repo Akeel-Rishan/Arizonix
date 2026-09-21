@@ -92,11 +92,10 @@ export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) 
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={handleMouseLeave}
         >
-          <div
+          <section
             aria-label="Client testimonial"
             aria-live="polite"
             className="glass-panel relative min-h-[31rem] overflow-hidden rounded-xl2 p-6 sm:p-8 md:min-h-[27rem] md:p-12"
-            role="region"
           >
             <AnimatePresence initial={false} mode="wait">
               <motion.div
@@ -168,7 +167,7 @@ export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) 
                       aria-hidden="true"
                       className="mx-auto size-8 text-brand-cyan"
                     />
-                    <p className="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                    <p className="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
                       Business impact
                     </p>
                     <p className="text-gradient mt-3 text-2xl font-bold leading-tight">
@@ -178,7 +177,7 @@ export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) 
                 </div>
               </motion.div>
             </AnimatePresence>
-          </div>
+          </section>
 
           <div className="mt-8 flex items-center justify-between gap-4">
             <p className="text-sm font-medium text-slate-400">

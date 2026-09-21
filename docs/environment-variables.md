@@ -18,6 +18,8 @@
 | `RESEND_FROM_EMAIL` | Yes | Server | Verified sender, e.g. `hello@arizonix.com`. |
 | `RESEND_TO_EMAIL` | Yes | Server | Internal recipient for contact form notifications. |
 | `CONTACT_FORM_HONEYPOT_FIELD` | Recommended | Server | Honeypot field name, currently `website_url`. |
+| `NEXT_PUBLIC_CALENDLY_URL` | Optional | Client/server | Real booking URL. Scheduling UI is hidden when empty. |
+| `NEXT_PUBLIC_WHATSAPP_URL` | Optional | Client/server | Full `https://wa.me/...` URL. WhatsApp UI is hidden when empty. |
 
 ## Upstash Redis
 
@@ -25,6 +27,14 @@
 |---|---:|---|---|
 | `UPSTASH_REDIS_REST_URL` | Yes | Server | Upstash Redis REST URL. |
 | `UPSTASH_REDIS_REST_TOKEN` | Yes | Server | Upstash Redis REST token. |
+| `NEWSLETTER_ADMIN_TOKEN` | Yes for admin count | Server | Dedicated bearer token for `GET /api/newsletter`. Never expose as `NEXT_PUBLIC_`. |
+
+## Studio protection
+
+| Variable | Required | Scope | Description |
+|---|---:|---|---|
+| `STUDIO_USERNAME` | Yes in production | Edge/server | HTTP Basic Auth username for `/studio`. |
+| `STUDIO_PASSWORD` | Yes in production | Edge/server | Strong HTTP Basic Auth password for `/studio`. Missing credentials fail closed. |
 
 ## Analytics and Monitoring
 

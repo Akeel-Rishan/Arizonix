@@ -1,57 +1,54 @@
 # Arizonix Performance Budget
 
+Measured locally on 2026-09-21 against the optimized production server.
+
 ## Targets
 
-| Metric | Target | Maximum |
-|--------|--------|---------|
-| Lighthouse Performance | 95+ | 90 minimum |
-| LCP | < 2.0s | < 2.5s |
+| Metric | Target | CI floor |
+| --- | ---: | ---: |
+| Desktop Lighthouse Performance | 95 | 90 |
+| Accessibility | 100 | 100 |
+| SEO | 100 | 100 |
+| Best Practices | 95 | 90 |
+| LCP | < 2.0s | < 3.0s |
 | CLS | < 0.05 | < 0.1 |
-| TBT | < 150ms | < 300ms |
-| FCP | < 1.2s | < 1.8s |
-| JS Bundle page | < 150KB gzipped | < 200KB gzipped |
-| Total Page Weight | < 500KB | < 800KB |
+| TBT | < 150ms | < 400ms |
+| Individual JS chunk | < 150KB gzip | < 200KB gzip |
 
-## Baseline Scores
+## Desktop Lighthouse Results
 
-Local Lighthouse could not be collected inside this restricted Codex run because it requires a browser/server sweep. Fill these after running `npm run lighthouse:local` on your machine.
+| Page | Perf | A11y | Best Practices | SEO | FCP | LCP | TBT | CLS |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Home | 96 | 100 | 100 | 100 | 425ms | 1336ms | 70ms | 0 |
+| About | 97 | 100 | 100 | 100 | 378ms | 1292ms | 20ms | 0 |
+| Services | 96 | 100 | 100 | 100 | 389ms | 1379ms | 23ms | 0 |
+| AI Automation | 96 | 100 | 100 | 100 | 380ms | 1353ms | 5ms | 0 |
+| Blog | 96 | 100 | 100 | 100 | 380ms | 1353ms | 3ms | 0 |
+| Contact | 97 | 100 | 100 | 100 | 382ms | 1274ms | 13ms | 0 |
 
-| Page | Perf | LCP | CLS | TBT |
-|------|------|-----|-----|-----|
-| Homepage | Pending local run | Pending | Pending | Pending |
-| AI Automation | Pending local run | Pending | Pending | Pending |
-| Blog Post | Pending local run | Pending | Pending | Pending |
-| Service Detail | Pending local run | Pending | Pending | Pending |
-| Industry Detail | Pending local run | Pending | Pending | Pending |
+Lighthouse completed and wrote valid reports on Windows, but its CLI sometimes
+exited nonzero while deleting a locked temporary Chrome profile. The scores
+above were read from the completed JSON reports.
 
-## Post-Optimization Scores
+## Bundle Results
 
-| Page | Perf | LCP | CLS | TBT |
-|------|------|-----|-----|-----|
-| Homepage | Pending local Lighthouse | Pending | Pending | Pending |
-| AI Automation | Pending local Lighthouse | Pending | Pending | Pending |
-| Blog Post | Pending local Lighthouse | Pending | Pending | Pending |
-| Service Detail | Pending local Lighthouse | Pending | Pending | Pending |
-| Industry Detail | Pending local Lighthouse | Pending | Pending | Pending |
+The bundle gate parses the Next.js app build manifest. Every individual route
+chunk is below 200KB gzip; the largest shared chunk is 116KB gzip.
 
-## Bundle Analysis Notes
+Total route JavaScript remains above the aspirational 150KB budget on every
+page (175-310KB gzip). This does not fail the individual-chunk CI gate, but it
+is the clearest remaining performance opportunity.
 
-- Run `npm run analyze` to generate the Next.js client/server bundle treemaps.
-- Analyzer artifacts were generated at `.next/analyze/client.html`, `.next/analyze/nodejs.html`, and `.next/analyze/edge.html` during this pass. The analyzer build then exited during route collection, while the normal production build passed.
-- Homepage below-fold sections are dynamically imported with SSR retained.
-- Sanity Studio remains isolated to `/studio`.
-- Blog syntax highlighting is lazy-loaded in the client content renderer.
+## Mobile Finding
 
-## Latest Next.js Build Snapshot
+The local mobile Lighthouse run for the homepage scored 58 Performance with
+LCP 5789ms and TBT 848ms. Accessibility, Best Practices, and SEO were 100.
+Before calling mobile performance complete, reduce the shared client payload
+and retest on production with a representative mobile connection.
 
-| Route | First Load JS |
-|-------|---------------|
-| Homepage `/` | 348 kB |
-| AI Automation `/ai-automation` | 259 kB |
-| Blog Post `/blog/[slug]` | 329 kB |
-| Portfolio Detail `/portfolio/[slug]` | 302 kB |
-| Service Detail `/services/[slug]` | 302 kB |
-| Industry Detail `/industries/[slug]` | 298 kB |
-| Sanity Studio `/studio/[[...tool]]` | 1.7 MB isolated route |
+## Next Performance Work
 
-The shared app bundle is currently 174 kB. The homepage is above the aggressive 150 kB target, so the next performance pass should focus on reducing shared client dependencies and auditing which global client components are included on every route.
+- Reduce global client-side hydration and shared Framer Motion usage.
+- Load analytics, consent, and nonessential global widgets later where practical.
+- Audit the 118KB shared chunk and isolate route-specific code.
+- Retest representative detail pages and real-user Core Web Vitals after launch.

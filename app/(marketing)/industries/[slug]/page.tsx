@@ -48,20 +48,25 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
+  const { slug } = await params;
   const industry =
-    (await getIndustryBySlug(params.slug).catch(() => null)) ??
-    fallbackIndustry(params.slug);
-  if (!industry) return { title: 'Industry Not Found — Arizonix' };
+    (await getIndustryBySlug(slug).catch(() => null)) ??
+    fallbackIndustry(slug);
+  if (!industry) return { title: 'Industry Not Found' };
   const detail = industryDetailData[industry.slug];
+  const rawTitle = (industry.seo?.title ?? `${industry.name} Software Solutions`).replace(
+    /\s*[|—-]\s*Arizonix$/i,
+    '',
+  );
+  const metadataTitle =
+    rawTitle.length > 47 ? `${rawTitle.slice(0, 44).trimEnd()}...` : rawTitle;
   return {
     alternates: {
       canonical: `https://arizonix.com/industries/${industry.slug}`,
     },
-    title:
-      industry.seo?.title ??
-      `${industry.name} Software & AI Solutions | Arizonix`,
+    title: metadataTitle,
     description:
       industry.seo?.description ??
       detail?.heroDescription ??
@@ -82,14 +87,15 @@ export async function generateMetadata({
 export default async function IndustryPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   const [cmsIndustry, cmsIndustries, cmsProjects] = await Promise.all([
-    getIndustryBySlug(params.slug).catch(() => null),
+    getIndustryBySlug(slug).catch(() => null),
     getIndustries().catch(() => []),
     getPortfolioProjects().catch(() => []),
   ]);
-  const industry = cmsIndustry ?? fallbackIndustry(params.slug);
+  const industry = cmsIndustry ?? fallbackIndustry(slug);
   if (!industry) notFound();
   const allIndustries: SanityIndustry[] = cmsIndustries.length
     ? cmsIndustries
@@ -180,7 +186,7 @@ export default async function IndustryPage({
     .filter((item) => item.slug !== industry.slug)
     .slice(0, 3);
   return (
-    <main>
+    <div>
       <script
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(schemas).replace(/</g, '\\u003c'),
@@ -224,6 +230,6 @@ export default async function IndustryPage({
         </Container>
       </section>
       <IndustryDetailCTA industryName={industry.name} />
-    </main>
+    </div>
   );
 }

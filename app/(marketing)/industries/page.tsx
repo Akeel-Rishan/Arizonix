@@ -7,7 +7,7 @@ import { getIndustries } from '@/lib/sanity/fetch';
 import type { SanityIndustry } from '@/lib/sanity/types';
 export const metadata: Metadata = {
   alternates: { canonical: 'https://arizonix.com/industries' },
-  title: 'Industries We Serve — Software & AI Solutions | Arizonix',
+  title: 'Industry Software & AI Solutions',
   description:
     'Arizonix builds specialized software and AI solutions for 12+ industries including Healthcare, Finance, Retail, Construction, Logistics, and more. Industry-specific expertise, enterprise-grade execution.',
   openGraph: {
@@ -66,7 +66,7 @@ export default async function IndustriesPage() {
     },
   ];
   return (
-    <main>
+    <div>
       <script
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(data).replace(/</g, '\\u003c'),
@@ -75,6 +75,6 @@ export default async function IndustriesPage() {
       />
       <IndustriesListingHero industries={industries} />
       <IndustriesOverviewGrid industries={industries} />
-    </main>
+    </div>
   );
 }

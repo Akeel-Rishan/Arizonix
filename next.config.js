@@ -51,6 +51,10 @@ const nextConfig = {
     return [
       { source: '/(.*)', headers: securityHeaders },
       {
+        source: '/studio/:path*',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
+      {
         source: '/:all*(svg|jpg|jpeg|png|gif|webp|avif|ico|woff|woff2)',
         headers: [
           {
@@ -89,18 +93,27 @@ const nextConfig = {
   },
 };
 
-module.exports = withSentryConfig(
-  withBundleAnalyzer(nextConfig),
-  {
-    org: process.env.SENTRY_ORG,
-    project: process.env.SENTRY_PROJECT,
-    silent: true,
-  },
-  {
-    disableLogger: true,
-    hideSourceMaps: true,
-    tunnelRoute: '/monitoring',
-    transpileClientSDK: true,
-    widenClientFileUpload: true,
-  },
+const hasSentryUploadCredentials = Boolean(
+  process.env.SENTRY_AUTH_TOKEN &&
+    process.env.SENTRY_ORG &&
+    process.env.SENTRY_PROJECT,
 );
+
+module.exports = withSentryConfig(withBundleAnalyzer(nextConfig), {
+  ...(hasSentryUploadCredentials
+    ? {
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        org: process.env.SENTRY_ORG,
+        project: process.env.SENTRY_PROJECT,
+      }
+    : {}),
+  silent: true,
+  disableLogger: true,
+  sourcemaps: {
+    disable: !hasSentryUploadCredentials,
+    deleteSourcemapsAfterUpload: hasSentryUploadCredentials,
+  },
+  tunnelRoute: '/monitoring',
+  widenClientFileUpload: hasSentryUploadCredentials,
+  automaticVercelMonitors: false,
+});

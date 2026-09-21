@@ -110,12 +110,12 @@ export function BlogCard({
                 {post.author?.name ?? 'Arizonix'}
               </span>
             </div>
-            <span className="flex items-center gap-1 text-xs text-slate-500">
+            <span className="flex items-center gap-1 text-xs text-slate-400">
               <Clock className="size-3" />
               {post.readingTime ?? 5} min read
             </span>
           </div>
-          <p className="mt-2 text-xs text-slate-500">
+          <p className="mt-2 text-xs text-slate-400">
             {formatDate(post.publishedAt)}
           </p>
           <span className="absolute bottom-5 right-6 text-xs text-brand-blue opacity-0 transition group-hover:opacity-100">

@@ -12,7 +12,7 @@ export function LegalContent({ sections }: { sections: LegalSection[] }) {
           {sections.map((section, index) => (
             <li key={section.id}>
               <a
-                className="text-sm text-slate-500 hover:text-brand-blue"
+                className="text-sm text-slate-400 hover:text-brand-blue"
                 href={`#${section.id}`}
               >
                 {index + 1}. {section.title}

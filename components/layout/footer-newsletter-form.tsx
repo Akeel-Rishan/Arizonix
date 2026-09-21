@@ -72,7 +72,7 @@ export function FooterNewsletterForm() {
           aria-invalid={errors.email ? 'true' : 'false'}
           autoComplete="email"
           className={cn(
-            'glass-panel h-12 w-full !rounded-full py-3 pl-5 pr-14 text-sm text-slate-100 outline-none transition duration-200 placeholder:text-slate-500 focus:border-brand-blue/70 focus:ring-2 focus:ring-brand-blue/30',
+            'glass-panel h-12 w-full !rounded-full py-3 pl-5 pr-14 text-sm text-slate-100 outline-none transition duration-200 placeholder:text-slate-400 focus:border-brand-blue/70 focus:ring-2 focus:ring-brand-blue/30',
             errors.email && 'border-brand-purple/70',
           )}
           id="footer-newsletter-email"
@@ -81,7 +81,7 @@ export function FooterNewsletterForm() {
         />
         <button
           aria-label="Subscribe to newsletter"
-          className="absolute right-1.5 top-1.5 flex size-9 items-center justify-center rounded-full bg-gradient-to-r from-brand-blue via-brand-purple to-brand-cyan text-white shadow-glow-blue transition duration-200 hover:scale-105 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950 disabled:cursor-wait disabled:opacity-70"
+          className="absolute right-0.5 top-0.5 flex size-11 items-center justify-center rounded-full bg-gradient-to-r from-brand-blue via-brand-purple to-brand-cyan text-white shadow-glow-blue transition duration-200 hover:scale-105 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950 disabled:cursor-wait disabled:opacity-70"
           disabled={isSubmitting}
           type="submit"
         >

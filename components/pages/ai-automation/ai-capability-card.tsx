@@ -86,7 +86,8 @@ export function AICapabilityCard({ capability }: { capability: AICapability }) {
         className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-slate-300 transition hover:text-brand-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan"
         href={capability.href}
       >
-        Learn More <ArrowRight className="size-4" />
+        Learn More<span className="sr-only"> about {capability.title}</span>{' '}
+        <ArrowRight aria-hidden="true" className="size-4" />
       </Link>
     </article>
   );

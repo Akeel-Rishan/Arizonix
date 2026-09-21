@@ -11,11 +11,11 @@ export function LegalLayout({
   title: string;
 }) {
   return (
-    <main>
+    <div>
       <div className="container mx-auto max-w-5xl px-4 pb-24">
         <LegalHero intro={intro} lastUpdated="July 5, 2026" title={title} />
         {children}
       </div>
-    </main>
+    </div>
   );
 }

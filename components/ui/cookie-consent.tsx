@@ -39,7 +39,10 @@ export function CookieConsent() {
             <p>
               We use cookies to improve your experience and analyze traffic. See
               our{' '}
-              <Link className="text-brand-blue underline" href="/privacy">
+              <Link
+                className="text-brand-cyan underline underline-offset-2"
+                href="/privacy"
+              >
                 Privacy Policy
               </Link>
               .

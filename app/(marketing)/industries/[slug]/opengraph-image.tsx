@@ -3,8 +3,13 @@ import { ImageResponse } from 'next/og';
 import { industries } from '@/lib/industries-data';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
-export default function Image({ params }: { params: { slug: string } }) {
-  const industry = industries.find((item) => item.slug === params.slug);
+export default async function Image({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const industry = industries.find((item) => item.slug === slug);
   return new ImageResponse(
     <div
       style={{

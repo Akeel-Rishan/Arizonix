@@ -6,7 +6,6 @@ export {
   useAnimationFrame,
   useInView,
   useMotionValue,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
@@ -14,3 +13,8 @@ export {
   type MotionValue,
   type Variants,
 } from 'framer-motion';
+
+export {
+  useShouldReduceMotion,
+  useShouldReduceMotion as useReducedMotion,
+} from '@/hooks/use-site-motion-preference';

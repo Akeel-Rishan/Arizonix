@@ -12,6 +12,7 @@ import {
 
 import { Button } from '@/components/ui/button';
 import { Analytics } from '@/lib/analytics/events';
+import { getCalendlyUrl } from '@/lib/contact-links';
 import { AnimatePresence, motion, useReducedMotion } from '@/lib/framer-motion';
 import { ctaFormSchema, type CTAFormValues } from '@/lib/schemas/contact';
 import { cn } from '@/lib/utils';
@@ -47,7 +48,7 @@ const referralOptions = [
 ];
 
 const fieldClassName =
-  'w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue';
+  'w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-400 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue';
 
 interface FieldShellProps {
   children: React.ReactNode;
@@ -108,6 +109,7 @@ function fieldAccessibility(
 }
 
 export function CTAForm() {
+  const calendlyUrl = getCalendlyUrl(process.env.NEXT_PUBLIC_CALENDLY_URL);
   const reducedMotion = Boolean(useReducedMotion());
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submittedName, setSubmittedName] = useState<string | null>(null);
@@ -201,19 +203,22 @@ export function CTAForm() {
               Thank you, {submittedName}! We&apos;ll review your project details
               and get back to you within 48 hours with a personalized response.
             </p>
-            <p className="mt-4 text-sm text-slate-500">
-              In the meantime, feel free to schedule a call directly on
-              Calendly.
-            </p>
-            <Button
-              className="mt-6"
-              href="https://calendly.com"
-              rel="noopener noreferrer"
-              target="_blank"
-              variant="secondary"
-            >
-              Schedule on Calendly
-            </Button>
+            {calendlyUrl ? (
+              <>
+                <p className="mt-4 text-sm text-slate-400">
+                  In the meantime, feel free to schedule a call directly.
+                </p>
+                <Button
+                  className="mt-6"
+                  href={calendlyUrl}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  variant="secondary"
+                >
+                  Schedule a Call
+                </Button>
+              </>
+            ) : null}
           </motion.div>
         ) : (
           <motion.form
@@ -269,7 +274,7 @@ export function CTAForm() {
               <FieldShell error={errors.phone} id="phone" label="Phone Number">
                 <input
                   autoComplete="tel"
-                  placeholder="+1 (555) 000-0000"
+                  placeholder="Phone number with country code"
                   type="tel"
                   {...inputProps('phone', register('phone'), false)}
                 />
@@ -327,7 +332,7 @@ export function CTAForm() {
                   rows={4}
                   {...inputProps('description', register('description'), true)}
                 />
-                <p className="mt-1 text-right text-xs text-slate-500">
+                <p className="mt-1 text-right text-xs text-slate-400">
                   {description.length} / 1000
                 </p>
               </FieldShell>
@@ -367,7 +372,7 @@ export function CTAForm() {
               </div>
             ) : null}
 
-            <p className="mt-6 text-center text-xs text-slate-500">
+            <p className="mt-6 text-center text-xs text-slate-400">
               🔒 Your information is secure and will never be shared with third
               parties.
             </p>
@@ -387,7 +392,7 @@ export function CTAForm() {
             >
               {isSubmitting ? 'Sending...' : 'Send Project Inquiry'}
             </Button>
-            <p className="mt-3 text-center text-xs leading-5 text-slate-500">
+            <p className="mt-3 text-center text-xs leading-5 text-slate-400">
               By submitting, you agree to our{' '}
               <Link
                 className="text-slate-400 underline hover:text-white"

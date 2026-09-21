@@ -7,7 +7,7 @@ import {
 import { LegalLayout } from '@/components/pages/legal/legal-layout';
 export const metadata: Metadata = {
   alternates: { canonical: 'https://arizonix.com/privacy' },
-  title: 'Privacy Policy — Arizonix',
+  title: 'Privacy Policy',
   description:
     'How Arizonix collects, uses, and protects your personal information.',
   robots: { index: false, follow: false },

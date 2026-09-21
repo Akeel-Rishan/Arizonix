@@ -67,19 +67,19 @@ export function PortfolioCard({ project }: PortfolioCardProps) {
           {project.title}
         </h3>
 
-        <div
+        <ul
           className="mt-4 flex flex-wrap gap-2"
           aria-label="Technologies used"
         >
           {project.tags.map((tag) => (
-            <span
+            <li
               className="glass-panel rounded-full px-2.5 py-1 font-mono text-xs text-slate-300"
               key={tag}
             >
               {tag}
-            </span>
+            </li>
           ))}
-        </div>
+        </ul>
 
         <dl className="mt-6 grid grid-cols-3 divide-x divide-white/10 border-y border-white/10 py-4">
           {project.results.map((result) => (
@@ -90,7 +90,7 @@ export function PortfolioCard({ project }: PortfolioCardProps) {
               <dt className="order-2 mt-1 text-[0.65rem] leading-4 text-slate-400 sm:text-xs">
                 {result.label}
               </dt>
-              <dd className="text-gradient order-1 text-lg font-bold sm:text-2xl">
+              <dd className="order-1 text-lg font-bold text-brand-blue sm:text-2xl">
                 {result.metric}
               </dd>
             </div>

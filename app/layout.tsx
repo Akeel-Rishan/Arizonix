@@ -115,7 +115,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     new Promise<null>((resolve) => setTimeout(() => resolve(null), 1500)),
   ]);
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <PreconnectHints />
       </head>

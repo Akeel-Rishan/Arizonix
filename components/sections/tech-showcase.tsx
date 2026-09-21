@@ -31,7 +31,7 @@ export function TechShowcase() {
     >
       <Container>
         <p
-          className="text-center text-sm font-semibold uppercase tracking-[0.2em] text-slate-500"
+          className="text-center text-sm font-semibold uppercase tracking-[0.2em] text-slate-400"
           id="technology-showcase-label"
         >
           Technologies We Work With

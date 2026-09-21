@@ -66,15 +66,15 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
+  const { slug } = await params;
   const project =
-    (await getProjectBySlug(params.slug).catch(() => null)) ??
-    fallbackProject(params.slug);
-  if (!project) return { title: 'Project Not Found — Arizonix' };
+    (await getProjectBySlug(slug).catch(() => null)) ?? fallbackProject(slug);
+  if (!project) return { title: 'Project Not Found' };
   return {
     alternates: { canonical: `https://arizonix.com/portfolio/${project.slug}` },
-    title: `${project.title} — Portfolio | Arizonix`,
+    title: `${project.title.split(' — ')[0]} Case Study`,
     description:
       project.seo?.description ?? `${project.challenge.slice(0, 150)}...`,
     openGraph: {
@@ -95,13 +95,14 @@ export async function generateMetadata({
 export default async function ProjectPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   const [cmsProject, cmsAll] = await Promise.all([
-    getProjectBySlug(params.slug).catch(() => null),
+    getProjectBySlug(slug).catch(() => null),
     getPortfolioProjects().catch(() => []),
   ]);
-  const raw = cmsProject ?? fallbackProject(params.slug);
+  const raw = cmsProject ?? fallbackProject(slug);
   if (!raw) notFound();
   const project = display(raw);
   const mainImageBlurUrl = raw.mainImage ? sanityBlurImage(raw.mainImage) : null;
@@ -161,7 +162,7 @@ export default async function ProjectPage({
     },
   ];
   return (
-    <main>
+    <div>
       <script
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(schema).replace(/</g, '\\u003c'),
@@ -206,6 +207,6 @@ export default async function ProjectPage({
         </Container>
       </section>
       <PortfolioCTA />
-    </main>
+    </div>
   );
 }

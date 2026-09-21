@@ -25,7 +25,7 @@ export function CareersCTA() {
         >
           Send a Speculative Application
         </Button>
-        <p className="mt-3 text-xs text-slate-500">
+        <p className="mt-3 text-xs text-slate-400">
           Please include your CV, portfolio, and the kind of work you&apos;re
           looking for.
         </p>

@@ -66,27 +66,22 @@ export function WorkflowNode({
   const colors = colorMap[step.color];
   const isActive = state === 'active';
   const isCompleted = state === 'completed';
-
-  return (
-    <button
-      aria-pressed={selected}
-      className={cn(
-        'glass-panel relative h-full min-h-44 w-full overflow-hidden p-5 text-left transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan sm:p-6 lg:min-h-52',
-        state === 'idle' && 'opacity-70',
-        isCompleted && 'opacity-85',
-        isActive && [
-          'gradient-border opacity-100',
-          colors.activeBorder,
-          colors.activeGlow,
-        ],
-        selected && 'z-10 border-brand-cyan/70 shadow-glow-cyan',
-        className,
-      )}
-      data-state={state}
-      disabled={!onClick}
-      onClick={onClick}
-      type="button"
-    >
+  const nodeClassName = cn(
+    'glass-panel relative h-full min-h-44 w-full overflow-hidden p-5 text-left transition duration-300 sm:p-6 lg:min-h-52',
+    onClick &&
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan',
+    state === 'idle' && 'opacity-70',
+    isCompleted && 'opacity-85',
+    isActive && [
+      'gradient-border opacity-100',
+      colors.activeBorder,
+      colors.activeGlow,
+    ],
+    selected && 'z-10 border-brand-cyan/70 shadow-glow-cyan',
+    className,
+  );
+  const content = (
+    <>
       {isActive && !reducedMotion ? (
         <span
           aria-hidden="true"
@@ -130,6 +125,26 @@ export function WorkflowNode({
       <span className="mt-2 block line-clamp-2 text-xs leading-5 text-slate-400">
         {step.description}
       </span>
+    </>
+  );
+
+  if (onClick) {
+    return (
+    <button
+      aria-pressed={selected}
+      className={nodeClassName}
+      data-state={state}
+      onClick={onClick}
+      type="button"
+    >
+      {content}
     </button>
+    );
+  }
+
+  return (
+    <div className={nodeClassName} data-state={state}>
+      {content}
+    </div>
   );
 }

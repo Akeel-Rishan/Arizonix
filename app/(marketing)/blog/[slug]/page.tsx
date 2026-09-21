@@ -27,17 +27,23 @@ async function findPost(slug: string) {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const post = await findPost(params.slug);
-  if (!post) return { title: 'Post Not Found — Arizonix Blog' };
+  const { slug } = await params;
+  const post = await findPost(slug);
+  if (!post) return { title: 'Post Not Found' };
   const image = post.coverImage
     ? sanityImage(post.coverImage, { width: 1200, height: 630 })
     : null;
-  const title = post.seo?.title ?? post.title;
+  const title = (post.seo?.title ?? post.title).replace(
+    /\s*[|—-]\s*Arizonix(?: Blog)?$/i,
+    '',
+  );
   const description = post.seo?.description ?? post.excerpt;
+  const metadataTitle =
+    title.length > 47 ? `${title.slice(0, 44).trimEnd()}...` : title;
   return {
-    title: `${title} | Arizonix Blog`,
+    title: metadataTitle,
     description,
     openGraph: {
       title,
@@ -64,10 +70,11 @@ export async function generateMetadata({
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   const [post, allCms] = await Promise.all([
-    findPost(params.slug),
+    findPost(slug),
     getBlogPosts().catch(() => []),
   ]);
   if (!post) notFound();
@@ -153,7 +160,7 @@ export default async function BlogPostPage({
     },
   ];
   return (
-    <main>
+    <div>
       {schemas.map((schema, index) => (
         <script
           dangerouslySetInnerHTML={{
@@ -176,6 +183,6 @@ export default async function BlogPostPage({
         <BlogPostRelated posts={related} />
         <BlogCTA />
       </article>
-    </main>
+    </div>
   );
 }

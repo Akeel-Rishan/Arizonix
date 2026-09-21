@@ -4,10 +4,15 @@ import { fallbackBlogPosts } from '@/lib/blog-data';
 import { getBlogPostBySlug } from '@/lib/sanity/fetch';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
-export default async function Image({ params }: { params: { slug: string } }) {
+export default async function Image({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
   const post =
-    (await getBlogPostBySlug(params.slug).catch(() => null)) ??
-    fallbackBlogPosts.find((item) => item.slug === params.slug);
+    (await getBlogPostBySlug(slug).catch(() => null)) ??
+    fallbackBlogPosts.find((item) => item.slug === slug);
   const title = post?.title ?? 'Arizonix Blog';
   const category = post?.categories[0] ?? 'Technology';
   return new ImageResponse(

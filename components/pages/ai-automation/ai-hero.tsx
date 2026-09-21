@@ -103,7 +103,7 @@ export function AIHero() {
             See AI In Action
           </Button>
         </motion.div>
-        <motion.p className="mt-4 text-sm text-slate-500" variants={fadeInUp}>
+        <motion.p className="mt-4 text-sm text-slate-400" variants={fadeInUp}>
           AI solutions deployed across Healthcare, Finance, Retail, Logistics
           &amp; more
         </motion.p>

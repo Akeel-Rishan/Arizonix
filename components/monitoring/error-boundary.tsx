@@ -33,7 +33,7 @@ export class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         this.props.fallback ?? (
-          <div className="py-12 text-center text-sm text-slate-500">
+          <div className="py-12 text-center text-sm text-slate-400">
             This section failed to load.
           </div>
         )

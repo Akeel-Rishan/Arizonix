@@ -37,6 +37,7 @@ jobs:
       UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
       UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
       SANITY_REVALIDATE_SECRET: ${{ secrets.SANITY_REVALIDATE_SECRET }}
+      NEWSLETTER_ADMIN_TOKEN: placeholder
       NEXT_PUBLIC_GA_MEASUREMENT_ID: ''
       NEXT_PUBLIC_SENTRY_DSN: ''
       SENTRY_AUTH_TOKEN: ''
@@ -49,5 +50,20 @@ jobs:
       - run: npm ci
       - name: Build
         run: npm run build
-      - name: Check bundle size placeholder
-        run: echo "Bundle check passed"
+      - name: Check initial page bundle sizes
+        run: node scripts/check-bundle-size.mjs
+      - name: Smoke test production server
+        run: |
+          npm run start &
+          SERVER_PID=$!
+          npx wait-on http://localhost:3000 --timeout 30000
+          for route in "/" "/about" "/services" "/contact" "/blog"; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "http://localhost:3000$route")
+            if [ "$STATUS" != "200" ]; then
+              echo "ERROR: Route $route returned HTTP $STATUS"
+              kill $SERVER_PID
+              exit 1
+            fi
+            echo "$route -> $STATUS"
+          done
+          kill $SERVER_PID

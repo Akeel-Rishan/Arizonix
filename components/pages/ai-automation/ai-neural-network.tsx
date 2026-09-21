@@ -60,7 +60,7 @@ export default function AINeuralNetwork() {
                 animate={{ cx: [x1, x2], cy: [y1, y2], opacity: [0, 1, 0] }}
                 className="fill-brand-cyan"
                 initial={{ cx: x1, cy: y1 }}
-                r="0.35"
+                r={0.35}
                 transition={{
                   delay: index * 0.35,
                   duration: 3,
@@ -80,8 +80,9 @@ export default function AINeuralNetwork() {
             className="fill-brand-purple"
             cx={cx}
             cy={cy}
+            initial={{ opacity: 0.45, r: 0.5 }}
             key={`${cx}-${cy}`}
-            r="0.5"
+            r={0.5}
             transition={{
               delay: index * 0.11,
               duration: 2.4 + (index % 3),

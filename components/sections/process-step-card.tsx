@@ -66,18 +66,25 @@ export function ProcessStepCard({
         />
       ) : null}
 
-      <button
+      <div
         aria-controls={contentId}
         aria-expanded={isActive}
         className="relative block w-full min-w-0 rounded-xl2 p-4 text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-cyan sm:p-5 lg:p-4"
         onClick={onClick}
-        type="button"
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            onClick();
+          }
+        }}
+        role="button"
+        tabIndex={0}
       >
         <span className="flex items-center justify-between gap-2">
           <Badge className="px-2.5 py-0.5 font-mono" variant="outline">
             {String(phase.id).padStart(2, '0')}
           </Badge>
-          <span className="text-right text-[0.65rem] text-slate-500 sm:text-xs lg:text-[0.65rem]">
+          <span className="text-right text-[0.65rem] text-slate-400 sm:text-xs lg:text-[0.65rem]">
             {phase.duration}
           </span>
         </span>
@@ -91,7 +98,10 @@ export function ProcessStepCard({
           <Icon aria-hidden="true" className={cn('size-5', colors.icon)} />
         </span>
 
-        <h3 className="mt-4 text-base font-bold leading-tight text-white">
+        <h3
+          className="mt-4 text-base font-bold leading-tight text-white"
+          id={`process-phase-${phase.id}-heading`}
+        >
           {phase.title}
         </h3>
         <span className="mt-1 block text-xs italic leading-5 text-slate-400">
@@ -105,9 +115,12 @@ export function ProcessStepCard({
         >
           {phase.description}
         </p>
-      </button>
+      </div>
 
-      <div id={contentId} role="region">
+      <section
+        aria-labelledby={`process-phase-${phase.id}-heading`}
+        id={contentId}
+      >
         <AnimatePresence initial={false}>
           {showDeliverables ? (
             <motion.div
@@ -130,7 +143,7 @@ export function ProcessStepCard({
             </motion.div>
           ) : null}
         </AnimatePresence>
-      </div>
+      </section>
     </motion.article>
   );
 }

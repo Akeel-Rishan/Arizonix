@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import { Section } from '@/components/ui/section';
 import { SectionHeading } from '@/components/ui/section-heading';
@@ -64,8 +64,27 @@ const labels = ['Time', 'Cost', 'Accuracy', 'Availability', 'Scalability'];
 
 export function AIComparison() {
   const [index, setIndex] = useState(0);
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const reduced = useReducedMotion();
   const active = comparisons[index];
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLButtonElement>, tabIndex: number) => {
+      let nextIndex = tabIndex;
+      if (event.key === 'ArrowRight')
+        nextIndex = (tabIndex + 1) % comparisons.length;
+      else if (event.key === 'ArrowLeft')
+        nextIndex =
+          (tabIndex - 1 + comparisons.length) % comparisons.length;
+      else if (event.key === 'Home') nextIndex = 0;
+      else if (event.key === 'End') nextIndex = comparisons.length - 1;
+      else return;
+
+      event.preventDefault();
+      setIndex(nextIndex);
+      tabRefs.current[nextIndex]?.focus();
+    },
+    [],
+  );
   return (
     <Section id="comparison">
       <div className="container mx-auto px-4">
@@ -79,16 +98,28 @@ export function AIComparison() {
           }
           description="See the real impact of replacing manual workflows with intelligent automation."
         />
-        <div className="mt-10 flex flex-wrap justify-center gap-2">
+        <div
+          aria-label="AI automation process comparison"
+          className="mt-10 flex flex-wrap justify-center gap-2"
+          role="tablist"
+        >
           {comparisons.map((item, itemIndex) => (
             <button
-              aria-pressed={index === itemIndex}
+              aria-controls={`ai-comparison-panel-${itemIndex}`}
+              aria-selected={index === itemIndex}
               className={cn(
                 'glass-panel min-h-11 rounded-full px-5 text-sm text-slate-300 focus-visible:ring-2 focus-visible:ring-brand-cyan',
                 index === itemIndex && 'gradient-border text-white',
               )}
+              id={`ai-comparison-tab-${itemIndex}`}
               key={item.process}
               onClick={() => setIndex(itemIndex)}
+              onKeyDown={(event) => handleKeyDown(event, itemIndex)}
+              ref={(node) => {
+                tabRefs.current[itemIndex] = node;
+              }}
+              role="tab"
+              tabIndex={index === itemIndex ? 0 : -1}
               type="button"
             >
               {item.process}
@@ -97,11 +128,15 @@ export function AIComparison() {
         </div>
         <AnimatePresence mode="wait">
           <motion.div
+            aria-labelledby={`ai-comparison-tab-${index}`}
             animate={{ opacity: 1, y: 0 }}
             className="mx-auto mt-8 max-w-4xl"
             exit={{ opacity: 0, y: reduced ? 0 : 8 }}
             initial={{ opacity: 0, y: reduced ? 0 : 8 }}
+            id={`ai-comparison-panel-${index}`}
             key={active.process}
+            role="tabpanel"
+            tabIndex={0}
           >
             <div className="hidden md:block">
               <table
@@ -122,7 +157,7 @@ export function AIComparison() {
                 <tbody>
                   {labels.map((label, row) => (
                     <tr key={label}>
-                      <th className="text-left text-xs uppercase tracking-wide text-slate-500" scope="row">
+                      <th className="text-left text-xs uppercase tracking-wide text-slate-400" scope="row">
                         {label}
                       </th>
                       <td className="glass-panel rounded-lg px-4 py-3 text-red-400/80">
@@ -145,7 +180,7 @@ export function AIComparison() {
                   <h3 className={String(color)}>{String(title)}</h3>
                   {labels.map((label, row) => (
                     <div className="mt-4" key={label}>
-                      <p className="text-xs uppercase text-slate-500">
+                      <p className="text-xs uppercase text-slate-400">
                         {label}
                       </p>
                       <p className={cn('mt-1 text-sm', String(color))}>

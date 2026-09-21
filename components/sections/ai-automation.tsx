@@ -107,7 +107,7 @@ function WorkflowControls({
     <div className="mt-8 flex items-center justify-center gap-3">
       <button
         aria-label="Previous step"
-        className="glass-panel inline-flex size-10 items-center justify-center rounded-full text-slate-200 transition duration-200 hover:-translate-y-0.5 hover:border-brand-cyan/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950"
+        className="glass-panel inline-flex size-11 items-center justify-center rounded-full text-slate-200 transition duration-200 hover:-translate-y-0.5 hover:border-brand-cyan/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950"
         onClick={goPrev}
         type="button"
       >
@@ -123,7 +123,7 @@ function WorkflowControls({
       </button>
       <button
         aria-label="Next step"
-        className="glass-panel inline-flex size-10 items-center justify-center rounded-full text-slate-200 transition duration-200 hover:-translate-y-0.5 hover:border-brand-cyan/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950"
+        className="glass-panel inline-flex size-11 items-center justify-center rounded-full text-slate-200 transition duration-200 hover:-translate-y-0.5 hover:border-brand-cyan/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950"
         onClick={goNext}
         type="button"
       >
@@ -169,11 +169,10 @@ export function AIAutomation() {
           }
         />
 
-        <motion.div
+        <motion.section
           aria-label={WORKFLOW_ARIA_LABEL}
           className="mt-14 lg:mt-16"
           initial="hidden"
-          role="img"
           variants={staggerContainer}
           viewport={{ once: true, amount: 0.2 }}
           whileInView="visible"
@@ -359,7 +358,7 @@ export function AIAutomation() {
               </motion.div>
             </div>
           </div>
-        </motion.div>
+        </motion.section>
 
         <WorkflowControls
           goNext={goNext}

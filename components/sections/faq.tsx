@@ -129,7 +129,7 @@ export function FAQ({ faqData }: { faqData: FAQCategory[] }) {
                   key={category.id}
                 >
                   {activeCategory === ALL_CATEGORIES ? (
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
                       {category.label}
                     </p>
                   ) : null}

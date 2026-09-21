@@ -41,7 +41,7 @@ export function CaseStudyDetailHero({
         <nav aria-label="Breadcrumb">
           <ol className="flex gap-2 text-sm">
             <li>
-              <Link className="text-slate-500" href="/case-studies">
+              <Link className="text-slate-400" href="/case-studies">
                 Case Studies
               </Link>
             </li>
@@ -64,7 +64,7 @@ export function CaseStudyDetailHero({
           {study.summary}
         </p>
         {study.publishedAt ? (
-          <time className="mt-4 block text-sm text-slate-500">
+          <time className="mt-4 block text-sm text-slate-400">
             {new Date(study.publishedAt).toLocaleDateString('en-US', {
               dateStyle: 'long',
             })}

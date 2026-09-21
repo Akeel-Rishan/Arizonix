@@ -40,15 +40,21 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
+  const { slug } = await params;
   const service =
-    (await getServiceBySlug(params.slug).catch(() => null)) ??
-    staticService(params.slug);
-  if (!service) return { title: 'Service Not Found — Arizonix' };
+    (await getServiceBySlug(slug).catch(() => null)) ?? staticService(slug);
+  if (!service) return { title: 'Service Not Found' };
+  const rawTitle = (service.seo?.title ?? service.name).replace(
+    /\s*[|—-]\s*Arizonix$/i,
+    '',
+  );
+  const metadataTitle =
+    rawTitle.length > 47 ? `${rawTitle.slice(0, 44).trimEnd()}...` : rawTitle;
   return {
     alternates: { canonical: `https://arizonix.com/services/${service.slug}` },
-    title: `${service.seo?.title ?? service.name} | Arizonix`,
+    title: metadataTitle,
     description: service.seo?.description ?? service.shortDescription,
     openGraph: {
       title: service.seo?.title ?? service.name,
@@ -72,13 +78,14 @@ export async function generateMetadata({
 export default async function ServicePage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   const [cmsService, cmsServices] = await Promise.all([
-    getServiceBySlug(params.slug).catch(() => null),
+    getServiceBySlug(slug).catch(() => null),
     getServices().catch(() => []),
   ]);
-  const service = cmsService ?? staticService(params.slug);
+  const service = cmsService ?? staticService(slug);
   if (!service) notFound();
   const allServices: SanityService[] = cmsServices.length
     ? cmsServices
@@ -133,7 +140,7 @@ export default async function ServicePage({
     },
   ];
   return (
-    <main>
+    <div>
       <script
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(data).replace(/</g, '\\u003c'),
@@ -150,6 +157,6 @@ export default async function ServicePage({
       <ServiceFeatures serviceName={service.name} slug={service.slug} />
       <ServiceRelated allServices={allServices} currentSlug={service.slug} />
       <ServiceDetailCTA serviceName={service.name} />
-    </main>
+    </div>
   );
 }

@@ -7,7 +7,7 @@ import {
 import { LegalLayout } from '@/components/pages/legal/legal-layout';
 export const metadata: Metadata = {
   alternates: { canonical: 'https://arizonix.com/terms' },
-  title: 'Terms of Service — Arizonix',
+  title: 'Terms of Service',
   description: 'The terms governing use of the Arizonix website and services.',
   robots: { index: false, follow: false },
 };

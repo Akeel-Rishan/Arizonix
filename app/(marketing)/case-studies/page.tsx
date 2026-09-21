@@ -5,7 +5,7 @@ import { CaseStudiesHero } from '@/components/pages/case-studies/case-studies-he
 import { getCaseStudies } from '@/lib/sanity/fetch';
 export const metadata: Metadata = {
   alternates: { canonical: 'https://arizonix.com/case-studies' },
-  title: 'Case Studies — Deep Dive Into Our Work | Arizonix',
+  title: 'Software & AI Case Studies',
   description:
     'Detailed case studies showing how Arizonix solves complex business problems with software and AI. Read the full story behind each project.',
 };
@@ -31,13 +31,13 @@ export default async function CaseStudiesPage() {
     ],
   };
   return (
-    <main>
+    <div>
       <script
         dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
         type="application/ld+json"
       />
       <CaseStudiesHero />
       <CaseStudiesGrid caseStudies={studies} />
-    </main>
+    </div>
   );
 }

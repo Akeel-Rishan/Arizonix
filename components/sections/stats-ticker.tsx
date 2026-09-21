@@ -9,10 +9,9 @@ export interface StatsTickerProps {
 
 export function StatsTicker({ stats }: StatsTickerProps) {
   return (
-    <div
+    <section
       aria-label="Arizonix key statistics"
       className="mt-14 border-y border-white/10 bg-white/5 backdrop-blur-xl md:mt-16"
-      role="region"
     >
       <div className="mx-auto grid w-full max-w-7xl grid-cols-2 px-4 sm:px-6 md:grid-cols-4 lg:px-8">
         {stats.map((stat) => (
@@ -34,6 +33,6 @@ export function StatsTicker({ stats }: StatsTickerProps) {
           </dl>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

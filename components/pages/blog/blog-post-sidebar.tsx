@@ -43,7 +43,7 @@ export function BlogPostSidebar({
     <aside className="sticky top-24 space-y-6">
       {headings.length ? (
         <nav aria-label="Table of contents">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400">
             In this article
           </p>
           <ul className="space-y-2">
@@ -67,13 +67,13 @@ export function BlogPostSidebar({
       ) : null}
       <BlogPostAuthor author={post.author} avatarUrl={authorAvatarUrl} />
       <div>
-        <p className="mb-3 text-xs uppercase text-slate-500">
+        <p className="mb-3 text-xs uppercase text-slate-400">
           Share this article
         </p>
         <div className="flex gap-2">
           <button
             aria-label="Copy article link"
-            className="glass-panel flex size-9 items-center justify-center rounded-full"
+            className="glass-panel flex size-11 items-center justify-center rounded-full"
             onClick={() => navigator.clipboard.writeText(window.location.href)}
             type="button"
           >
@@ -81,13 +81,19 @@ export function BlogPostSidebar({
           </button>
           <a
             aria-label="Share on Twitter"
+            className="glass-panel flex size-11 items-center justify-center rounded-full"
             href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`}
+            rel="noopener noreferrer"
+            target="_blank"
           >
             <Twitter className="size-4" />
           </a>
           <a
             aria-label="Share on LinkedIn"
+            className="glass-panel flex size-11 items-center justify-center rounded-full"
             href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`}
+            rel="noopener noreferrer"
+            target="_blank"
           >
             <Linkedin className="size-4" />
           </a>
@@ -95,7 +101,7 @@ export function BlogPostSidebar({
       </div>
       {post.tags.length ? (
         <div>
-          <p className="mb-3 text-xs uppercase text-slate-500">Tags</p>
+          <p className="mb-3 text-xs uppercase text-slate-400">Tags</p>
           <div className="flex flex-wrap gap-2">
             {post.tags.map((tag) => (
               <span

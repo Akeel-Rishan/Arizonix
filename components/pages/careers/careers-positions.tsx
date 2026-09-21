@@ -67,18 +67,28 @@ export function CareersPositions() {
                     HOT ROLE
                   </Badge>
                 ) : null}
-                <button
+                <div
                   aria-controls={`${position.id}-details`}
                   aria-expanded={expanded}
                   className="w-full pr-20 text-left focus-visible:ring-2 focus-visible:ring-brand-cyan"
                   onClick={() => setOpen(expanded ? null : position.id)}
-                  type="button"
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault();
+                      setOpen(expanded ? null : position.id);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
                 >
                   <div className="flex flex-col justify-between gap-4 md:flex-row">
                     <div>
-                      <span className="block text-lg font-bold text-white">
+                      <h3
+                        className="text-lg font-bold text-white"
+                        id={`${position.id}-heading`}
+                      >
                         {position.title}
-                      </span>
+                      </h3>
                       <div className="mt-2 flex flex-wrap gap-2">
                         {[
                           position.department,
@@ -106,7 +116,7 @@ export function CareersPositions() {
                         <MapPin className="size-4" />
                         Remote
                       </span>
-                      <time className="mt-1 block text-xs text-slate-500">
+                      <time className="mt-1 block text-xs text-slate-400">
                         Posted{' '}
                         {new Intl.DateTimeFormat('en-US', {
                           month: 'short',
@@ -121,7 +131,7 @@ export function CareersPositions() {
                       />
                     </span>
                   </div>
-                </button>
+                </div>
                 <AnimatePresence initial={false}>
                   {expanded ? (
                     <motion.div
@@ -130,6 +140,7 @@ export function CareersPositions() {
                       exit={{ height: 0, opacity: 0 }}
                       id={`${position.id}-details`}
                       initial={{ height: 0, opacity: 0 }}
+                      aria-labelledby={`${position.id}-heading`}
                       role="region"
                     >
                       <div className="grid gap-8 border-t border-white/10 pt-6 md:grid-cols-3">
@@ -182,7 +193,7 @@ export function CareersPositions() {
                           >
                             Apply Now
                           </Button>
-                          <p className="mt-3 text-xs text-slate-500">
+                          <p className="mt-3 text-xs text-slate-400">
                             Applications are reviewed within 5 business days.
                           </p>
                         </aside>

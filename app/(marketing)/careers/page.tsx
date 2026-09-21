@@ -8,7 +8,7 @@ import { CareersPositions } from '@/components/pages/careers/careers-positions';
 import { openPositions } from '@/lib/careers-data';
 export const metadata: Metadata = {
   alternates: { canonical: 'https://arizonix.com/careers' },
-  title: 'Careers at Arizonix — Join Our Engineering Team',
+  title: 'Careers: Join Our Engineering Team',
   description:
     'Join Arizonix — a remote-first AI and software engineering company building world-class products for ambitious businesses.',
   openGraph: {
@@ -47,7 +47,7 @@ export default function CareersPage() {
     })),
   ];
   return (
-    <main>
+    <div>
       {schema.map((item, index) => (
         <script
           dangerouslySetInnerHTML={{ __html: JSON.stringify(item) }}
@@ -60,6 +60,6 @@ export default function CareersPage() {
       <CareersBenefits />
       <CareersPositions />
       <CareersCTA />
-    </main>
+    </div>
   );
 }

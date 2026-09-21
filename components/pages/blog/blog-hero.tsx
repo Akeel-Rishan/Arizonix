@@ -31,7 +31,7 @@ export function BlogHero({
           animate={{ opacity: 1, x: 0 }}
           initial={{ opacity: 0, x: -24 }}
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">
             Arizonix Blog
           </p>
           <h1 className="mt-4 text-4xl font-bold text-white md:text-5xl">
@@ -43,7 +43,7 @@ export function BlogHero({
             Practical guides, technical deep-dives, and industry analysis from
             the engineers and AI specialists at Arizonix.
           </p>
-          <p className="mt-3 text-sm text-slate-500">
+          <p className="mt-3 text-sm text-slate-400">
             Publishing {postCount}+ articles on AI, engineering, and technology.
           </p>
           <p className="mb-2 mt-6 text-sm text-slate-400">
@@ -68,7 +68,10 @@ export function BlogHero({
           initial={{ opacity: 0, x: 24 }}
         >
           {featuredPost ? (
-            <BlogCard post={featuredPost} variant="large" />
+            <>
+              <h2 className="sr-only">Featured article</h2>
+              <BlogCard post={featuredPost} variant="large" />
+            </>
           ) : (
             <div className="glass-panel flex min-h-[340px] items-center justify-center rounded-xl2 bg-gradient-to-br from-brand-blue/20 to-brand-purple/20 text-xl font-bold text-white">
               First article coming soon

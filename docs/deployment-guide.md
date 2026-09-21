@@ -2,7 +2,7 @@
 
 ## Architecture Overview
 
-- Frontend: Next.js 14 App Router on Vercel
+- Frontend: Next.js 15 App Router on Vercel
 - CMS: Sanity hosted CMS, CDN reads
 - Email: Resend
 - Rate limiting/storage: Upstash Redis
@@ -64,6 +64,10 @@ Create a Sanity webhook:
 - Method: `POST`
 - Dataset: `production`
 - Trigger: create, update, delete
+
+## Protecting `/studio` in production
+
+Set strong `STUDIO_USERNAME` and `STUDIO_PASSWORD` server-side environment variables. Edge middleware protects every `/studio` route with HTTP Basic authentication and fails closed if the variables are absent. Also enable Vercel Deployment Protection or an identity-aware proxy when available.
 
 ## Rollback
 

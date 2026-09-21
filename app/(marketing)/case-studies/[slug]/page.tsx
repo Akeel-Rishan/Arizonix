@@ -19,15 +19,22 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const study = await getCaseStudyBySlug(params.slug).catch(() => null);
-  if (!study) return { title: 'Case Study Not Found — Arizonix' };
+  const { slug } = await params;
+  const study = await getCaseStudyBySlug(slug).catch(() => null);
+  if (!study) return { title: 'Case Study Not Found' };
+  const rawTitle = (study.seo?.title ?? study.title).replace(
+    /\s*[|—-]\s*Arizonix$/i,
+    '',
+  );
+  const metadataTitle =
+    rawTitle.length > 47 ? `${rawTitle.slice(0, 44).trimEnd()}...` : rawTitle;
   return {
     alternates: {
       canonical: `https://arizonix.com/case-studies/${study.slug}`,
     },
-    title: `${study.seo?.title ?? study.title} | Arizonix`,
+    title: metadataTitle,
     description: study.seo?.description ?? study.summary,
     openGraph: {
       title: study.title,
@@ -43,10 +50,11 @@ export async function generateMetadata({
 export default async function CaseStudyPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   const [study, all] = await Promise.all([
-    getCaseStudyBySlug(params.slug).catch(() => null),
+    getCaseStudyBySlug(slug).catch(() => null),
     getCaseStudies().catch(() => []),
   ]);
   if (!study) notFound();
@@ -93,7 +101,7 @@ export default async function CaseStudyPage({
     },
   ];
   return (
-    <main>
+    <div>
       <script
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(schema).replace(/</g, '\\u003c'),
@@ -137,6 +145,6 @@ export default async function CaseStudyPage({
         </section>
       ) : null}
       <CaseStudyCTA clientName={study.client} />
-    </main>
+    </div>
   );
 }

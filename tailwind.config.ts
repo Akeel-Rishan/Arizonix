@@ -29,9 +29,9 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          blue: '#2563FF',
-          purple: '#7C3AED',
-          cyan: '#06B6D4',
+          blue: '#3B82F6',
+          purple: '#A78BFA',
+          cyan: '#22D3EE',
         },
         navy: {
           50: '#F5F7FF',

@@ -1,11 +1,13 @@
+export const IS_DEV = process.env.NODE_ENV === 'development';
+
 export const ANIMATION = {
   duration: {
-    instant: 0.1,
-    fast: 0.2,
-    normal: 0.35,
-    slow: 0.5,
-    verySlow: 0.8,
-    pageTransition: 0.4,
+    instant: IS_DEV ? 0 : 0.1,
+    fast: IS_DEV ? 0 : 0.2,
+    normal: IS_DEV ? 0.1 : 0.35,
+    slow: IS_DEV ? 0.15 : 0.5,
+    verySlow: IS_DEV ? 0.2 : 0.8,
+    pageTransition: IS_DEV ? 0 : 0.15,
   },
   easing: {
     smooth: [0.25, 0.1, 0.25, 1] as const,

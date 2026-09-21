@@ -1,8 +1,7 @@
 'use client';
 
 import { TrendingUp } from 'lucide-react';
-import { memo } from 'react';
-import { useState } from 'react';
+import { memo, useCallback, useRef, useState } from 'react';
 
 import { Section } from '@/components/ui/section';
 import { SectionHeading } from '@/components/ui/section-heading';
@@ -197,7 +196,24 @@ const UseCaseCard = memo(function UseCaseCard({ item }: { item: UseCase }) {
 
 export function AIUseCasesTabs() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const active = cases[activeIndex];
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+      let nextIndex = index;
+      if (event.key === 'ArrowRight') nextIndex = (index + 1) % cases.length;
+      else if (event.key === 'ArrowLeft')
+        nextIndex = (index - 1 + cases.length) % cases.length;
+      else if (event.key === 'Home') nextIndex = 0;
+      else if (event.key === 'End') nextIndex = cases.length - 1;
+      else return;
+
+      event.preventDefault();
+      setActiveIndex(nextIndex);
+      tabRefs.current[nextIndex]?.focus();
+    },
+    [],
+  );
   return (
     <Section id="use-cases">
       <div className="container mx-auto px-4">
@@ -220,17 +236,24 @@ export function AIUseCasesTabs() {
             const Icon = getIcon(item.icon);
             return (
               <button
+                aria-controls={`ai-use-case-panel-${index}`}
                 aria-selected={index === activeIndex}
                 className={cn(
                   'glass-panel flex min-h-11 shrink-0 items-center gap-2 rounded-full px-4 text-sm text-slate-300 focus-visible:ring-2 focus-visible:ring-brand-cyan',
                   index === activeIndex && 'gradient-border text-white',
                 )}
+                id={`ai-use-case-tab-${index}`}
                 key={item.industry}
                 onClick={() => setActiveIndex(index)}
+                onKeyDown={(event) => handleKeyDown(event, index)}
+                ref={(node) => {
+                  tabRefs.current[index] = node;
+                }}
                 role="tab"
+                tabIndex={index === activeIndex ? 0 : -1}
                 type="button"
               >
-                <Icon className="size-4" />
+                <Icon aria-hidden="true" className="size-4" />
                 {item.industry}
               </button>
             );
@@ -238,12 +261,15 @@ export function AIUseCasesTabs() {
         </div>
         <AnimatePresence mode="wait">
           <motion.div
+            aria-labelledby={`ai-use-case-tab-${activeIndex}`}
             animate={{ opacity: 1, y: 0 }}
             className="mt-6 grid gap-6 md:grid-cols-3"
             exit={{ opacity: 0, y: 8 }}
+            id={`ai-use-case-panel-${activeIndex}`}
             initial={{ opacity: 0, y: 8 }}
             key={active.industry}
             role="tabpanel"
+            tabIndex={0}
           >
             {active.useCases.map((item) => (
               <UseCaseCard item={item} key={item.title} />

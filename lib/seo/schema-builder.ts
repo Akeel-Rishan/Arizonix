@@ -20,7 +20,6 @@ export function buildOrganizationSchema(): object {
     image: { '@type': 'ImageObject', url: SEO_CONFIG.organization.image },
     description: SEO_CONFIG.siteDescription,
     email: SEO_CONFIG.organization.email,
-    telephone: SEO_CONFIG.organization.telephone,
     address: { '@type': 'PostalAddress', ...SEO_CONFIG.organization.address },
     foundingDate: SEO_CONFIG.organization.foundingDate,
     sameAs: SEO_CONFIG.socialProfiles,
@@ -220,7 +219,6 @@ export function buildLocalBusinessSchema(): object {
     name: SEO_CONFIG.organization.name,
     image: SEO_CONFIG.organization.image,
     url: SEO_CONFIG.siteUrl,
-    telephone: SEO_CONFIG.organization.telephone,
     email: SEO_CONFIG.organization.email,
     address: { '@type': 'PostalAddress', addressCountry: 'US' },
     openingHoursSpecification: {

@@ -31,11 +31,13 @@ import type {
   SanityTeamMember,
 } from '@/lib/sanity/types';
 
+const REVALIDATE_SECONDS = process.env.NODE_ENV === 'development' ? 60 : 3600;
+
 export async function getServices(): Promise<SanityService[]> {
   return client.fetch<SanityService[]>(
     servicesQuery,
     {},
-    { next: { tags: ['services'], revalidate: 3600 } },
+    { next: { tags: ['services'], revalidate: REVALIDATE_SECONDS } },
   );
 }
 
@@ -43,7 +45,7 @@ export async function getFeaturedServices(): Promise<SanityService[]> {
   return client.fetch<SanityService[]>(
     featuredServicesQuery,
     {},
-    { next: { tags: ['services'], revalidate: 3600 } },
+    { next: { tags: ['services'], revalidate: REVALIDATE_SECONDS } },
   );
 }
 
@@ -53,7 +55,7 @@ export async function getPortfolioProjects(): Promise<
   return client.fetch<SanityPortfolioProject[]>(
     portfolioProjectsQuery,
     {},
-    { next: { tags: ['portfolio'], revalidate: 3600 } },
+    { next: { tags: ['portfolio'], revalidate: REVALIDATE_SECONDS } },
   );
 }
 
@@ -61,7 +63,7 @@ export async function getCaseStudies(): Promise<SanityCaseStudy[]> {
   return client.fetch<SanityCaseStudy[]>(
     caseStudiesQuery,
     {},
-    { next: { tags: ['case-studies'], revalidate: 3600 } },
+    { next: { tags: ['case-studies'], revalidate: REVALIDATE_SECONDS } },
   );
 }
 
@@ -71,7 +73,9 @@ export async function getCaseStudyBySlug(
   return client.fetch<SanityCaseStudyFull | null>(
     caseStudyBySlugQuery,
     { slug },
-    { next: { tags: ['case-studies'], revalidate: 3600 } },
+    {
+      next: { tags: ['case-studies'], revalidate: REVALIDATE_SECONDS },
+    },
   );
 }
 
@@ -79,7 +83,7 @@ export async function getFeaturedProjects(): Promise<SanityPortfolioProject[]> {
   return client.fetch<SanityPortfolioProject[]>(
     featuredProjectsQuery,
     {},
-    { next: { tags: ['portfolio'], revalidate: 3600 } },
+    { next: { tags: ['portfolio'], revalidate: REVALIDATE_SECONDS } },
   );
 }
 
@@ -87,7 +91,7 @@ export async function getTestimonials(): Promise<SanityTestimonial[]> {
   return client.fetch<SanityTestimonial[]>(
     testimonialsQuery,
     {},
-    { next: { tags: ['testimonials'], revalidate: 3600 } },
+    { next: { tags: ['testimonials'], revalidate: REVALIDATE_SECONDS } },
   );
 }
 
@@ -95,7 +99,7 @@ export async function getTeamMembers(): Promise<SanityTeamMember[]> {
   return client.fetch<SanityTeamMember[]>(
     teamMembersQuery,
     {},
-    { next: { tags: ['team'], revalidate: 3600 } },
+    { next: { tags: ['team'], revalidate: REVALIDATE_SECONDS } },
   );
 }
 
@@ -103,7 +107,7 @@ export async function getFAQItems(): Promise<SanityFAQItem[]> {
   return client.fetch<SanityFAQItem[]>(
     faqItemsQuery,
     {},
-    { next: { tags: ['faq'], revalidate: 3600 } },
+    { next: { tags: ['faq'], revalidate: REVALIDATE_SECONDS } },
   );
 }
 
@@ -111,7 +115,7 @@ export async function getIndustries(): Promise<SanityIndustry[]> {
   return client.fetch<SanityIndustry[]>(
     industriesQuery,
     {},
-    { next: { tags: ['industries'], revalidate: 3600 } },
+    { next: { tags: ['industries'], revalidate: REVALIDATE_SECONDS } },
   );
 }
 
@@ -121,7 +125,7 @@ export async function getIndustryBySlug(
   return client.fetch<SanityIndustry | null>(
     industryBySlugQuery,
     { slug },
-    { next: { tags: ['industries'], revalidate: 3600 } },
+    { next: { tags: ['industries'], revalidate: REVALIDATE_SECONDS } },
   );
 }
 
@@ -129,7 +133,7 @@ export async function getFeaturedBlogPosts(): Promise<SanityBlogPost[]> {
   return client.fetch<SanityBlogPost[]>(
     featuredBlogPostsQuery,
     {},
-    { next: { tags: ['blog'], revalidate: 3600 } },
+    { next: { tags: ['blog'], revalidate: REVALIDATE_SECONDS } },
   );
 }
 
@@ -137,7 +141,7 @@ export async function getBlogPosts(): Promise<SanityBlogPost[]> {
   return client.fetch<SanityBlogPost[]>(
     blogPostsQuery,
     {},
-    { next: { tags: ['blog'], revalidate: 3600 } },
+    { next: { tags: ['blog'], revalidate: REVALIDATE_SECONDS } },
   );
 }
 
@@ -145,7 +149,7 @@ export async function getSiteSettings(): Promise<SanitySiteSettings | null> {
   return client.fetch<SanitySiteSettings | null>(
     siteSettingsQuery,
     {},
-    { next: { tags: ['settings'], revalidate: 3600 } },
+    { next: { tags: ['settings'], revalidate: REVALIDATE_SECONDS } },
   );
 }
 
@@ -155,7 +159,7 @@ export async function getServiceBySlug(
   return client.fetch<SanityService | null>(
     serviceBySlugQuery,
     { slug },
-    { next: { tags: ['services'], revalidate: 3600 } },
+    { next: { tags: ['services'], revalidate: REVALIDATE_SECONDS } },
   );
 }
 
@@ -167,7 +171,7 @@ export async function getProjectBySlug(
     {
       slug,
     },
-    { next: { tags: ['portfolio'], revalidate: 3600 } },
+    { next: { tags: ['portfolio'], revalidate: REVALIDATE_SECONDS } },
   );
 }
 
@@ -177,6 +181,6 @@ export async function getBlogPostBySlug(
   return client.fetch<SanityBlogPost | null>(
     blogPostBySlugQuery,
     { slug },
-    { next: { tags: ['blog'], revalidate: 3600 } },
+    { next: { tags: ['blog'], revalidate: REVALIDATE_SECONDS } },
   );
 }

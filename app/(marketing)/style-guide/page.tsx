@@ -108,7 +108,7 @@ function ColorGrid({ swatches }: { swatches: readonly Swatch[] }) {
 
 export default function StyleGuidePage() {
   return (
-    <main className="min-h-screen overflow-hidden">
+    <div className="min-h-screen overflow-hidden">
       <div className="aurora-bg border-b border-white/10">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-brand-cyan">
@@ -356,6 +356,6 @@ export default function StyleGuidePage() {
           </div>
         </Container>
       </Section>
-    </main>
+    </div>
   );
 }

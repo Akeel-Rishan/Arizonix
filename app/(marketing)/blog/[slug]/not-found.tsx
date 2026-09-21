@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 export default function BlogNotFound() {
   return (
-    <main className="flex min-h-screen items-center justify-center px-4 text-center">
+    <div className="flex min-h-screen items-center justify-center px-4 text-center">
       <div>
         <p className="text-sm font-semibold text-brand-cyan">404</p>
         <h1 className="mt-3 text-4xl font-bold text-white">
@@ -17,6 +17,6 @@ export default function BlogNotFound() {
           </Button>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

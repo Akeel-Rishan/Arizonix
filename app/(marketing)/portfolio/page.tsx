@@ -10,7 +10,7 @@ import { getPortfolioProjects } from '@/lib/sanity/fetch';
 import { sanityImage } from '@/lib/sanity/image';
 export const metadata: Metadata = {
   alternates: { canonical: 'https://arizonix.com/portfolio' },
-  title: 'Portfolio — Real Projects, Real Results | Arizonix',
+  title: 'Software & AI Portfolio',
   description:
     "Explore Arizonix's portfolio of enterprise software, AI automation, mobile applications, and web platforms. Each project measured by the business outcomes it delivered.",
   openGraph: {
@@ -76,7 +76,7 @@ export default async function PortfolioPage() {
     },
   ];
   return (
-    <main>
+    <div>
       <script
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(data).replace(/</g, '\\u003c'),
@@ -86,6 +86,6 @@ export default async function PortfolioPage() {
       <PortfolioHero />
       <PortfolioGrid projects={projects} />
       <PortfolioCTA />
-    </main>
+    </div>
   );
 }

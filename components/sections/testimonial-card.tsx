@@ -38,6 +38,7 @@ export function StarRating({
     <span
       aria-label={`${rating} out of 5 stars`}
       className="flex items-center gap-1"
+      role="img"
     >
       {Array.from({ length: 5 }, (_, index) => (
         <Star
@@ -96,7 +97,7 @@ export function TestimonialCard({
       <span className="mt-3 block">
         <StarRating rating={testimonial.rating} small />
       </span>
-      <span className="mt-3 line-clamp-3 block text-xs leading-5 text-slate-500">
+      <span className="mt-3 line-clamp-3 block text-xs leading-5 text-slate-400">
         {quoteExcerpt}
       </span>
     </button>

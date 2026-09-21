@@ -51,7 +51,7 @@ export function ProjectDetailHero({
         <nav aria-label="Breadcrumb">
           <ol className="flex gap-2 text-sm">
             <li>
-              <Link className="text-slate-500" href="/portfolio">
+              <Link className="text-slate-400" href="/portfolio">
                 Portfolio
               </Link>
             </li>
@@ -89,7 +89,7 @@ export function ProjectDetailHero({
             Read more ↓
           </a>
         </p>
-        <p className="mt-4 text-xs text-slate-500">
+        <p className="mt-4 text-xs text-slate-400">
           Challenge → Solution → Results → Launch
         </p>
       </motion.div>
