@@ -25,7 +25,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "img-src 'self' data: blob: https://cdn.sanity.io",
       "font-src 'self' https://fonts.gstatic.com",
-      "connect-src 'self' https://*.sanity.io https://api.resend.com https://*.upstash.io https://www.google-analytics.com https://*.ingest.sentry.io wss://*.sanity.io",
+      "connect-src 'self' https://*.sanity.io https://sanity-cdn.com https://api.resend.com https://*.upstash.io https://www.google-analytics.com https://*.ingest.sentry.io wss://*.sanity.io",
       "frame-ancestors 'self'",
     ].join('; '),
   },
