@@ -1,8 +1,6 @@
 import Link from 'next/link';
 
 import { ServiceIcon } from '@/components/layout/service-icon';
-import { motion } from '@/lib/framer-motion';
-import { scaleIn } from '@/lib/motion';
 import { getServiceHref, type Service } from '@/lib/services-data';
 
 interface ServicesMegaMenuProps {
@@ -15,14 +13,10 @@ export function ServicesMegaMenu({
   services,
 }: ServicesMegaMenuProps) {
   return (
-    <div className="fixed left-1/2 top-[4.75rem] w-[min(60rem,calc(100vw-3rem))] -translate-x-1/2">
-      <motion.div
-        animate="visible"
-        className="glass-panel overflow-hidden bg-navy-950/90 p-3 shadow-glow-purple"
-        exit="exit"
-        initial="hidden"
+    <div className="fixed left-1/2 top-[4.75rem] z-20 w-[min(60rem,calc(100vw-3rem))] -translate-x-1/2">
+      <div
+        className="overflow-hidden rounded-xl2 border border-white/15 bg-navy-950 p-3 shadow-2xl shadow-navy-950/70"
         role="menu"
-        variants={scaleIn}
       >
         <div className="grid grid-cols-2 gap-1 xl:grid-cols-3">
           {services.map((service) => (
@@ -47,7 +41,7 @@ export function ServicesMegaMenu({
             </Link>
           ))}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

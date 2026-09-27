@@ -13,14 +13,9 @@ const CookieConsent = dynamic(
     ),
   { ssr: false },
 );
-const CursorGlow = dynamic(() => import('@/components/ui/cursor-glow'), {
-  ssr: false,
-});
-
 export function ClientEffects() {
   return (
     <>
-      <CursorGlow />
       <CookieConsent />
       <AnalyticsProvider />
       <PerformanceObserver />

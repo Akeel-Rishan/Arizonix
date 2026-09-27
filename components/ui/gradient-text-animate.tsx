@@ -1,7 +1,5 @@
-'use client';
 import type { ReactNode } from 'react';
 
-import { useReducedMotion } from '@/lib/framer-motion';
 import { cn } from '@/lib/utils';
 export function GradientTextAnimate({
   children,
@@ -12,13 +10,9 @@ export function GradientTextAnimate({
   className?: string;
   shimmer?: boolean;
 }) {
-  const reduced = useReducedMotion();
   return (
     <span
-      className={cn(
-        reduced || !shimmer ? 'text-gradient' : 'shimmer-gradient',
-        className,
-      )}
+      className={cn(shimmer ? 'shimmer-gradient' : 'text-gradient', className)}
     >
       {children}
     </span>

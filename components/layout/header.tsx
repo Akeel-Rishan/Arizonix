@@ -9,8 +9,6 @@ import { useEffect, useRef, useState } from 'react';
 import { MobileNav } from '@/components/layout/mobile-nav';
 import { navigation } from '@/components/layout/nav-data';
 import { ServicesMegaMenu } from '@/components/layout/services-mega-menu';
-import { MagneticButton } from '@/components/ui/magnetic-button';
-import { AnimatePresence, motion } from '@/lib/framer-motion';
 import { cn } from '@/lib/utils';
 
 const focusStyles =
@@ -85,13 +83,15 @@ export function Header() {
     <header
       className={cn(
         'fixed inset-x-0 top-0 z-50 h-20 border-b border-transparent transition-[background-color,border-color,box-shadow] duration-300',
-        (isScrolled || isMobileOpen) &&
-          'border-white/10 bg-navy-950/80 shadow-lg shadow-navy-950/20 backdrop-blur-xl',
+        isServicesOpen
+          ? 'border-white/10 bg-navy-950 shadow-lg shadow-navy-950/20'
+          : (isScrolled || isMobileOpen) &&
+              'border-white/10 bg-navy-950/80 shadow-lg shadow-navy-950/20 backdrop-blur-xl',
       )}
       data-scrolled={isScrolled}
       ref={headerRef}
     >
-      <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-4 px-5 sm:px-8 lg:px-6 xl:px-8">
+      <div className="relative z-20 mx-auto flex h-full max-w-7xl items-center justify-between gap-4 px-5 sm:px-8 lg:px-6 xl:px-8">
         <Link
           aria-label="Arizonix home"
           className={cn(
@@ -152,16 +152,14 @@ export function Header() {
                   />
                 </button>
 
-                <AnimatePresence>
-                  {isServicesOpen ? (
-                    <div id="services-mega-menu">
-                      <ServicesMegaMenu
-                        onNavigate={closeDesktopMenu}
-                        services={item.services}
-                      />
-                    </div>
-                  ) : null}
-                </AnimatePresence>
+                {isServicesOpen ? (
+                  <div id="services-mega-menu">
+                    <ServicesMegaMenu
+                      onNavigate={closeDesktopMenu}
+                      services={item.services}
+                    />
+                  </div>
+                ) : null}
               </div>
             ) : (
               <Link
@@ -180,18 +178,16 @@ export function Header() {
         </nav>
 
         <div className="hidden shrink-0 lg:block">
-          <MagneticButton>
-            <Link
-              className={cn(
-                'flex min-h-11 items-center justify-center rounded-xl bg-gradient-to-r from-brand-blue via-brand-purple to-brand-cyan px-4 py-2.5 text-sm font-semibold text-white shadow-glow-blue transition duration-200 hover:brightness-110 xl:px-5',
-                focusStyles,
-              )}
-              href="/contact"
-              onClick={closeDesktopMenu}
-            >
-              Schedule a Call
-            </Link>
-          </MagneticButton>
+          <Link
+            className={cn(
+              'flex min-h-11 items-center justify-center rounded-xl bg-gradient-to-r from-brand-blue via-brand-purple to-brand-cyan px-4 py-2.5 text-sm font-semibold text-white shadow-glow-blue transition duration-200 hover:brightness-110 xl:px-5',
+              focusStyles,
+            )}
+            href="/contact"
+            onClick={closeDesktopMenu}
+          >
+            Schedule a Call
+          </Link>
         </div>
 
         <button
@@ -205,23 +201,21 @@ export function Header() {
           onClick={() => setIsMobileOpen((isOpen) => !isOpen)}
           type="button"
         >
-          <AnimatePresence initial={false} mode="wait">
-            <motion.span
-              animate={{ opacity: 1, rotate: 0 }}
-              exit={{ opacity: 0, rotate: 90 }}
-              initial={{ opacity: 0, rotate: -90 }}
-              key={isMobileOpen ? 'close' : 'open'}
-              transition={{ duration: 0.15 }}
-            >
-              {isMobileOpen ? (
-                <X aria-hidden="true" className="size-5" />
-              ) : (
-                <Menu aria-hidden="true" className="size-5" />
-              )}
-            </motion.span>
-          </AnimatePresence>
+          {isMobileOpen ? (
+            <X aria-hidden="true" className="size-5" />
+          ) : (
+            <Menu aria-hidden="true" className="size-5" />
+          )}
         </button>
       </div>
+
+      {isServicesOpen ? (
+        <div
+          aria-hidden="true"
+          className="fixed inset-x-0 bottom-0 top-20 z-10 hidden bg-navy-950/70 backdrop-blur-sm lg:block"
+          onClick={closeDesktopMenu}
+        />
+      ) : null}
 
       <div id="mobile-navigation">
         <MobileNav

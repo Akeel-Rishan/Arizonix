@@ -3,15 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --brand-blue: #3B82F6;
-  --brand-purple: #A78BFA;
-  --brand-cyan: #22D3EE;
-  --navy-950: #0A0A12;
+  --brand-blue: #3b82f6;
+  --brand-purple: #a78bfa;
+  --brand-cyan: #22d3ee;
+  --navy-950: #0a0a12;
 }
 
 /* Base typography and dark-first theme */
 @layer base {
-  html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+  }
   :focus-visible {
     outline: 2px solid theme('colors.brand.blue');
     outline-offset: 2px;
@@ -19,7 +22,11 @@
   }
   body {
     @apply bg-navy-950 font-sans text-slate-200 antialiased;
-    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family:
+      var(--font-inter),
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
   }
 
   h1 {
@@ -35,13 +42,54 @@
   }
 }
 
-@keyframes shimmer-gradient { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
-@keyframes skeleton-sweep { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+@keyframes shimmer-gradient {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+@keyframes skeleton-sweep {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
 @layer utilities {
-  .shimmer-gradient { background-image: linear-gradient(90deg, theme('colors.brand.blue') 0%, theme('colors.brand.purple') 25%, white 50%, theme('colors.brand.purple') 75%, theme('colors.brand.cyan') 100%); background-size: 200% auto; animation: shimmer-gradient 4s linear infinite; background-clip: text; color: transparent; }
-  .noise-texture { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E"); mix-blend-mode: soft-light; }
-  .skeleton-shimmer { background-image: linear-gradient(90deg, rgb(255 255 255 / .03), rgb(255 255 255 / .1), rgb(255 255 255 / .03)); background-size: 200% 100%; animation: skeleton-sweep 1.8s ease-in-out infinite; }
-  .glass-panel-hover { @apply transition duration-300 hover:-translate-y-1 hover:border-brand-cyan/30 hover:bg-white/10 hover:shadow-glow-blue; }
+  .shimmer-gradient {
+    background-image: linear-gradient(
+      90deg,
+      theme('colors.brand.blue') 0%,
+      theme('colors.brand.purple') 25%,
+      white 50%,
+      theme('colors.brand.purple') 75%,
+      theme('colors.brand.cyan') 100%
+    );
+    background-size: 200% auto;
+    animation: shimmer-gradient 4s linear infinite;
+    background-clip: text;
+    color: transparent;
+  }
+  .noise-texture {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+    mix-blend-mode: soft-light;
+  }
+  .skeleton-shimmer {
+    background-image: linear-gradient(
+      90deg,
+      rgb(255 255 255 / 0.03),
+      rgb(255 255 255 / 0.1),
+      rgb(255 255 255 / 0.03)
+    );
+    background-size: 200% 100%;
+    animation: skeleton-sweep 1.8s ease-in-out infinite;
+  }
+  .glass-panel-hover {
+    @apply transition duration-300 hover:-translate-y-1 hover:border-brand-cyan/30 hover:bg-white/10 hover:shadow-glow-blue;
+  }
 }
 html[data-reduce-motion='true'] *,
 html[data-reduce-motion='true'] *::before,
@@ -63,33 +111,87 @@ html[data-reduce-motion='true'] *::after {
 }
 
 @layer components {
-  .cms-prose p { @apply mb-4 text-base leading-relaxed text-slate-300; }
-  .cms-prose h2 { @apply mb-4 mt-10 text-2xl font-bold text-white; }
-  .cms-prose h3 { @apply mb-3 mt-8 text-xl font-semibold text-white; }
-  .cms-prose h4 { @apply mb-2 mt-6 text-lg font-medium text-slate-200; }
-  .cms-prose blockquote { @apply my-6 border-l-4 border-brand-blue pl-6 italic text-slate-400; }
-  .cms-prose strong { @apply font-semibold text-white; }
-  .cms-prose a { @apply text-brand-blue underline transition-colors hover:text-brand-cyan; }
-  .cms-prose ul { @apply my-4 list-disc space-y-2 pl-6 text-slate-300; }
-  .cms-prose ol { @apply my-4 list-decimal space-y-2 pl-6 text-slate-300; }
-  .cms-prose img { @apply my-8 rounded-xl; }
-  .cms-prose pre { @apply my-6 overflow-x-auto rounded-xl border border-white/10 bg-navy-900 p-6; }
-  .cms-prose code { @apply font-mono text-sm text-brand-cyan; }
-  .blog-prose p { @apply mb-6 text-lg leading-8; }
-  .blog-prose h2 { @apply scroll-mt-28 border-l-2 border-brand-blue pl-4; }
-  .blog-prose h3 { @apply scroll-mt-28; }
-  .blog-prose blockquote { @apply glass-panel my-10 rounded-xl border-l-4 border-brand-blue px-8 py-6 text-xl italic text-slate-200; }
-  .blog-prose figure { @apply my-10; }
-  .blog-prose pre { @apply relative bg-navy-900; }
-  .blog-prose .hljs-keyword, .blog-prose .hljs-selector-tag { @apply text-brand-purple; }
-  .blog-prose .hljs-string, .blog-prose .hljs-attr { @apply text-brand-cyan; }
-  .blog-prose .hljs-number, .blog-prose .hljs-literal { @apply text-brand-blue; }
-  .blog-prose .hljs-comment { @apply text-slate-400; }
-  .legal-prose h2 { @apply scroll-mt-28 text-xl; }
+  .cms-prose p {
+    @apply mb-4 text-base leading-relaxed text-slate-300;
+  }
+  .cms-prose h2 {
+    @apply mb-4 mt-10 text-2xl font-bold text-white;
+  }
+  .cms-prose h3 {
+    @apply mb-3 mt-8 text-xl font-semibold text-white;
+  }
+  .cms-prose h4 {
+    @apply mb-2 mt-6 text-lg font-medium text-slate-200;
+  }
+  .cms-prose blockquote {
+    @apply my-6 border-l-4 border-brand-blue pl-6 italic text-slate-400;
+  }
+  .cms-prose strong {
+    @apply font-semibold text-white;
+  }
+  .cms-prose a {
+    @apply text-brand-blue underline transition-colors hover:text-brand-cyan;
+  }
+  .cms-prose ul {
+    @apply my-4 list-disc space-y-2 pl-6 text-slate-300;
+  }
+  .cms-prose ol {
+    @apply my-4 list-decimal space-y-2 pl-6 text-slate-300;
+  }
+  .cms-prose img {
+    @apply my-8 rounded-xl;
+  }
+  .cms-prose pre {
+    @apply my-6 overflow-x-auto rounded-xl border border-white/10 bg-navy-900 p-6;
+  }
+  .cms-prose code {
+    @apply font-mono text-sm text-brand-cyan;
+  }
+  .blog-prose p {
+    @apply mb-6 text-lg leading-8;
+  }
+  .blog-prose h2 {
+    @apply scroll-mt-28 border-l-2 border-brand-blue pl-4;
+  }
+  .blog-prose h3 {
+    @apply scroll-mt-28;
+  }
+  .blog-prose blockquote {
+    @apply glass-panel my-10 rounded-xl border-l-4 border-brand-blue px-8 py-6 text-xl italic text-slate-200;
+  }
+  .blog-prose figure {
+    @apply my-10;
+  }
+  .blog-prose pre {
+    @apply relative bg-navy-900;
+  }
+  .blog-prose .hljs-keyword,
+  .blog-prose .hljs-selector-tag {
+    @apply text-brand-purple;
+  }
+  .blog-prose .hljs-string,
+  .blog-prose .hljs-attr {
+    @apply text-brand-cyan;
+  }
+  .blog-prose .hljs-number,
+  .blog-prose .hljs-literal {
+    @apply text-brand-blue;
+  }
+  .blog-prose .hljs-comment {
+    @apply text-slate-400;
+  }
+  .legal-prose h2 {
+    @apply scroll-mt-28 text-xl;
+  }
 }
 
 /* Reusable visual utilities */
 @layer utilities {
+  .content-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
+  }
+
   .glass-panel {
     @apply rounded-xl2 border border-white/20 bg-white/5 backdrop-blur-xl;
   }

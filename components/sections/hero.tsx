@@ -1,22 +1,12 @@
-'use client';
-
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 import { HeroBackgroundOrbs } from '@/components/sections/hero-background-orbs';
 import { HeroMockup } from '@/components/sections/hero-mockup';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
 import { GradientTextAnimate } from '@/components/ui/gradient-text-animate';
-import { MagneticButton } from '@/components/ui/magnetic-button';
 import { Section } from '@/components/ui/section';
-import { motion, useReducedMotion } from '@/lib/framer-motion';
-import {
-  blurIn,
-  fadeInUp,
-  premiumScaleIn,
-  staggerContainer,
-} from '@/lib/motion';
 
 const HERO_EYEBROW = 'AI-Powered Software Engineering';
 const HERO_DESCRIPTION =
@@ -31,24 +21,17 @@ const TRUST_MARKS = [
 ] as const;
 
 export function Hero() {
-  const shouldReduceMotion = useReducedMotion() ?? false;
-
   return (
     <Section
       aria-labelledby="hero-heading"
       className="relative flex min-h-[calc(100svh-5rem)] items-center overflow-hidden !py-0"
       variant="aurora"
     >
-      <HeroBackgroundOrbs reducedMotion={shouldReduceMotion} />
+      <HeroBackgroundOrbs />
 
       <Container className="relative z-10 py-16 text-center sm:py-20 lg:py-24">
-        <motion.div
-          animate="visible"
-          className="mx-auto"
-          initial="hidden"
-          variants={staggerContainer}
-        >
-          <motion.div data-hero-step="eyebrow" variants={premiumScaleIn}>
+        <div className="mx-auto">
+          <div data-hero-step="eyebrow">
             <Badge className="gap-2 border-brand-cyan/20 bg-navy-900/60 px-4 py-2 text-slate-200">
               <span className="relative flex size-2">
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand-cyan opacity-60 motion-reduce:animate-none" />
@@ -56,9 +39,9 @@ export function Hero() {
               </span>
               {HERO_EYEBROW}
             </Badge>
-          </motion.div>
+          </div>
 
-          <motion.div data-hero-step="headline" variants={blurIn}>
+          <div data-hero-step="headline">
             <h1
               className="mx-auto mt-7 max-w-6xl text-5xl font-extrabold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
               id="hero-heading"
@@ -67,45 +50,34 @@ export function Hero() {
               <GradientTextAnimate>Intelligent Software</GradientTextAnimate>{' '}
               That Scales Your Business
             </h1>
-          </motion.div>
+          </div>
 
-          <motion.div data-hero-step="description" variants={fadeInUp}>
+          <div data-hero-step="description">
             <p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-slate-400 md:text-xl md:leading-9">
               {HERO_DESCRIPTION}
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
+          <div
             className="mx-auto mt-9 flex max-w-xl flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center"
             data-hero-step="ctas"
-            variants={fadeInUp}
           >
-            <MagneticButton>
-              <Button
-                className="w-full sm:w-auto"
-                href="/contact"
-                icon={ArrowRight}
-                iconPosition="right"
-                size="lg"
-              >
-                Schedule a Free Consultation
-              </Button>
-            </MagneticButton>
-            <Button
-              className="w-full sm:w-auto"
+            <Link
+              className="min-h-13 inline-flex w-full shrink-0 items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-brand-blue via-brand-purple to-brand-cyan px-6 py-3 text-base font-semibold text-white shadow-glow-blue transition duration-200 hover:-translate-y-0.5 hover:shadow-glow-purple hover:brightness-110 active:scale-95 sm:w-auto"
+              href="/contact"
+            >
+              <span>Schedule a Free Consultation</span>
+              <ArrowRight aria-hidden="true" className="size-4" />
+            </Link>
+            <Link
+              className="glass-panel min-h-13 inline-flex w-full shrink-0 items-center justify-center gap-2.5 rounded-xl px-6 py-3 text-base font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:border-brand-cyan/30 hover:bg-white/10 active:scale-95 sm:w-auto"
               href="/portfolio"
-              size="lg"
-              variant="secondary"
             >
               View Our Work
-            </Button>
-          </motion.div>
+            </Link>
+          </div>
 
-          <motion.div
-            className="mt-10"
-            data-hero-step="trust"
-            variants={fadeInUp}
-          >
+          <div className="mt-10" data-hero-step="trust">
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-400">
               {TRUST_LABEL}
             </p>
@@ -122,16 +94,12 @@ export function Hero() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="mt-14 sm:mt-16"
-            data-hero-step="mockup"
-            variants={fadeInUp}
-          >
-            <HeroMockup reducedMotion={shouldReduceMotion} />
-          </motion.div>
-        </motion.div>
+          <div className="mt-14 sm:mt-16" data-hero-step="mockup">
+            <HeroMockup />
+          </div>
+        </div>
       </Container>
     </Section>
   );

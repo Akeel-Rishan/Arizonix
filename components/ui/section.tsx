@@ -23,7 +23,7 @@ export const Section = forwardRef<HTMLElement, SectionProps>(
   ) => (
     <section
       className={cn(
-        'relative py-20 md:py-section',
+        'content-auto relative py-20 md:py-section',
         variantStyles[variant],
         className,
       )}

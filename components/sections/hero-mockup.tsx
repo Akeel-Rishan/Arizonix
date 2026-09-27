@@ -1,27 +1,12 @@
-'use client';
-
-import { motion } from '@/lib/framer-motion';
-
-interface HeroMockupProps {
-  reducedMotion: boolean;
-}
-
 const activityRows = ['w-4/5', 'w-3/5', 'w-2/3'] as const;
 const chartBars = ['h-12', 'h-20', 'h-16', 'h-28', 'h-24', 'h-32'] as const;
 
-export function HeroMockup({ reducedMotion }: HeroMockupProps) {
+export function HeroMockup() {
   return (
-    <motion.div
-      animate={reducedMotion ? { y: 0 } : { y: [0, -8, 0] }}
+    <div
       aria-hidden="true"
       className="mx-auto w-full max-w-4xl"
-      data-reduced-motion={reducedMotion}
       data-testid="hero-mockup"
-      transition={
-        reducedMotion
-          ? { duration: 0 }
-          : { duration: 7, ease: 'easeInOut', repeat: Infinity }
-      }
     >
       <div className="glass-panel overflow-hidden bg-navy-950/70 p-2 shadow-glow-purple sm:p-3">
         <div className="overflow-hidden rounded-[calc(1.25rem-0.25rem)] border border-white/10 bg-navy-900/80">
@@ -102,6 +87,6 @@ export function HeroMockup({ reducedMotion }: HeroMockupProps) {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
