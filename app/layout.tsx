@@ -9,6 +9,7 @@ import { Header } from '@/components/layout/header';
 import { MainContent } from '@/components/layout/main-content';
 import { JsonLd } from '@/components/seo/json-ld';
 import { AnnouncementBanner } from '@/components/ui/announcement-banner';
+import { NavigationProgress } from '@/components/ui/navigation-progress';
 import { SkipLink } from '@/components/ui/skip-link';
 import { getSiteSettings } from '@/lib/sanity/fetch';
 import {
@@ -126,6 +127,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           schema={[buildOrganizationSchema(), buildWebSiteSchema()]}
         />
         <AnnouncementBanner banner={siteSettings?.announcementBanner ?? null} />
+        <NavigationProgress />
         <Header />
         <div className="pt-20">
           <MainContent>{children}</MainContent>
