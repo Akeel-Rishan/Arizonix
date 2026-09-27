@@ -41,5 +41,5 @@ export async function POST(request: NextRequest) {
     if (notification.status === 'rejected') console.error('Team notification email failed');
     if (confirmation.status === 'rejected') console.error('Client confirmation email failed');
     return Response.json({ success: true, message: "Thank you! We'll be in touch within 48 hours.", emailSent: notification.status === 'fulfilled' });
-  } catch { return Response.json({ success: false, error: 'Failed to send your message. Please try again or email us directly at hello@arizonix.com' }, { status: 500 }); }
+  } catch { return Response.json({ success: false, error: 'Failed to send your message. Please try again or email us directly at support@arizonix.tech' }, { status: 500 }); }
 }

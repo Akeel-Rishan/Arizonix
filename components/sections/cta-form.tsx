@@ -158,7 +158,7 @@ export function CTAForm() {
     } catch {
       Analytics.contactFormError(values.service);
       setSubmitError(
-        'Something went wrong. Please try again or email us at hello@arizonix.com',
+        'Something went wrong. Please try again or email us at support@arizonix.tech',
       );
     }
   };

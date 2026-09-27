@@ -76,7 +76,7 @@ export default async function AboutPage() {
       contactPoint: {
         '@type': 'ContactPoint',
         contactType: 'customer service',
-        email: siteSettings?.contactInfo?.email ?? 'hello@arizonix.com',
+        email: siteSettings?.contactInfo?.email ?? 'support@arizonix.tech',
       },
       sameAs: [
         socialLinks?.linkedin,

@@ -14,7 +14,7 @@ export const SEO_CONFIG = {
     name: 'Arizonix',
     legalName: 'Arizonix Technologies',
     foundingDate: '2019',
-    email: 'hello@arizonix.com',
+    email: 'support@arizonix.tech',
     address: {
       streetAddress: 'Remote-First Company',
       addressLocality: 'Worldwide',

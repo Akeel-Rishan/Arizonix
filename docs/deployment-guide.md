@@ -54,7 +54,7 @@ Add these origins in Sanity project settings:
 
 ## Resend domain verification
 
-Configure SPF, DKIM, and DMARC DNS records from Resend before using `hello@arizonix.com` in production.
+Configure SPF, DKIM, and DMARC DNS records from Resend before using `support@arizonix.tech` in production.
 
 ## Sanity revalidation webhook
 

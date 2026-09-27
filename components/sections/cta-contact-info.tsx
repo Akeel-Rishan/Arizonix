@@ -3,7 +3,7 @@ import { Mail, MapPin, Phone } from 'lucide-react';
 import type { SanityContactInfo } from '@/lib/sanity/types';
 
 export function CTAContactInfo({ contactInfo }: { contactInfo?: SanityContactInfo }) {
-  const email = contactInfo?.email ?? 'hello@arizonix.com';
+  const email = contactInfo?.email ?? 'support@arizonix.tech';
   const rawPhone = contactInfo?.phone?.trim();
   const normalizedPhone = rawPhone?.replace(/\D/g, '');
   const phone =

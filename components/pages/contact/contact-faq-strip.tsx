@@ -49,9 +49,9 @@ export function ContactFAQStrip() {
           Have a specific question?{' '}
           <a
             className="text-brand-blue underline underline-offset-2"
-            href="mailto:hello@arizonix.com"
+            href="mailto:support@arizonix.tech"
           >
-            hello@arizonix.com
+            support@arizonix.tech
           </a>
         </p>
       </div>

@@ -31,7 +31,7 @@ export default function ContactPage() {
         contactPoint: {
           '@type': 'ContactPoint',
           contactType: 'customer service',
-          email: 'hello@arizonix.com',
+          email: 'support@arizonix.tech',
           availableLanguage: 'English',
         },
       },

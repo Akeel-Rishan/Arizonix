@@ -26,10 +26,10 @@ export function ContactInfoSection() {
   const cards: ContactCard[] = [
     {
       detail: 'We respond within 2 business hours',
-      href: 'mailto:hello@arizonix.com',
+      href: 'mailto:support@arizonix.tech',
       icon: Mail,
       label: 'EMAIL US',
-      value: 'hello@arizonix.com',
+      value: 'support@arizonix.tech',
     },
     ...(calendlyUrl
       ? [
