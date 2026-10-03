@@ -28,8 +28,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
   return [
     ...staticPages,
-    entry('/privacy', 'yearly', 0.3),
-    entry('/terms', 'yearly', 0.3),
     ...services.map((service) =>
       entry(`/services/${service.slug}`, 'monthly', 0.8),
     ),
