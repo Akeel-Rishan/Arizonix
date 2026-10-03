@@ -1,3 +1,5 @@
+import { hasAnalyticsConsent } from '@/lib/analytics/consent';
+
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 export const GA_ENABLED = Boolean(GA_MEASUREMENT_ID);
 
@@ -19,6 +21,7 @@ export function trackPageview(path: string) {
     !GA_ENABLED ||
     !GA_MEASUREMENT_ID ||
     typeof window === 'undefined' ||
+    !hasAnalyticsConsent() ||
     !window.gtag
   ) {
     return;
@@ -38,6 +41,7 @@ export function trackEvent(
     !GA_ENABLED ||
     !GA_MEASUREMENT_ID ||
     typeof window === 'undefined' ||
+    !hasAnalyticsConsent() ||
     !window.gtag
   ) {
     return;

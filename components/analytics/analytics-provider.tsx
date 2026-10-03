@@ -18,8 +18,14 @@ export function AnalyticsProvider() {
 
   useEffect(() => {
     initializeAnalytics(() => setEnabled(true));
-    const enable = () => setEnabled(true);
-    const disable = () => setEnabled(false);
+    const enable = () => {
+      window.gtag?.('consent', 'update', { analytics_storage: 'granted' });
+      setEnabled(true);
+    };
+    const disable = () => {
+      window.gtag?.('consent', 'update', { analytics_storage: 'denied' });
+      setEnabled(false);
+    };
     window.addEventListener('cookie-consent-accepted', enable);
     window.addEventListener('cookie-consent-declined', disable);
     return () => {

@@ -38,7 +38,8 @@ export function CookieConsent() {
           >
             Privacy Policy
           </Link>
-          .
+          . You can change your choice at any time through Cookie Settings in
+          the footer.
         </p>
       </div>
       <div className="flex w-full gap-3 md:w-auto">

@@ -8,6 +8,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { CookieSettingsControl } from '@/components/layout/cookie-settings-control';
 import { FooterNewsletterForm } from '@/components/layout/footer-newsletter-form';
 import { footerColumns } from '@/components/layout/nav-data';
 
@@ -58,20 +59,20 @@ export function Footer() {
             </p>
 
             {visibleSocialLinks.length ? (
-            <div className="mt-6 flex items-center gap-3">
-              {visibleSocialLinks.map(({ href, icon: Icon, label }) => (
-                <a
-                  aria-label={label}
-                  className={`glass-panel flex size-11 items-center justify-center !rounded-full text-slate-400 transition duration-200 hover:scale-105 hover:border-brand-cyan/30 hover:text-white hover:shadow-glow-blue ${focusStyles}`}
-                  href={href}
-                  key={label}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <Icon aria-hidden="true" className="size-4" />
-                </a>
-              ))}
-            </div>
+              <div className="mt-6 flex items-center gap-3">
+                {visibleSocialLinks.map(({ href, icon: Icon, label }) => (
+                  <a
+                    aria-label={label}
+                    className={`glass-panel flex size-11 items-center justify-center !rounded-full text-slate-400 transition duration-200 hover:scale-105 hover:border-brand-cyan/30 hover:text-white hover:shadow-glow-blue ${focusStyles}`}
+                    href={href}
+                    key={label}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <Icon aria-hidden="true" className="size-4" />
+                  </a>
+                ))}
+              </div>
             ) : null}
 
             <div className="mt-9">
@@ -128,6 +129,9 @@ export function Footer() {
             >
               Terms of Service
             </Link>
+            <CookieSettingsControl
+              className={`rounded transition-colors duration-200 hover:text-white ${focusStyles}`}
+            />
           </div>
         </div>
       </div>

@@ -12,9 +12,28 @@ export function hasAnalyticsConsent() {
   return getAnalyticsConsent() === 'accepted';
 }
 
+function removeGoogleAnalyticsCookies() {
+  const cookieNames = document.cookie
+    .split(';')
+    .map((cookie) => cookie.trim().split('=')[0])
+    .filter((name) => /^(_ga|_gid|_gat)/.test(name));
+  const hostname = window.location.hostname;
+  const domains = [hostname, `.${hostname}`];
+
+  for (const name of cookieNames) {
+    document.cookie = `${name}=; Max-Age=0; path=/; SameSite=Lax`;
+    for (const domain of domains) {
+      document.cookie = `${name}=; Max-Age=0; path=/; domain=${domain}; SameSite=Lax`;
+    }
+  }
+}
+
 export function setAnalyticsConsent(value: CookieConsentValue) {
   if (typeof window === 'undefined') return;
   window.localStorage.setItem(CONSENT_KEY, value);
+
+  if (value === 'declined') removeGoogleAnalyticsCookies();
+
   window.dispatchEvent(
     new CustomEvent(
       value === 'accepted'

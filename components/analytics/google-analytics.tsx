@@ -4,7 +4,11 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 import { useEffect } from 'react';
 
-import { GA_ENABLED, GA_MEASUREMENT_ID, trackPageview } from '@/lib/analytics/gtag';
+import {
+  GA_ENABLED,
+  GA_MEASUREMENT_ID,
+  trackPageview,
+} from '@/lib/analytics/gtag';
 
 export function GoogleAnalytics() {
   const pathname = usePathname();
@@ -29,6 +33,7 @@ export function GoogleAnalytics() {
           function gtag(){dataLayer.push(arguments);}
           window.gtag = gtag;
           gtag('js', new Date());
+          gtag('consent', 'default', { analytics_storage: 'granted' });
           gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });
         `}
       </Script>

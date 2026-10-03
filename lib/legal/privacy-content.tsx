@@ -92,7 +92,7 @@ const privacySections: LegalSection[] = [
     id: 'cookies',
     title: 'Cookies and Similar Technologies',
     body: [
-      'Essential storage supports functions such as remembering your cookie preference and does not require consent where it is strictly necessary. Google Analytics 4 is loaded only after you give analytics consent through our cookie banner. You can decline or later withdraw optional consent through your browser storage controls.',
+      'Essential storage supports functions such as remembering your cookie preference and does not require consent where it is strictly necessary. Google Analytics 4 is loaded only after you give analytics consent through our cookie banner. You can decline or later withdraw optional consent at any time through the persistent Cookie Settings control in the website footer.',
       'We do not use advertising, cross-site behavioral tracking, or targeted-advertising cookies, and we do not sell personal data.',
     ],
   },
