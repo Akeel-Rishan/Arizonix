@@ -148,17 +148,25 @@ export function CTAForm() {
       });
 
       if (response.status === 429) {
-        setSubmitError("You've submitted too many requests. Please wait a few minutes before trying again.");
+        setSubmitError(
+          "You've submitted too many requests. Please wait a few minutes before trying again.",
+        );
         return;
       }
-      const result = (await response.json()) as { error?: string; success?: boolean };
-      if (!response.ok || !result.success) throw new Error(result.error ?? 'Contact request failed');
+      const result = (await response.json()) as {
+        error?: string;
+        success?: boolean;
+      };
+      if (!response.ok || !result.success)
+        throw new Error(result.error ?? 'Contact request failed');
       Analytics.contactFormSubmit(values.service, values.budget);
       setSubmittedName(values.fullName.trim().split(/\s+/)[0]);
-    } catch {
+    } catch (error) {
       Analytics.contactFormError(values.service);
       setSubmitError(
-        'Something went wrong. Please try again or email us at support@arizonix.tech',
+        error instanceof Error
+          ? error.message
+          : 'Something went wrong. Please try again or email us at support@arizonix.tech',
       );
     }
   };
@@ -191,9 +199,19 @@ export function CTAForm() {
             transition={{ duration: reducedMotion ? 0 : 0.35 }}
           >
             {/* Honeypot — hidden visually, but intentionally present for bots. */}
-            <div aria-hidden="true" style={{ left: '-9999px', position: 'absolute', top: '-9999px' }} tabIndex={-1}>
+            <div
+              aria-hidden="true"
+              style={{ left: '-9999px', position: 'absolute', top: '-9999px' }}
+              tabIndex={-1}
+            >
               <label htmlFor="website_url_field">Website URL</label>
-              <input autoComplete="off" id="website_url_field" tabIndex={-1} type="text" {...register('website_url')} />
+              <input
+                autoComplete="off"
+                id="website_url_field"
+                tabIndex={-1}
+                type="text"
+                {...register('website_url')}
+              />
             </div>
             <CheckCircle2 className="size-16 text-brand-cyan" />
             <h3 className="mt-6 text-2xl font-bold text-white">

@@ -18,7 +18,7 @@ For defense in depth, enable Vercel Deployment Protection or an identity-aware p
 
 ## Newsletter administration
 
-`GET /api/newsletter` requires the server-only `NEWSLETTER_ADMIN_TOKEN`. If it is absent, the endpoint returns HTTP 503. Authorized calls return only the subscriber count; email addresses must be exported from Upstash directly.
+`GET /api/newsletter` and `GET /api/admin/failed-leads` require the server-only `NEWSLETTER_ADMIN_TOKEN`. If it is absent, the endpoints return HTTP 503. The newsletter endpoint returns only the subscriber count; email addresses must be exported from Upstash directly. The failed-leads endpoint returns contact submissions whose team notification could not be delivered, so treat its response as sensitive client data.
 
 Generate secrets with:
 

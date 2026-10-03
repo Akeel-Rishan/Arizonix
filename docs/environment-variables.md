@@ -27,7 +27,7 @@
 |---|---:|---|---|
 | `UPSTASH_REDIS_REST_URL` | Yes | Server | Upstash Redis REST URL. |
 | `UPSTASH_REDIS_REST_TOKEN` | Yes | Server | Upstash Redis REST token. |
-| `NEWSLETTER_ADMIN_TOKEN` | Yes for admin count | Server | Dedicated bearer token for `GET /api/newsletter`. Never expose as `NEXT_PUBLIC_`. |
+| `NEWSLETTER_ADMIN_TOKEN` | Yes for admin access | Server | Dedicated bearer token for `GET /api/newsletter` and `GET /api/admin/failed-leads`. Never expose as `NEXT_PUBLIC_`. |
 
 ## Studio protection
 
