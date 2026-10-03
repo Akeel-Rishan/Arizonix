@@ -17,6 +17,9 @@
 | `RESEND_API_KEY` | Yes | Server | Resend API key. |
 | `RESEND_FROM_EMAIL` | Yes | Server | Verified sender, e.g. `support@arizonix.tech`. |
 | `RESEND_TO_EMAIL` | Yes | Server | Internal recipient for contact form notifications. |
+| `COMPANY_POSTAL_ADDRESS` | Yes for newsletter | Server | Valid physical postal address, P.O. box, or registered private mailbox shown in commercial email footers. |
+| `NEWSLETTER_UNSUBSCRIBE_SECRET` | Yes for newsletter | Server | Random secret of at least 32 characters used to sign unsubscribe links. |
+| `NEXT_PUBLIC_SITE_URL` | Yes | Client/server | Canonical HTTPS site origin used to generate unsubscribe links. |
 | `CONTACT_FORM_HONEYPOT_FIELD` | Recommended | Server | Honeypot field name, currently `website_url`. |
 | `NEXT_PUBLIC_CALENDLY_URL` | Optional | Client/server | Real booking URL. Scheduling UI is hidden when empty. |
 | `NEXT_PUBLIC_WHATSAPP_URL` | Optional | Client/server | Full `https://wa.me/...` URL. WhatsApp UI is hidden when empty. |

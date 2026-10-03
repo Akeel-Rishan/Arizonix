@@ -33,6 +33,11 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'location',
+      title: 'Location',
+      type: 'string',
+    }),
+    defineField({
       name: 'photo',
       title: 'Photo',
       type: 'image',

@@ -73,7 +73,7 @@ const privacySections: LegalSection[] = [
     ],
     bullets: [
       'Contact form submissions: 2 years from submission.',
-      'Newsletter subscriber email addresses: until you unsubscribe or request deletion.',
+      'Newsletter subscriber email addresses: until you unsubscribe or request deletion. After an unsubscribe request, we retain the email address on a suppression list only as long as needed to honor the opt-out and prevent accidental marketing sends, unless you later subscribe again.',
       'Server and security logs: no longer than 30 days.',
       'Google Analytics 4 user-level and event-level data: 14 months.',
       'Sentry error logs: 90 days.',

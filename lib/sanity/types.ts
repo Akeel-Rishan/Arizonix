@@ -10,7 +10,12 @@ export interface SanityImage {
 
 export interface SanityBlock {
   _type: 'block';
-  children?: Array<{ _key?: string; _type?: string; marks?: string[]; text?: string }>;
+  children?: Array<{
+    _key?: string;
+    _type?: string;
+    marks?: string[];
+    text?: string;
+  }>;
   style?: string;
   [key: string]: unknown;
 }
@@ -156,6 +161,7 @@ export interface SanityTeamMember {
   name: string;
   role: string;
   department: string;
+  location?: string;
   photo?: SanityImage;
   bio?: string;
   featured: boolean;

@@ -25,3 +25,9 @@ Generate secrets with:
 ```bash
 openssl rand -hex 32
 ```
+
+## Newsletter unsubscribe
+
+Newsletter unsubscribe URLs are signed with the server-only `NEWSLETTER_UNSUBSCRIBE_SECRET`. Use an independently generated secret of at least 32 characters and rotate it only when necessary, because rotation invalidates links in previously delivered email. Newsletter sending also requires `COMPANY_POSTAL_ADDRESS`; this must be a real postal address, P.O. box, or registered private mailbox rather than a general “remote-first” description.
+
+Unsubscribed addresses are removed from active subscriber records and retained on the Redis suppression list solely to prevent future marketing sends. An explicit subscription through the website removes the suppression record and records new consent.

@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowRight, CheckCircle2, LoaderCircle } from 'lucide-react';
+import Link from 'next/link';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -34,12 +35,25 @@ export function FooterNewsletterForm() {
   const onSubmit = async ({ email }: NewsletterFormValues) => {
     setApiError(null);
     try {
-      const response = await fetch('/api/newsletter', { body: JSON.stringify({ email }), headers: { 'Content-Type': 'application/json' }, method: 'POST' });
-      const result = (await response.json()) as { error?: string; success?: boolean };
-      if (!response.ok || !result.success) { setApiError(result.error ?? 'Something went wrong. Please try again.'); return; }
+      const response = await fetch('/api/newsletter', {
+        body: JSON.stringify({ email }),
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+      });
+      const result = (await response.json()) as {
+        error?: string;
+        success?: boolean;
+      };
+      if (!response.ok || !result.success) {
+        setApiError(result.error ?? 'Something went wrong. Please try again.');
+        return;
+      }
       Analytics.newsletterSubmit('footer');
-      reset(); setIsSuccess(true);
-    } catch { setApiError('Network error. Please check your connection and try again.'); }
+      reset();
+      setIsSuccess(true);
+    } catch {
+      setApiError('Network error. Please check your connection and try again.');
+    }
   };
 
   if (isSuccess) {
@@ -101,7 +115,19 @@ export function FooterNewsletterForm() {
           {errors.email.message}
         </p>
       ) : null}
-      {apiError ? <p className="mt-2 text-xs text-red-400" role="alert">{apiError}</p> : null}
+      {apiError ? (
+        <p className="mt-2 text-xs text-red-400" role="alert">
+          {apiError}
+        </p>
+      ) : null}
+      <p className="mt-2 text-xs leading-5 text-slate-500">
+        By subscribing, you consent to receive Arizonix marketing emails. You
+        can unsubscribe at any time. See our{' '}
+        <Link className="underline hover:text-slate-300" href="/privacy">
+          Privacy Policy
+        </Link>
+        .
+      </p>
     </form>
   );
 }

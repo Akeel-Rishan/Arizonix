@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowRight, CheckCircle2, LoaderCircle } from 'lucide-react';
+import Link from 'next/link';
 import { useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -93,6 +94,14 @@ export function NewsletterInlineForm({ className }: { className?: string }) {
           {apiError}
         </p>
       ) : null}
+      <p className="mt-2 text-xs leading-5 text-slate-500">
+        By subscribing, you consent to receive Arizonix marketing emails. You
+        can unsubscribe at any time. See our{' '}
+        <Link className="underline hover:text-slate-300" href="/privacy">
+          Privacy Policy
+        </Link>
+        .
+      </p>
     </form>
   );
 }
