@@ -8,19 +8,28 @@ jobs:
   lighthouse:
     name: Lighthouse Audit
     runs-on: ubuntu-latest
+    # Lighthouse validates the fallback experience without requiring access to
+    # production services or secrets (which are unavailable to forked PRs).
     env:
-      NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+      NEXT_PUBLIC_SANITY_PROJECT_ID: ci123456
       NEXT_PUBLIC_SANITY_DATASET: production
       NEXT_PUBLIC_SANITY_API_VERSION: '2024-01-01'
-      SANITY_API_TOKEN: ${{ secrets.SANITY_API_TOKEN }}
-      RESEND_API_KEY: placeholder
+      SANITY_API_TOKEN: ''
+      RESEND_API_KEY: re_ci_placeholder
       RESEND_FROM_EMAIL: noreply@example.com
       RESEND_TO_EMAIL: team@example.com
-      UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
-      UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
-      SANITY_REVALIDATE_SECRET: placeholder
+      COMPANY_POSTAL_ADDRESS: CI placeholder address
+      NEWSLETTER_UNSUBSCRIBE_SECRET: ci-placeholder-secret-32-characters
+      NEXT_PUBLIC_SITE_URL: https://example.com
+      UPSTASH_REDIS_REST_URL: https://ci-placeholder.upstash.io
+      UPSTASH_REDIS_REST_TOKEN: ci-placeholder
+      SANITY_REVALIDATE_SECRET: ci-placeholder
+      NEWSLETTER_ADMIN_TOKEN: ci-placeholder
       NEXT_PUBLIC_GA_MEASUREMENT_ID: ''
       NEXT_PUBLIC_SENTRY_DSN: ''
+      SENTRY_DSN: ''
+      SENTRY_ORG: ''
+      SENTRY_PROJECT: ''
       SENTRY_AUTH_TOKEN: ''
     steps:
       - uses: actions/checkout@v4
