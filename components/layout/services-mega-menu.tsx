@@ -13,7 +13,7 @@ export function ServicesMegaMenu({
   services,
 }: ServicesMegaMenuProps) {
   return (
-    <div className="fixed left-1/2 top-[4.75rem] z-20 w-[min(60rem,calc(100vw-3rem))] -translate-x-1/2">
+    <div className="fixed left-1/2 top-16 z-20 w-[min(60rem,calc(100vw-3rem))] -translate-x-1/2 pt-3">
       <div
         className="overflow-hidden rounded-xl2 border border-white/15 bg-navy-950 p-3 shadow-2xl shadow-navy-950/70"
         role="menu"
@@ -34,7 +34,7 @@ export function ServicesMegaMenu({
                 <span className="block text-sm font-semibold text-slate-100 transition-colors duration-200 group-hover:text-white">
                   {service.name}
                 </span>
-                <span className="mt-1 block text-xs leading-5 text-slate-400">
+                <span className="mt-1 block text-xs leading-5 text-slate-300">
                   {service.shortDescription}
                 </span>
               </span>

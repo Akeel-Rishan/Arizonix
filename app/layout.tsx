@@ -120,7 +120,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       <head>
         <PreconnectHints />
       </head>
-      <body className={inter.variable}>
+      <body className={`${inter.variable} ${inter.className}`}>
         <SkipLink />
         <JsonLd
           id="global-schema"

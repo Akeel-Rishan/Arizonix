@@ -1,6 +1,8 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
+import { isServiceSlug } from '@/lib/service-slugs';
+
 function secureCompare(left: string, right: string) {
   if (left.length !== right.length) return false;
   let mismatch = 0;
@@ -26,6 +28,22 @@ function restrictedResponse(status: 401 | 503) {
 }
 
 export function middleware(request: NextRequest) {
+  const serviceMatch = /^\/services\/([^/]+)\/?$/.exec(
+    request.nextUrl.pathname,
+  );
+
+  if (serviceMatch && !isServiceSlug(decodeURIComponent(serviceMatch[1]))) {
+    const notFoundUrl = request.nextUrl.clone();
+    notFoundUrl.pathname = '/service-not-found';
+    const response = NextResponse.rewrite(notFoundUrl, { status: 404 });
+    response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+    return response;
+  }
+
+  if (!request.nextUrl.pathname.startsWith('/studio')) {
+    return NextResponse.next();
+  }
+
   if (process.env.NODE_ENV !== 'production') return NextResponse.next();
 
   const expectedUsername = process.env.STUDIO_USERNAME;
@@ -58,5 +76,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/studio/:path*'],
+  matcher: ['/services/:path*', '/studio/:path*'],
 };

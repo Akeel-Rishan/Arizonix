@@ -1,40 +1,19 @@
-import type { PortableTextBlock } from '@portabletext/types';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { ServiceDetailContent } from '@/components/pages/services/service-detail-content';
-import { ServiceDetailCTA } from '@/components/pages/services/service-detail-cta';
-import { ServiceDetailHero } from '@/components/pages/services/service-detail-hero';
-import { ServiceFeatures } from '@/components/pages/services/service-features';
-import { ServiceRelated } from '@/components/pages/services/service-related';
-import { getServiceBySlug, getServices } from '@/lib/sanity/fetch';
+import {
+  ServiceDetailPage,
+  type ServicePageDisplay,
+} from '@/components/pages/services/service-detail-page';
+import { getServiceBySlug } from '@/lib/sanity/fetch';
 import { sanityImage } from '@/lib/sanity/image';
-import type { SanityService } from '@/lib/sanity/types';
-import { services as staticServices } from '@/lib/services-data';
+import { getServiceDetail, serviceDetails } from '@/lib/service-detail-data';
+import { services } from '@/lib/services-data';
 
 export const revalidate = 3600;
-export const dynamicParams = false;
 
-function staticService(slug: string): SanityService | null {
-  const service = staticServices.find((item) => item.slug === slug);
-  return service
-    ? {
-        _id: service.slug,
-        name: service.name,
-        slug: service.slug,
-        shortDescription: service.shortDescription,
-        description: service.description,
-        icon: service.icon.displayName ?? service.icon.name,
-        featured: false,
-        order: 0,
-      }
-    : null;
-}
-
-export async function generateStaticParams() {
-  const cms = await getServices().catch(() => []);
-  const services = cms.length ? cms : staticServices;
-  return services.map((service) => ({ slug: service.slug }));
+export function generateStaticParams() {
+  return serviceDetails.map((service) => ({ slug: service.slug }));
 }
 
 export async function generateMetadata({
@@ -43,34 +22,35 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const service =
-    (await getServiceBySlug(slug).catch(() => null)) ?? staticService(slug);
-  if (!service) return { title: 'Service Not Found' };
-  const rawTitle = (service.seo?.title ?? service.name).replace(
-    /\s*[|—-]\s*Arizonix$/i,
-    '',
-  );
-  const metadataTitle =
-    rawTitle.length > 47 ? `${rawTitle.slice(0, 44).trimEnd()}...` : rawTitle;
+  const detail = getServiceDetail(slug);
+
+  if (!detail) {
+    notFound();
+  }
+
+  const cmsService = await getServiceBySlug(slug).catch(() => null);
+  const title = cmsService?.seo?.title ?? detail.seo.title;
+  const description = cmsService?.seo?.description ?? detail.seo.description;
+
   return {
-    alternates: { canonical: `https://arizonix.com/services/${service.slug}` },
-    title: metadataTitle,
-    description: service.seo?.description ?? service.shortDescription,
+    alternates: { canonical: `https://arizonix.com/services/${detail.slug}` },
+    title: { absolute: title },
+    description,
     openGraph: {
-      title: service.seo?.title ?? service.name,
-      description: service.seo?.description ?? service.shortDescription,
+      title,
+      description,
       type: 'website',
-      url: `https://arizonix.com/services/${service.slug}`,
-      images: service.seo?.ogImage
+      url: `https://arizonix.com/services/${detail.slug}`,
+      images: cmsService?.seo?.ogImage
         ? [
             {
-              url: sanityImage(service.seo.ogImage, {
+              url: sanityImage(cmsService.seo.ogImage, {
                 width: 1200,
                 height: 630,
               }),
             },
           ]
-        : [],
+        : undefined,
     },
   };
 }
@@ -81,36 +61,38 @@ export default async function ServicePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const [cmsService, cmsServices] = await Promise.all([
-    getServiceBySlug(slug).catch(() => null),
-    getServices().catch(() => []),
-  ]);
-  const service = cmsService ?? staticService(slug);
-  if (!service) notFound();
-  const allServices: SanityService[] = cmsServices.length
-    ? cmsServices
-    : staticServices.map((item, order) => ({
-        _id: item.slug,
-        name: item.name,
-        slug: item.slug,
-        shortDescription: item.shortDescription,
-        description: item.description,
-        icon: item.icon.displayName ?? item.icon.name,
-        featured: false,
-        order,
-      }));
-  const data = [
+  const detail = getServiceDetail(slug);
+  const staticService = services.find((service) => service.slug === slug);
+
+  if (!detail || !staticService) {
+    notFound();
+  }
+
+  const cmsService = await getServiceBySlug(slug).catch(() => null);
+  const service: ServicePageDisplay = {
+    name: cmsService?.name ?? staticService.name,
+    slug: detail.slug,
+    shortDescription:
+      cmsService?.shortDescription ?? staticService.shortDescription,
+    description: detail.heroDescription,
+    icon:
+      cmsService?.icon ??
+      staticService.icon.displayName ??
+      staticService.icon.name,
+  };
+
+  const structuredData = [
     {
       '@context': 'https://schema.org',
       '@type': 'Service',
       name: service.name,
-      description: service.description,
+      description: detail.seo.description,
       provider: {
         '@type': 'Organization',
         name: 'Arizonix',
         url: 'https://arizonix.com',
       },
-      url: `https://arizonix.com/services/${service.slug}`,
+      url: `https://arizonix.com/services/${detail.slug}`,
       serviceType: service.name,
       areaServed: 'Worldwide',
     },
@@ -134,29 +116,21 @@ export default async function ServicePage({
           '@type': 'ListItem',
           position: 3,
           name: service.name,
-          item: `https://arizonix.com/services/${service.slug}`,
+          item: `https://arizonix.com/services/${detail.slug}`,
         },
       ],
     },
   ];
+
   return (
     <div>
       <script
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(data).replace(/</g, '\\u003c'),
+          __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
         }}
         type="application/ld+json"
       />
-      <ServiceDetailHero service={service} />
-      <ServiceDetailContent
-        content={
-          service.fullPageContent as unknown as PortableTextBlock[] | undefined
-        }
-        serviceName={service.name}
-      />
-      <ServiceFeatures serviceName={service.name} slug={service.slug} />
-      <ServiceRelated allServices={allServices} currentSlug={service.slug} />
-      <ServiceDetailCTA serviceName={service.name} />
+      <ServiceDetailPage detail={detail} service={service} />
     </div>
   );
 }

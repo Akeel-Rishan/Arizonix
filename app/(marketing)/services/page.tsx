@@ -3,14 +3,14 @@ import type { Metadata } from 'next';
 import { ServicesHero } from '@/components/pages/services/services-hero';
 import { ServicesList } from '@/components/pages/services/services-list';
 import { getServices } from '@/lib/sanity/fetch';
-import { services as staticServices } from '@/lib/services-data';
+import { mergeServiceCatalog } from '@/lib/services-data';
 export const metadata: Metadata = {
   alternates: { canonical: 'https://arizonix.com/services' },
   title: 'Software & AI Development Services',
   description:
     "Explore Arizonix's full range of services: AI automation, web & mobile application development, enterprise software, cloud solutions, and more. Built for ambitious businesses worldwide.",
   openGraph: {
-    title: 'Services — Arizonix',
+    title: 'Services | Arizonix',
     description:
       'AI automation, web apps, mobile apps, enterprise software and more. Premium software engineering for ambitious businesses.',
     type: 'website',
@@ -20,15 +20,7 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 export default async function ServicesPage() {
   const cms = await getServices().catch(() => []);
-  const services = cms.length
-    ? cms
-    : staticServices.map((service, order) => ({
-        _id: service.slug,
-        ...service,
-        icon: service.icon.displayName ?? service.icon.name,
-        featured: false,
-        order,
-      }));
+  const services = mergeServiceCatalog(cms);
   const data = [
     {
       '@context': 'https://schema.org',

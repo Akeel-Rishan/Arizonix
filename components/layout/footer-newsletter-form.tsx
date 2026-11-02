@@ -120,10 +120,13 @@ export function FooterNewsletterForm() {
           {apiError}
         </p>
       ) : null}
-      <p className="mt-2 text-xs leading-5 text-slate-500">
+      <p className="mt-2 text-xs leading-5 text-slate-400">
         By subscribing, you consent to receive Arizonix marketing emails. You
         can unsubscribe at any time. See our{' '}
-        <Link className="underline hover:text-slate-300" href="/privacy">
+        <Link
+          className="text-slate-300 underline hover:text-white"
+          href="/privacy"
+        >
           Privacy Policy
         </Link>
         .

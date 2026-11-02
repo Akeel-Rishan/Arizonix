@@ -17,6 +17,9 @@ const focusStyles =
 export function Header() {
   const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
+  const servicesCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
   const [isScrolled, setIsScrolled] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -73,7 +76,40 @@ export function Header() {
     setIsMobileServicesOpen(false);
   }, [pathname]);
 
-  const closeDesktopMenu = () => setIsServicesOpen(false);
+  useEffect(
+    () => () => {
+      if (servicesCloseTimerRef.current) {
+        clearTimeout(servicesCloseTimerRef.current);
+      }
+    },
+    [],
+  );
+
+  const cancelDesktopMenuClose = () => {
+    if (servicesCloseTimerRef.current) {
+      clearTimeout(servicesCloseTimerRef.current);
+      servicesCloseTimerRef.current = null;
+    }
+  };
+
+  const openDesktopMenu = () => {
+    cancelDesktopMenuClose();
+    setIsServicesOpen(true);
+  };
+
+  const closeDesktopMenu = () => {
+    cancelDesktopMenuClose();
+    setIsServicesOpen(false);
+  };
+
+  const scheduleDesktopMenuClose = () => {
+    cancelDesktopMenuClose();
+    servicesCloseTimerRef.current = setTimeout(() => {
+      setIsServicesOpen(false);
+      servicesCloseTimerRef.current = null;
+    }, 180);
+  };
+
   const closeMobileMenu = () => {
     setIsMobileOpen(false);
     setIsMobileServicesOpen(false);
@@ -127,8 +163,8 @@ export function Header() {
                     setIsServicesOpen(false);
                   }
                 }}
-                onMouseEnter={() => setIsServicesOpen(true)}
-                onMouseLeave={() => setIsServicesOpen(false)}
+                onMouseEnter={openDesktopMenu}
+                onMouseLeave={scheduleDesktopMenuClose}
               >
                 <button
                   aria-controls="services-mega-menu"
@@ -139,7 +175,7 @@ export function Header() {
                     focusStyles,
                   )}
                   onClick={() => setIsServicesOpen((isOpen) => !isOpen)}
-                  onFocus={() => setIsServicesOpen(true)}
+                  onFocus={openDesktopMenu}
                   type="button"
                 >
                   {item.label}

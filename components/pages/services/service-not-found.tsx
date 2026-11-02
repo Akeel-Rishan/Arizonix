@@ -1,0 +1,24 @@
+import { Button } from '@/components/ui/button';
+
+export function ServiceNotFound() {
+  return (
+    <div className="aurora-bg flex min-h-[70vh] items-center justify-center px-4 text-center">
+      <div>
+        <p className="text-gradient text-7xl font-bold">404</p>
+        <h1 className="mt-4 text-3xl font-bold text-white">
+          Service Not Found
+        </h1>
+        <p className="mt-3 text-slate-300">
+          The service you&apos;re looking for doesn&apos;t exist or may have
+          moved.
+        </p>
+        <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+          <Button href="/services">Browse All Services</Button>
+          <Button href="/" variant="outline">
+            Go Home
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -14,19 +14,10 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
-export type ServiceSlug =
-  | 'ai-agents-chatbots'
-  | 'ai-automation-solutions'
-  | 'api-development-integrations'
-  | 'cloud-solutions'
-  | 'custom-software-development'
-  | 'enterprise-software-development'
-  | 'mobile-application-development'
-  | 'pos-system-development'
-  | 'ui-ux-design'
-  | 'web-application-development'
-  | 'website-development'
-  | 'workflow-automation';
+import type { SanityService } from '@/lib/sanity/types';
+import type { ServiceSlug } from '@/lib/service-slugs';
+
+export type { ServiceSlug } from '@/lib/service-slugs';
 
 export interface Service {
   description: string;
@@ -137,4 +128,31 @@ export const services: readonly Service[] = [
 
 export function getServiceHref(service: Service) {
   return `/services/${service.slug}`;
+}
+
+function toCatalogService(service: Service, order: number): SanityService {
+  return {
+    _id: service.slug,
+    name: service.name,
+    slug: service.slug,
+    shortDescription: service.shortDescription,
+    description: service.description,
+    icon: service.icon.displayName ?? service.icon.name,
+    featured: false,
+    order,
+  };
+}
+
+export function mergeServiceCatalog(
+  cmsServices: readonly SanityService[],
+): SanityService[] {
+  const cmsBySlug = new Map(
+    cmsServices.map((service) => [service.slug, service]),
+  );
+
+  return services.map((service, order) => ({
+    ...toCatalogService(service, order),
+    ...cmsBySlug.get(service.slug),
+    slug: service.slug,
+  }));
 }
