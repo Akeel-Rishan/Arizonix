@@ -22,11 +22,6 @@
   }
   body {
     @apply bg-navy-950 font-sans text-slate-200 antialiased;
-    font-family:
-      var(--font-inter),
-      -apple-system,
-      BlinkMacSystemFont,
-      sans-serif;
   }
 
   h1 {

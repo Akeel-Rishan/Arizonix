@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 
 import { PreconnectHints } from '@/components/head/preconnect-hints';
@@ -19,24 +18,6 @@ import {
 import { SEO_CONFIG } from '@/lib/seo/seo-config';
 
 import './globals.css';
-
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-inter',
-  display: 'swap',
-  preload: true,
-  fallback: [
-    '-apple-system',
-    'BlinkMacSystemFont',
-    'Segoe UI',
-    'Roboto',
-    'Helvetica Neue',
-    'Arial',
-    'sans-serif',
-  ],
-  adjustFontFallback: true,
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SEO_CONFIG.siteUrl),
@@ -120,7 +101,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       <head>
         <PreconnectHints />
       </head>
-      <body className={`${inter.variable} ${inter.className}`}>
+      <body>
         <SkipLink />
         <JsonLd
           id="global-schema"

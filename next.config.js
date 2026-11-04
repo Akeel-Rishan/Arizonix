@@ -22,9 +22,9 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
       "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.sanity.io https://www.googletagmanager.com",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://cdn.sanity.io",
-      "font-src 'self' https://fonts.gstatic.com",
+      "font-src 'self'",
       "connect-src 'self' https://*.sanity.io https://sanity-cdn.com https://api.resend.com https://*.upstash.io https://www.google-analytics.com https://*.ingest.sentry.io wss://*.sanity.io",
       "frame-ancestors 'self'",
     ].join('; '),
@@ -95,8 +95,8 @@ const nextConfig = {
 
 const hasSentryUploadCredentials = Boolean(
   process.env.SENTRY_AUTH_TOKEN &&
-    process.env.SENTRY_ORG &&
-    process.env.SENTRY_PROJECT,
+  process.env.SENTRY_ORG &&
+  process.env.SENTRY_PROJECT,
 );
 
 module.exports = withSentryConfig(withBundleAnalyzer(nextConfig), {
